@@ -1,0 +1,73 @@
+# depslib dependency file v1.0
+1589243712 source:c:\users\pc\documents\uni\lasd murano\progetto1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"deposito_libri.h"
+	"restituzione.h"
+	"prestito.h"
+
+1589134435 source:c:\users\pc\documents\uni\lasd murano\progetto1\restituzione.c
+	"restituzione.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1588971450 c:\users\pc\documents\uni\lasd murano\progetto1\restituzione.h
+	"deposito_libri.h"
+	"prestito.h"
+
+1589045036 c:\users\pc\documents\uni\lasd murano\progetto1\deposito_libri.h
+
+1589243575 source:c:\users\pc\documents\uni\lasd murano\progetto1\deposito_libri.c
+	"deposito_libri.h"
+	"prestito.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1588875203 c:\users\pc\documents\uni\lasd murano\progetto1\prestito.h
+	"deposito_libri.h"
+
+1589244143 source:c:\users\pc\documents\uni\lasd murano\progetto1\prestito.c
+	"prestito.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1589277605 source:c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\deposito_libri.c
+	"deposito_libri.h"
+	"prestito.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1589277605 c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\deposito_libri.h
+
+1588875203 c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\prestito.h
+	"deposito_libri.h"
+
+1589280383 source:c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"deposito_libri.h"
+	"restituzione.h"
+	"prestito.h"
+
+1588971450 c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\restituzione.h
+	"deposito_libri.h"
+	"prestito.h"
+
+1589280383 source:c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\prestito.c
+	"prestito.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1589277112 source:c:\users\pc\documents\uni\lasd murano\aldodigiovanni-n86002319\progetto1\restituzione.c
+	"restituzione.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+

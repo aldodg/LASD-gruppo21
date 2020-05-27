@@ -1,0 +1,15 @@
+Marcellini_Sbordone - Analisi 1|1|xxxxxxxxx
+Marcellini_Sbordone - Analisi 1|2|N86002319
+Elmasri_Navathe - Sistemi Di Basi Di Dati|1|N86012456
+Mangeli - Fondamenti Meccanica Del Volo|1|M53001091
+Mazzoldi_Nigro - Fisica 1|1|M53001091
+Mazzoldi_Nigro - Fisica 1|2|xxxxxxxxx
+Casarossa - Meccanica Del Volo|1|M53 xpt
+Chang_Goldsby - Chimica Generale|1|xxxxxxxxx
+Carlomagno - Complementi Di Fluidodinamica|1|M53001091
+Carlomagno - Complementi Di Fluidodinamica|2|M53010145
+Cormen_Leiserson_Rivest_Stein - Introduzione Agli Algoritmi E Strutture Dati|1|N86002319
+Sestoft - Java Precisely|1|xxxxxxxxx
+Sestoft - Java Precisely|2|N86001156
+Sestoft - Java Precisely|3|xxxxxxxxx
+Sipser - Teoria Della Computazione|1|xxxxxxxxx
