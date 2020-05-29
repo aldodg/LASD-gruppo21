@@ -1,5 +1,6 @@
 #ifndef GRAPH_H_INCLUDED
 #define GRAPH_H_INCLUDED
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -16,13 +17,23 @@ typedef struct grafo{
 }grafo;
 
 
-int empty_graph(struct grafo*);
+int empty_graph(grafo*);
 
 int creaGrafo(int, grafo **, int);
 
 void stampaGrafo(grafo *);
 
-arco *nuovoArco(int, int );
+int aggiungiArco(grafo *,int ,int );
+
+int aggiungiArcoPesato(grafo *,int ,int ,int);
+
+int rimuoviArco(grafo *,int ,int );
+
+int aggiungiVertice(grafo *);
+
+int rimuoviVertice(grafo *,int);
 
 
 #endif // GRAPH_H_INCLUDED
+
+
