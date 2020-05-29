@@ -67,7 +67,7 @@ arco *nuovoArco(int destinazione, int costo){
 
   nuovo = (arco*)malloc(sizeof(arco));
   if(nuovo != NULL){
-    nuovo->localita = destinazione;
+    *nuovo->localita = destinazione;
     nuovo->next = NULL;
     nuovo->costo = costo;
   }else{
@@ -90,7 +90,7 @@ int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int peso){
       if(partenza < g->n_vertici && arrivo < g->n_vertici){
 
         curr = g->adiacenti[partenza];//imposta curr al primo arco uscente da partenza
-        while(curr != NULL && curr->next != NULL && curr->localita != arrivo){
+        while(curr != NULL && curr->next != NULL && *curr->localita != arrivo){
           /*arriva alla fine della lista di adiacenza di partenza
           o si ferma prima se l'arco con arrivo uguale e' gia' presente*/
           curr = curr->next;
@@ -137,14 +137,14 @@ int rimuoviArco(grafo *g, int partenza, int arrivo){
       ret = 1;
       curr = g->adiacenti[partenza];
 
-      while(curr != NULL && curr->localita != arrivo){
+      while(curr != NULL && *curr->localita != arrivo){
         prev = curr;
         curr = curr->next;
       }
 
       if(curr != NULL){//controlla sia il caso in cui la lista fosse vuota, sia il caso in cui sia stata esplorata tutta senza trovare l'elemento
 
-        if(curr == g->adiacenti[partenza]){//se il nodo da eliminare e' il primo bisogna modificare il puntatore nel vettore delle liste
+        if(curr == (g)->adiacenti[partenza]){//se il nodo da eliminare e' il primo bisogna modificare il puntatore nel vettore delle liste
           g->adiacenti[partenza] = g->adiacenti[partenza]->next;
           free(curr);
         }else{//altrimenti l'eliminazione e' uguale sia se l'elemento e' centrale sia se e' l'ultimo della lista
@@ -214,7 +214,7 @@ int rimuoviVertice(grafo *g, int vertice){
 
             while(curr != NULL){//scorre tutta una lista
 
-              if(curr->localita == vertice){//se analizza un arco che andava nel vertice da eliminare
+              if(*curr->localita == vertice){//se analizza un arco che andava nel vertice da eliminare
 
                 if(curr == g->adiacenti[i]){//se l'arco da eliminare è il primo
                   g->adiacenti[i] = g->adiacenti[i]->next;//imposta il nuovo primo nel vettore delle liste
@@ -229,7 +229,7 @@ int rimuoviVertice(grafo *g, int vertice){
 
               }else{//se l'arco non andava nel vertice da eliminare
 
-                if(curr->localita > vertice){//se andava in un vertice maggiore di quello da eliminare
+                if(*curr->localita > vertice){//se andava in un vertice maggiore di quello da eliminare
                   curr->localita = curr->localita - 1;//diminuisce il valore di questo perché dopo aver eliminato vertice tutti i maggiori avranno il loro numero ridotto
 
                 }
@@ -272,3 +272,4 @@ int rimuoviVertice(grafo *g, int vertice){
   }
   return ret;
 }
+
