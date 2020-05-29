@@ -1,6 +1,6 @@
 #include"graph.h"
 
-int empty_graph(struct grafo* G){
+int empty_graph(grafo* G){
 	return G==NULL;
 }
 
@@ -77,3 +77,198 @@ arco *nuovoArco(int destinazione, int costo){
   return nuovo;
 }
 
+
+int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int peso){
+
+  arco *curr;
+  int ret = 0;
+
+  if(!empty_graph(g)){
+
+    if(peso == 0){
+
+      if(partenza < g->n_vertici && arrivo < g->n_vertici){
+
+        curr = g->adiacenti[partenza];//imposta curr al primo arco uscente da partenza
+        while(curr != NULL && curr->next != NULL && curr->localita != arrivo){
+          /*arriva alla fine della lista di adiacenza di partenza
+          o si ferma prima se l'arco con arrivo uguale e' gia' presente*/
+          curr = curr->next;
+        }
+
+        if(curr == NULL){//se la lista di adiacenza era vuota
+          g->adiacenti[partenza] = nuovoArco(arrivo, peso);//crea un arco e modifica il puntatore nell'array perche' punti a questo
+          ret = 1;
+        }else if(curr->next == NULL){//se e' arrivato alla fine della lista
+          curr->next = nuovoArco(arrivo, peso);//crea un arco e lo imposta come successivo dell'ultimo
+          ret = 1;
+        }else{//l'arco era gia' presente
+          printf("L'arco %d -> %d e' gia' presente nel grafo\n", partenza, arrivo);
+          ret = 1;
+        }
+      }else{
+        printf("Non esiste il vertice di partenza o di arrivo\n");
+      }
+    }else{
+      printf("Impossibile inserire arco pesato in grafo non pesato\n");
+    }
+  }else{
+    printf("Il grafo e' vuoto\n");
+  }
+  return ret;
+}
+
+
+int aggiungiArco(grafo *g, int partenza, int arrivo){
+
+  return aggiungiArcoPesato(g,partenza,arrivo,0);
+}
+
+int rimuoviArco(grafo *g, int partenza, int arrivo){
+
+
+  arco *curr, *prev;
+  int ret = 0;
+
+  if(!empty_graph(g)){
+
+    if(partenza < g->n_vertici && arrivo < g->n_vertici){
+
+      ret = 1;
+      curr = g->adiacenti[partenza];
+
+      while(curr != NULL && curr->localita != arrivo){
+        prev = curr;
+        curr = curr->next;
+      }
+
+      if(curr != NULL){//controlla sia il caso in cui la lista fosse vuota, sia il caso in cui sia stata esplorata tutta senza trovare l'elemento
+
+        if(curr == g->adiacenti[partenza]){//se il nodo da eliminare e' il primo bisogna modificare il puntatore nel vettore delle liste
+          g->adiacenti[partenza] = g->adiacenti[partenza]->next;
+          free(curr);
+        }else{//altrimenti l'eliminazione e' uguale sia se l'elemento e' centrale sia se e' l'ultimo della lista
+          prev->next = curr->next;
+          free(curr);
+        }
+
+      }else{
+        printf("L'arco non e' presente nel grafo\n");
+        ret = 1;
+      }
+    }else{
+      printf("Non esiste il vertice di partenza o di arrivo\n");
+    }
+  }else{
+    printf("Il grafo e' vuoto\n");
+  }
+  return ret;
+}
+
+
+int aggiungiVertice(grafo *g){
+
+  arco **nuovo = NULL;
+  int ret = 0;
+
+  if(!empty_graph(g)){
+
+    nuovo = (arco**)realloc(g->adiacenti, g->n_vertici + 1);
+
+    if(nuovo != NULL){
+      g->adiacenti = nuovo;
+      g->n_vertici = g->n_vertici + 1;
+      ret = 1;
+    }else{
+      printf("Impossibile allocare memoria per nuovo vertice\n");
+    }
+  }else{
+    printf("Grafo vuoto\n");
+  }
+
+  return ret;
+}
+
+
+int rimuoviVertice(grafo *g, int vertice){
+
+  int ret = 0;
+  int i;
+  arco **nuovo = NULL;
+  arco *prev = NULL, *curr = NULL;
+
+  if(!empty_graph(g)){
+
+    if(vertice < g->n_vertici){//se il vertice da eliminare è presente
+
+      nuovo = (arco**)malloc(sizeof(arco*) * (g->n_vertici - 1));//alloca memoria per un vettore degli adiacenti temporaneo di un elemento in meno rispetto all'attuale
+      if(nuovo != NULL){//se l'allocazione è andata a buon fine
+
+        ret = 1;
+
+        for(i = 0; i < g->n_vertici; i++){//scorre tutte le vecchie liste d'adiacenza
+
+          if(i < vertice || i > vertice){//per tutte le liste tranne quella del vertice da eliminare
+            curr = g->adiacenti[i];//parte dall'inizio
+            prev = curr;//tiene traccia del precedente dell'elemento considerato
+
+            while(curr != NULL){//scorre tutta una lista
+
+              if(curr->localita == vertice){//se analizza un arco che andava nel vertice da eliminare
+
+                if(curr == g->adiacenti[i]){//se l'arco da eliminare è il primo
+                  g->adiacenti[i] = g->adiacenti[i]->next;//imposta il nuovo primo nel vettore delle liste
+                  free(curr);
+                  curr = g->adiacenti[i];//setta il prossimo elemento della lista da analizzare
+
+                }else{//se l'arco da eliminare e' in una posizione qualunque tranne la prima
+                  prev->next = curr->next;//bypassa l'elemento da eliminare
+                  free(curr);
+                  curr = prev->next;//setta il prossimo da analizzare
+                }
+
+              }else{//se l'arco non andava nel vertice da eliminare
+
+                if(curr->localita > vertice){//se andava in un vertice maggiore di quello da eliminare
+                  curr->localita = curr->localita - 1;//diminuisce il valore di questo perché dopo aver eliminato vertice tutti i maggiori avranno il loro numero ridotto
+
+                }
+                prev = curr;//manda avanti la ricerca sia se l'arco era maggiore, sia se non lo era
+                curr = curr->next;
+              }
+            }//fine del while
+
+            //ogni elemento del nuovo vettore delle liste viene fatto puntare alla lista corretta
+            if(i < vertice){
+              nuovo[i] = g->adiacenti[i];
+            }else{
+              nuovo[i-1] = g->adiacenti[i];
+            }
+
+          }else if(i == vertice){//per la lista del vertice da eliminare
+
+            prev = g->adiacenti[i];
+
+            while(prev != NULL){//elimina tutti i nodi
+              curr = prev->next;
+              free(prev);
+              prev = curr;
+            }
+          }
+        }
+
+        free(g->adiacenti);//elimina il vecchio vettore dei puntatori alle liste
+        g->adiacenti = nuovo;//modifica il puntatore verso il vettore delle liste
+        g->n_vertici = g->n_vertici - 1;//riduce il numero di vertici nella struttura grafo
+
+      }else{
+        printf("ERRORE in rimuoviVertice: Impossibile allocare memoria per nuovo vettore delle adiacenze\n");
+      }
+    }else{
+      printf("ERRORE in rimuoviVertice: Vertice da rimuovere fuori dal range del grafo\n");
+    }
+  }else{
+    printf("ERRORE in rimuoviVertice: Il grafo e' vuoto\n");
+  }
+  return ret;
+}
