@@ -7,27 +7,27 @@
 #include<stdlib.h>
 
 	 struct customer {
-	 	
+
 	 	char * cognome;
 	 	char * nome;
 	 	char * user;
 	 	char * password;
 	    struct customer *next;
-	 	
+
 		 };
-	
+
 		typedef struct customer Customers;
-		
+
 		char* username;
 		char *nome;
 		char *cognome;
 		char *pass;
 		char *pass2;
-		Customers *Utenti=NULL;
-		
+
+
 	void registra(Customers ** L, char *name, char * surname, char * username, char * password);//Funzione che riempie la lista delle registrazioni utente
     int	UserGiaPresente(Customers *L, char *username);//Funzione booleana che controlla se uno username è gia presente
-
+    int controllaCredenziali(Customers *L,char * username, char * password);
 
 
 
