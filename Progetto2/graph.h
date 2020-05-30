@@ -30,7 +30,7 @@ int aggiungiArcoPesato(grafo *,int ,int ,int);
 
 int numeroArchi(grafo *);
 
-int costoArco(grafo *g, int, int);
+int costoArco(grafo *, int, int);
 
 int esisteArco(grafo *, int, int);
 
