@@ -5,7 +5,7 @@ int empty_graph(grafo* G){
 }
 
 
-int creaGrafo(int vertici, grafo **g, int pesato){
+int creaGrafo(int vertici, grafo **g){
 
   grafo *nuovo;
   int ret = 0;//inizializzata a 0 per gestire implicitamente i casi in cui non fosse possibile allocare memoria
