@@ -78,14 +78,14 @@ arco *nuovoArco(int destinazione, int costo){
 }
 
 
-int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int peso){
+int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int costo){
 
   arco *curr;
   int ret = 0;
 
   if(!empty_graph(g)){
 
-    if(peso == 0){
+    if(costo == 0){
 
       if(partenza < g->n_vertici && arrivo < g->n_vertici){
 
@@ -97,10 +97,10 @@ int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int peso){
         }
 
         if(curr == NULL){//se la lista di adiacenza era vuota
-          g->adiacenti[partenza] = nuovoArco(arrivo, peso);//crea un arco e modifica il puntatore nell'array perche' punti a questo
+          g->adiacenti[partenza] = nuovoArco(arrivo, costo);//crea un arco e modifica il puntatore nell'array perche' punti a questo
           ret = 1;
         }else if(curr->next == NULL){//se e' arrivato alla fine della lista
-          curr->next = nuovoArco(arrivo, peso);//crea un arco e lo imposta come successivo dell'ultimo
+          curr->next = nuovoArco(arrivo, costo);//crea un arco e lo imposta come successivo dell'ultimo
           ret = 1;
         }else{//l'arco era gia' presente
           printf("L'arco %d -> %d e' gia' presente nel grafo\n", partenza, arrivo);
