@@ -9,6 +9,7 @@ typedef struct arco{
   char *localita;
   struct arco *next;
   int costo;
+  int key;
 }arco;
 
 typedef struct grafo{
