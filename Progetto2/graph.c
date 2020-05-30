@@ -5,6 +5,7 @@ int empty_graph(grafo* G){
 }
 
 
+
 int creaGrafo(int vertici, grafo **g){
 
   grafo *nuovo;
@@ -40,6 +41,7 @@ int creaGrafo(int vertici, grafo **g){
 }
 
 
+
 void stampaGrafo(grafo* G){
 	int ca=0, i; arco* app;
 	if(!empty_graph(G)){
@@ -61,6 +63,8 @@ void stampaGrafo(grafo* G){
 	printf("\n");
 }
 
+
+
 arco *nuovoArco(int destinazione, int costo){
 
   arco *nuovo = NULL;
@@ -77,6 +81,8 @@ arco *nuovoArco(int destinazione, int costo){
   return nuovo;
 }
 
+
+
 int numeroVertici(grafo *g){
 
   int ret;
@@ -89,6 +95,8 @@ int numeroVertici(grafo *g){
 
   return ret;
 }
+
+
 
 int numeroArchi(grafo *g){
 
@@ -109,6 +117,7 @@ int numeroArchi(grafo *g){
   }
   return ret;
 }
+
 
 
 int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int costo){
@@ -152,10 +161,13 @@ int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int costo){
 }
 
 
+
 int aggiungiArco(grafo *g, int partenza, int arrivo){
 
   return aggiungiArcoPesato(g,partenza,arrivo,0);
 }
+
+
 
 int rimuoviArco(grafo *g, int partenza, int arrivo){
 
@@ -199,6 +211,7 @@ int rimuoviArco(grafo *g, int partenza, int arrivo){
 }
 
 
+
 int esisteArco(grafo *g, int partenza, int arrivo){
 
   int ret = 0;
@@ -210,7 +223,7 @@ int esisteArco(grafo *g, int partenza, int arrivo){
       curr = g->adiacenti[partenza];
       while(curr != NULL && ret == 0){
 
-        if(curr->key == arrivo){
+        if(*curr->localita == arrivo){
           ret = 1;
         }
         curr = curr->next;
@@ -225,6 +238,8 @@ int esisteArco(grafo *g, int partenza, int arrivo){
   return ret;
 }
 
+
+
 int costoArco(grafo *g, int partenza, int arrivo){
 
   arco *curr = NULL;
@@ -234,7 +249,7 @@ int costoArco(grafo *g, int partenza, int arrivo){
     if(esisteArco(g, partenza, arrivo)){//forse esisteArco dovrebbe anche in qualche modo ritornare un puntatore all'arco se esiste?
 
       curr = g->adiacenti[partenza];
-      while(curr->key != arrivo){
+      while(*curr->localita != arrivo){
         curr = curr->next;
       }
       ret = curr->costo;
@@ -247,6 +262,8 @@ int costoArco(grafo *g, int partenza, int arrivo){
 
   return ret;
 }
+
+
 
 int aggiungiVertice(grafo *g){
 
@@ -272,9 +289,12 @@ int aggiungiVertice(grafo *g){
 }
 
 
+
 int esisteVertice(grafo *g, int v){
   return v < g->n_vertici;
 }
+
+
 
 int rimuoviVertice(grafo *g, int vertice){
 
