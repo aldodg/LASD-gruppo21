@@ -77,6 +77,39 @@ arco *nuovoArco(int destinazione, int costo){
   return nuovo;
 }
 
+int numeroVertici(grafo *g){
+
+  int ret;
+
+  if(!empty_graph(g)){
+    ret = g->n_vertici;
+  }else{
+    ret = 0;
+  }
+
+  return ret;
+}
+
+int numeroArchi(grafo *g){
+
+  int ret = 0;
+  int i;
+  arco *curr;
+
+  if(!empty_graph(g)){
+    for(i = 0; i < g->n_vertici; i++){//per tutte le liste di adiacenza del vettore
+
+      curr = g->adiacenti[i];//partendo dall'inizio
+
+      while(curr != NULL){//scorre la lista e conta gli elementi, potenzialmente 0
+        ret = ret + 1;
+        curr = curr->next;
+      }
+    }
+  }
+  return ret;
+}
+
 
 int aggiungiArcoPesato(grafo *g, int partenza, int arrivo, int costo){
 
@@ -166,6 +199,55 @@ int rimuoviArco(grafo *g, int partenza, int arrivo){
 }
 
 
+int esisteArco(grafo *g, int partenza, int arrivo){
+
+  int ret = 0;
+  arco *curr;
+
+  if(!empty_graph(g)){
+    if(partenza <= g->n_vertici && arrivo <= g->n_vertici){
+
+      curr = g->adiacenti[partenza];
+      while(curr != NULL && ret == 0){
+
+        if(curr->key == arrivo){
+          ret = 1;
+        }
+        curr = curr->next;
+      }
+    }else{
+      printf("ERRORE in esisteArco: vertice di partenza o arrivo fuori dal range\n");
+    }
+  }else{
+    printf("ERRORE in esisteArco: grafo vuoto\n");
+  }
+
+  return ret;
+}
+
+int costoArco(grafo *g, int partenza, int arrivo){
+
+  arco *curr = NULL;
+  int ret = 0;
+
+  if(!empty_graph(g)){
+    if(esisteArco(g, partenza, arrivo)){//forse esisteArco dovrebbe anche in qualche modo ritornare un puntatore all'arco se esiste?
+
+      curr = g->adiacenti[partenza];
+      while(curr->key != arrivo){
+        curr = curr->next;
+      }
+      ret = curr->costo;
+    }else{
+      printf("ERRORE in pesoArco: l'arco non esiste\n");
+    }
+  }else{
+    printf("ERRORE in pesoArco: grafo vuoto\n");
+  }
+
+  return ret;
+}
+
 int aggiungiVertice(grafo *g){
 
   arco **nuovo = NULL;
@@ -189,6 +271,10 @@ int aggiungiVertice(grafo *g){
   return ret;
 }
 
+
+int esisteVertice(grafo *g, int v){
+  return v < g->n_vertici;
+}
 
 int rimuoviVertice(grafo *g, int vertice){
 
@@ -272,4 +358,3 @@ int rimuoviVertice(grafo *g, int vertice){
   }
   return ret;
 }
-
