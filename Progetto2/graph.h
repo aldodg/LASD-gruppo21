@@ -19,7 +19,7 @@ typedef struct grafo{
 
 int empty_graph(grafo*);
 
-int creaGrafo(int, grafo **, int);
+int creaGrafo(int, grafo **;
 
 void stampaGrafo(grafo *);
 
