@@ -40,7 +40,7 @@ int creaGrafo(int vertici, grafo **g){
 }
 
 
-void stampaGrafo(struct grafo* G){
+void stampaGrafo(grafo* G){
 	int ca=0, i; arco* app;
 	if(!empty_graph(G)){
 		printf("IL GRAFO HA VERTICI %d", G->n_vertici);
