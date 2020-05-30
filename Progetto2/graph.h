@@ -20,7 +20,7 @@ typedef struct grafo{
 
 int empty_graph(grafo*);
 
-int creaGrafo(int, grafo **;
+int creaGrafo(int, grafo **);
 
 void stampaGrafo(grafo *);
 
@@ -28,11 +28,22 @@ int aggiungiArco(grafo *,int ,int );
 
 int aggiungiArcoPesato(grafo *,int ,int ,int);
 
+int numeroArchi(grafo *);
+
+int costoArco(grafo *g, int, int);
+
+int esisteArco(grafo *, int, int);
+
 int rimuoviArco(grafo *,int ,int );
 
 int aggiungiVertice(grafo *);
 
+int esisteVertice(grafo *, int);
+
+int numeroVertici(grafo *);
+
 int rimuoviVertice(grafo *,int);
+
 
 
 #endif // GRAPH_H_INCLUDED
