@@ -4,10 +4,10 @@ Abbate Carmine
 Fabio De Martino
 Aldo Di Giovanni*/
 
-#include"graph.h"
-#include"customers.h"
-#include"stdinutils.h"
-#include"mainfunction.h"
+//#include"graph.c"
+#include"customers.c"
+#include"stdinutils.c"
+#include"mainfunction.c"
     int main()	{
 
     Customers *Utenti=NULL;
@@ -23,7 +23,7 @@ Aldo Di Giovanni*/
 		printf("\n\n------------Login----------\n\n");
 		printf("1 - Registrati\n");
 		printf("2 - Accedi con credenziali\n");
-		printf("3 - Gestisci tratte\n");
+		printf("3 - Pannello admin\n");
 		choice=readint();
 		switch (choice)	{
 
@@ -84,9 +84,26 @@ Aldo Di Giovanni*/
 			break;
 
 			case 3:
-				//metodo incompleto, va completato con le funzioni sui grafi
+			printf("\nMenu Admin, inserire password:\n");
+			fflush(stdin);
+			adpass=read();
+			
+			if ( strcmp (adpass,"Admin")==0 || strcmp (adpass, "admin")==0)
+			 {
+			 	
+			printf("\nPassword corretta, benvenuto!\n");
 			menutratte();
-
+			
+			}else 	if ( strcmp (adpass,"Admin")!=0 || strcmp (adpass, "admin")!=0){
+			printf("\nPassword non corretta!3\n");
+			fflush(stdin);
+			adpass=read();
+	if ( strcmp (adpass,"Admin")==0 || strcmp (adpass, "admin")==0) {
+			printf("\nPassword corretta, benvenuto!\n");
+			menutratte();
+	
+}
+}
 			default:
 
 				printf("\nValore non corretto!\nDigitare 1 per registrarsi\nDigitare 2 per accedere con credenziali\nDigitare 3 per gestire le tratte\n");
