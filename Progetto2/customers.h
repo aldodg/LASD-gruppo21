@@ -13,17 +13,18 @@
 	 	char * user;
 	 	char * password;
 	    struct customer *next;
-
+		
 		 };
 
 		typedef struct customer Customers;
 
-		char* username;
+		char *username;
 		char *nome;
 		char *cognome;
 		char *pass;
 		char *pass2;
-
+		char *adpass;	
+	
 
 	void registra(Customers ** L, char *name, char * surname, char * username, char * password);//Funzione che riempie la lista delle registrazioni utente
     int	UserGiaPresente(Customers *L, char *username);//Funzione booleana che controlla se uno username è gia presente
