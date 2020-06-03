@@ -95,15 +95,11 @@ Aldo Di Giovanni*/
 			menutratte();
 			
 			}else 	if ( strcmp (adpass,"Admin")!=0 || strcmp (adpass, "admin")!=0){
-			printf("\nPassword non corretta!3\n");
-			fflush(stdin);
-			adpass=read();
-	if ( strcmp (adpass,"Admin")==0 || strcmp (adpass, "admin")==0) {
-			printf("\nPassword corretta, benvenuto!\n");
-			menutratte();
+			printf("\nPassword non corretta!\n");
+			break;
 	
 }
-}
+
 			default:
 
 				printf("\nValore non corretto!\nDigitare 1 per registrarsi\nDigitare 2 per accedere con credenziali\nDigitare 3 per gestire le tratte\n");
