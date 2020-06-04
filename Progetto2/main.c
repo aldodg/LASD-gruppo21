@@ -8,6 +8,7 @@ Aldo Di Giovanni*/
 #include"customers.c"
 #include"stdinutils.c"
 #include"mainfunction.c"
+#include "gettonate.h"
     int main()	{
 
     Customers *Utenti=NULL;
@@ -51,12 +52,12 @@ Aldo Di Giovanni*/
 				pass2=read();
 				}
 
-				/*Controllo su username, se gi‡ registrato impedisce la registrazione, altrimenti riempiamo la lista degli utenti*/
+				/*Controllo su username, se gi√† registrato impedisce la registrazione, altrimenti riempiamo la lista degli utenti*/
 				if(!UserGiaPresente(Utenti,username)){//se l'username cercato non esiste, allora lo registriamo in lista
 
 				registra(&Utenti,nome,cognome,username, pass);
 				printf("\nRegistrazione avvenuta con successo!\n");
-				login();//se tutto ok passiamo alle funzionalit‡ del men˘ login
+				login();//se tutto ok passiamo alle funzionalit√† del men√π login
 			}else{
 
 				printf("\nLo username scelto non e' disponibile, riprovare!\n");//altrimenti ritorna al menu login
