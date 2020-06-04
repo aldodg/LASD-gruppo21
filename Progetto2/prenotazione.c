@@ -12,10 +12,9 @@ Prenotati initNode(char *partenza, char *arrivo, int costo){
 
 Prenotati insertTail(Prenotati P, char *partenza , char *arrivo, int costo){
     if (P != NULL) {
-        if (P->partenza != arrivo) {
             P->next = insertTail(P->next, partenza, arrivo, costo);
-        }
-    } else {
+    }
+    else {
         P = initNode(partenza,arrivo,costo);
     }
     return P;
@@ -24,7 +23,7 @@ Prenotati insertTail(Prenotati P, char *partenza , char *arrivo, int costo){
 
 Prenotati insertHead(Prenotati P, char *partenza,char *arrivo, int costo) {
     if (P != NULL) {
-        Prenotati X = malloc(sizeof(struct voliPrenotati));
+        Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
         X->partenza = partenza;
         X->arrivo = arrivo;
         X->costo = costo;
