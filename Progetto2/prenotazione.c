@@ -1,7 +1,7 @@
 #include "prenotazione.h"
 
 Prenotati initNode(char *partenza, char *arrivo, int costo){
-    Prenotati P = malloc(sizeof(struct voliPrenotati));
+    Prenotati P = (Prenotati) malloc(sizeof(struct voliPrenotati));
     P->partenza = partenza;
     P->arrivo = arrivo;
     P->costo = costo;
