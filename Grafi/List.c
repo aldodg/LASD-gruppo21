@@ -3,12 +3,14 @@
 #include <time.h>
 #include "List.h"
 
-List initNodeList(int info, int peso, char* luogo) {
+List initNodeList(int info, int costo_tratta, int durata_tratta)
+{
     List L = malloc(sizeof(struct TList));
     L->target = info;
-    L->peso = peso;
-    L->citta=luogo;
+    L->costo_tratta = costo_tratta;
+    L->durata_tratta = durata_tratta;
     L->next = NULL;
+
     return L;
 }
 
@@ -23,33 +25,45 @@ List randomList(int index, int mod) {
 }
 */
 
-List appendNodeList(List L, int target, int peso, char* luogo) {
-    if (L != NULL) {
-        if (L->target != target) {
-            L->next = appendNodeList(L->next, target, peso, luogo);
+List appendNodeList(List L, int target, int costo_tratta, int durata_tratta)
+{
+    if (L != NULL)
+    {
+        if (L->target != target)
+        {
+            L->next = appendNodeList(L->next, target, costo_tratta, durata_tratta);
         }
-    } else {
-        L = initNodeList(target, peso, luogo);
     }
+    else
+    {
+        L = initNodeList(target, costo_tratta, durata_tratta);
+    }
+
     return L;
 }
 
-List addNodeHead(List L, int target, int peso, char* luogo) {
-    if (L != NULL) {
+//dove viene chiamata??
+List addNodeHead(List L, int target, int costo_tratta, int durata_tratta)
+{
+    if (L != NULL)
+    {
         List G = malloc(sizeof(struct TList));
         G->target = target;
         G->next = L;
         return G;
     }
-    return initNodeList(target, peso, luogo);
+    return initNodeList(target, costo_tratta, durata_tratta);
 }
 
 
 
 
-List removeNodeList(List L, int target) {
-    if (L != NULL) {
-        if (L->target == target) {
+List removeNodeList(List L, int target)
+{
+    if (L != NULL)
+    {
+        if (L->target == target)
+        {
             List tmp = L->next;
             free(L);
             return tmp;
@@ -60,17 +74,22 @@ List removeNodeList(List L, int target) {
 }
 
 
-void freeList(List L) {
-    if (L != NULL) {
+void freeList(List L)
+{
+    if (L != NULL)
+    {
         freeList(L->next);
         free(L);
     }
 }
 
 
-void printList(List L) {
-    if (L != NULL) {
-        printf(" %d ", L->citta);
+void printList(List L)
+{
+    if (L != NULL)
+    {
+        printf(" %d ", L->target);
         printList(L->next);
     }
 }
+
