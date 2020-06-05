@@ -3,7 +3,7 @@
 Gettonate initList(char *partenza, char *destinazione, int cont)
 {
     Gettonate G = (Gettonate)malloc(sizeof(struct MeteGettonate));
-    G->partenza = partenza;
+    //G->partenza = partenza;
     G->destinazione = destinazione;
     G->cont=cont;
     G->next = NULL;

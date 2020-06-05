@@ -1,0 +1,162 @@
+/*
+**  dijkstra.c
+**
+**  Letto in input un grafo orientato, rappresentato con una
+**  matrice di adiacenza e tale che ad ogni spigolo (u,v)
+**  sia associato un peso non negativo w(u,v), per ogni
+**  vertice v calcola il minimo cammino per raggiungere v
+**  partendo dalla sorgente s (letta in input). Il programma
+**  e` una codifica in C dell'algoritmo di Dijkstra.
+**
+**  Pseudo-codifica dell'algoritmo:
+**
+**  Dijkstra(G, W, s)
+**    per ogni v in V(G) ripeti:
+**      d(v) = infinito
+**      padre(v) = nil
+**    end
+**    d(s) = 0
+**    Q = V(G)
+**    fintanto che Q non e` vuoto ripeti:
+**      sia u il l'elemento di Q con d(u) minima
+**      estrai u da Q
+**      per ogni vertice v adiacente a u ripeti:
+**        se d(v) > d(u) + w(u,v) allora
+**          d(v) = d(u) + w(u,v)
+**          padre(v) = u
+**        end
+**      end
+**    end
+**  END
+**
+**  Marco Liverani (liverani@mat.uniroma3.it) - Dicembre 2007
+*/
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#define MAX 50
+#define INFINITO -1
+
+/*
+ *  Elemento della lista con cui viene definito l'insieme Q
+ */
+struct nodo {
+  int info;
+  int w;
+  struct nodo *next;
+};
+
+struct nodoQ {
+  int info;
+  struct nodoQ *next;
+};
+
+/*
+ *  Legge in input il grafo e lo rappresenta attraverso
+ *  n liste di adiacenza.
+ */
+struct nodo *leggi_lista(void) {
+  int i, n;
+  struct nodo *p, *primo;
+  printf("Numero di elementi: ");
+  scanf("%d", &n);
+  primo = NULL;
+  for (i=0; i<n; i++) {
+    p = malloc(sizeof(struct nodo));
+    printf("Vertice e peso: ");
+    scanf("%d %d", &p->info, &p->w);
+    p->next = primo;
+    primo = p;
+  }
+  return(primo);
+}
+
+int leggi_grafo(struct nodo *G[]) {
+  int i, n;
+  printf("Numero di vertici: ");
+  scanf("%d", &n);
+  for (i=0; i<n; i++) {
+    printf("Lista di adiacenza del vertice %d.\n", i);
+    G[i] = leggi_lista();
+  }
+  return(n);
+}
+
+/*
+ *  Estrae l'elemento u dalla lista Q (definita a partire dall'elemento
+ *  indirizzato dal puntatore primo) tale che d[u] sia minima.
+ */
+int estrai_min(struct nodoQ **primo, int d[]) {
+  struct nodoQ *p, *pmin, *prec=NULL, *precmin=NULL;
+  int u;
+  pmin = *primo;
+  p = *primo;
+  while (p != NULL) {
+    if ((d[p->info] != INFINITO && d[p->info] < d[pmin->info]) || d[pmin->info] == INFINITO) {
+      pmin = p;
+      precmin = prec;
+    }
+    prec = p;
+    p = p->next;
+  }
+  u = pmin->info;
+
+  if (precmin == NULL)
+    *primo = (*primo)->next;
+  else
+    precmin->next = pmin->next;
+  free(pmin);
+
+  return(u);
+}
+
+/*
+ *  Inserisce un elemento nella lista Q.
+ */
+void accoda(struct nodoQ **primo, int v) {
+  struct nodoQ *p;
+  p = malloc(sizeof(struct nodoQ));
+  p->info = v;
+  p->next = *primo;
+  *primo = p;
+  return;
+}
+
+/*
+ *  Funzione principale che implementa l'algoritmo di Dijkstra.
+ */
+int main(void) {
+  int d[MAX], pi[MAX], n, s, u, v;
+  struct nodoQ *q, *primo=NULL;
+  struct nodo *p, *G[MAX];
+  n = leggi_grafo(G);
+  for (v=0; v<n; v++) {
+    d[v] = INFINITO;
+    pi[v] = -1;
+  }
+
+  printf("Sorgente: ");
+  scanf("%d", &s);
+  d[s] = 0;
+
+  for (v=0; v<n; v++)
+    accoda(&primo, v);
+
+  while (primo != NULL) {
+    u = estrai_min(&primo, d);
+    p = G[u];
+    while (p != NULL) {
+      if (d[p->info] == INFINITO || d[p->info] > d[u] + p->w) {
+        pi[p->info] = u;
+        d[p->info] = d[u] + p->w;
+      }
+      p = p->next;
+    }
+  }
+
+  for (v=0; v<n; v++)
+    printf("d[%d] = %3d, pi[%d] = %3d\n", v, d[v], v, pi[v]);
+
+  return(0);
+}

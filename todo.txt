@@ -1,0 +1,54 @@
+1)FONDERE GRAPH IN PROGETTO2 CON GRAPH IN SOTTOCARTELLA GRAFI
+
+2)TROVARE DIJKSTRA BUONO
+
+
+3)funzione prenota volo:
+
+mostro lo sconto accumulato dall'utente
+lo sconto accumulato e' una variabile di accumulo che sta nella struct customer
+
+------------------------------------------
+vuoi vedere le mete piu' gettonate? 
+se si, parte una funzione di stampa delle mete piu' gettonate (ovvero una che fa il controlllo sul cobntatore 
+(nella struct nomeLuogo nella sottocartella grafi)
+di ogni singolo nodo e stampa solo i nodi (id, nome e contatore) il cui contatore e' maggiore di 5 
+
+chiedo all'utente se vuole andare in uno si questi posti
+se si, gli chiedo il numero (id) corrispondente che viene usato come campo destinazione
+
+--------------------------------------------
+
+scelta per mostrare tutti gli aeroporti disponibili -> stampa lista id in grafi
+
+inserisci codice del luogo di partenza e destinazione (se non l'ho preso gia' dai gettonati)/annulla
+
+dijkstra con il costo -> stampo la tratta piu' economica -> estrai e conserva informazioni di parte, arr, 
+cost, durata in una struct voliPrenotati
+
+dijkstra con la durata -> stampo tratta piu' veloce -> estrai e conserva informazioni di parte, arr, cost, 
+durata durata in una struct voliPrenotati
+
+ottengo quindi una lista formata (usando stesso funzione insertTail (in prenotazione.c) ) da due nodi della 
+struttura  voli prenotati
+(le due opzioni uscite da dijkstra),  
+faccio scegliere all'utente quale vuole e l'altra la cancello
+
+mostro la durata e il costo complessivo del volo (compresi eventuali scali).
+
+se l'utente ha uno sconto, chiedo all'utente se vuole usarlo.
+
+se si, viene ridotto il costo mostrato prima.
+
+chiedo conferma all'utente sulla prenotazione del volo.
+
+ora uso funzione insertTail (in prenotazione.c) sulla lista dei voli prenotati da quell'utente
+
+calcolo sconto come percentuale fissa e la aggiungo alla variabile di accumulto sconto che sta dentro customer
+
+
+
+
+
+
+

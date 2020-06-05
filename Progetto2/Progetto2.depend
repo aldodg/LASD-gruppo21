@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1591177490 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
+1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
 	"customers.h"
 
 1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.h
@@ -8,7 +8,7 @@
 	<stdlib.h>
 	"prenotazione.h"
 
-1591177490 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
+1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
 	"graph.h"
 
 1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
@@ -16,7 +16,7 @@
 	<stdlib.h>
 	<string.h>
 
-1591369562 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
+1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
 	"customers.h"
 	"stdinutils.h"
 	"mainfunction.h"
@@ -33,7 +33,7 @@
 	<stdlib.h>
 	<string.h>
 
-1590686015 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.c
+1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.c
 	<stdio.h>
 	<stdlib.h>
 	"stdinutils.h"
@@ -43,7 +43,7 @@
 	<string.h>
 	<stdlib.h>
 
-1591317382 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.c
+1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.c
 	"gettonate.h"
 
 1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.h
@@ -51,7 +51,7 @@
 	<string.h>
 	<stdlib.h>
 
-1591317382 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
+1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
 	"prenotazione.h"
 
 1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
