@@ -66,16 +66,8 @@
 				{
 
 					case 1:{
-						printf("\n---Menu' di aggiunta tratte\n");
-						printf("1 - Aggiungi nuovo aeroporto\n");
-						printf("2 - Aggiungi nuova tratta\n");
-						printf("3 - Ritorna al menu' principale\n");
-                        subchoice2=readint();
 
-                        while ( subchoice1 != 1 || subchoice1 != 2 || subchoice1 != 3){
-                            printf("\nErrore nella scelta\n");
-                            break;
-                        }
+					aggiuntatratta();
 
 					break;
 					}
@@ -99,5 +91,8 @@
 
 		}
 
+        void aggiuntatratta(){
 
+
+        }
 
