@@ -48,4 +48,7 @@ List checkListRemoval(List L, int node_to_remove);
 Nomi_Luoghi aggiungi_nome_citta(Nomi_Luoghi, int, char*);
 void stampa_lista_nomi(Nomi_Luoghi NM);
 
+Graph popola_grafo_file (Graph, Nomi_Luoghi*);
+void aggiorna_grafo_file (Graph);
+
 #endif

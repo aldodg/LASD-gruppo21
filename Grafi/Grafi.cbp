@@ -39,6 +39,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="List.h" />
+		<Unit filename="db_grafo.txt" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
