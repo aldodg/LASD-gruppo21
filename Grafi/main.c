@@ -27,7 +27,7 @@ int main(int argc, const char * argv[])
     printGraph(L);
     printf("\n\n");
     stampa_lista_nomi(NM);
-    aggiorna_grafo_file(L);
+    //aggiorna_grafo_file(L);
 
     return 0;
 }

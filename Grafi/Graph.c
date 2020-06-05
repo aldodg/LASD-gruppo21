@@ -252,7 +252,7 @@ Graph popola_grafo_file (Graph L, Nomi_Luoghi *NM)
     return L;
 
 }
-
+/*
 //la funzione aggiorna il database locale del grafo all'uscita del programma
 void aggiorna_grafo (Graph L)
 {
@@ -278,6 +278,6 @@ void aggiorna_grafo (Graph L)
     }
     fclose(ptr);
 }
-
+*/
 
 
