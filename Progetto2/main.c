@@ -8,7 +8,7 @@ Aldo Di Giovanni*/
 #include"customers.c"
 #include"stdinutils.c"
 #include"mainfunction.c"
-#include "gettonate.h"
+#include "gettonate.c"
     int main()	{
 
     Customers *Utenti=NULL;
@@ -28,7 +28,7 @@ Aldo Di Giovanni*/
 		choice=readint();
 		switch (choice)	{
 
-			case 1:
+			case 1:{
 				// Per leggere da stdin usare la read(), funzione implementata in stdinutils.
 				printf("\nBenvenuto nel menu' di registrazione!\n\n");
 				fflush(stdin);
@@ -64,8 +64,8 @@ Aldo Di Giovanni*/
 			}
 
 			break;
-
-			case 2:
+			}
+			case 2:{
 
 				printf("Inserisci Username: \n");
 				fflush(stdin);
@@ -83,33 +83,34 @@ Aldo Di Giovanni*/
 
 
 			break;
-
-			case 3:
+			}
+			case 3:{
 			printf("\nMenu Admin, inserire password:\n");
 			fflush(stdin);
 			adpass=read();
-			
+
 			if ( strcmp (adpass,"Admin")==0 || strcmp (adpass, "admin")==0)
 			 {
-			 	
+
 			printf("\nPassword corretta, benvenuto!\n");
 			menutratte();
-			
+
 			}else 	if ( strcmp (adpass,"Admin")!=0 || strcmp (adpass, "admin")!=0){
 			printf("\nPassword non corretta!\n");
+
+			}
 			break;
-	
 }
 
-			default:
+			default:{
 
-				printf("\nValore non corretto!\nDigitare 1 per registrarsi\nDigitare 2 per accedere con credenziali\nDigitare 3 per gestire le tratte\n");
+				printf("\nDigitare 1 per registrarsi\nDigitare 2 per accedere con credenziali\nDigitare 3 per gestire le tratte\n");
 
 			break;
 
 						}
 
-
+		}
 
 		}while(choice!=1 || choice !=2 || choice !=3);
 

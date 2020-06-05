@@ -51,6 +51,8 @@
 	void menutratte(){
 
 		int choice;
+		int subchoice1;
+		int subchoice2;
 			do{
 
 		printf("\n\n---Menu' gestione tratte---\n\n");
@@ -63,24 +65,36 @@
 		switch (choice)
 				{
 
-					case 1:
-						// implementare funzioni aggiunta vertici e archi
+					case 1:{
+						printf("\n---Menu' di aggiunta tratte\n");
+						printf("1 - Aggiungi nuovo aeroporto\n");
+						printf("2 - Aggiungi nuova tratta\n");
+						printf("3 - Ritorna al menu' principale\n");
+                        subchoice2=readint();
+
+                        while ( subchoice1 != 1 || subchoice1 != 2 || subchoice1 != 3){
+                            printf("\nErrore nella scelta\n");
+                            break;
+                        }
 
 					break;
-
-					case 2:
+					}
+					case 2:{
 						//implementare funzioni rimuovi nodi e archi
 					break;
+					}
+					case 3: {
 
-					case 3:
 
 					return;
 
-					default:
+					}
+                    default:{
 
 					printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+                    }
 				}
-
+                    break;
 			}while(choice !=1 || choice !=2 || choice !=3);
 
 		}
