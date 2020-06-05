@@ -1,98 +1,114 @@
-#include"mainfunction.h"
+#include "mainfunction.h"
+#include "stdinutils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 
-	void login(){
-		int choice;
+void login()
+{
+    int choice;
 
-		do
-	{
-
-
-		printf("\n\n---Menu' Principale Aeroporto---\n\n");
-		printf("1 - Prenota un volo\n");
-		printf("2 - Visualizza prenotazioni effettuate\n");
-		printf("3 - Esci\n");
-
-		choice=readint();
-
-			switch (choice)	{
-
-				case 1:
-
-				/*funzioni da implementare:
-				bisogna creare un sottomenu che permetta di scegliere le tratte, con due opzioni, solo partenza
-				e partenza e destinazione
-	*/
-				break;
+    do
+    {
 
 
-				case 2:
-				// da implementare: stampa grafo
-				break;
+        printf("\n\n---Menu' Principale Aeroporto---\n\n");
+        printf("1 - Prenota un volo\n");
+        printf("2 - Visualizza prenotazioni effettuate\n");
+        printf("3 - Esci\n");
 
-				case 3:
+        choice=readint();
 
-				return;
+        switch (choice)
+        {
 
-				default:
+        case 1:
 
-				printf("\nScelta non corretta\nDigitare 1 per prenotare un volot\n2Per visualizzare le prenotazioni effettuate\n3Per uscire");
+            /*funzioni da implementare:
+            bisogna creare un sottomenu che permetta di scegliere le tratte, con due opzioni, solo partenza
+            e partenza e destinazione
+            */
+            break;
 
 
-							}
+        case 2:
+            // da implementare: stampa grafo
+            break;
+
+        case 3:
+
+            return;
+
+        default:
+
+            printf("\nScelta non corretta\nDigitare 1 per prenotare un volot\n2Per visualizzare le prenotazioni effettuate\n3Per uscire");
+
+
+        }
 
 
 
-	}while (choice !=1 || choice !=2  || choice !=3);
+    }
+    while (choice !=1 || choice !=2  || choice !=3);
 
 
 }
 
-	void menutratte(){
 
-		int choice;
-		int subchoice1;
-		int subchoice2;
-			do{
-
-		printf("\n\n---Menu' gestione tratte---\n\n");
-		printf("1 - Aggiungere tratta\n");
-		printf("2 - Rimuovi tratta\n");
-		printf("3 - Esci\n");
-
-		choice=readint();
-
-		switch (choice)
-				{
-
-					case 1:{
-
-					aggiuntatratta();
-
-					break;
-					}
-					case 2:{
-						//implementare funzioni rimuovi nodi e archi
-					break;
-					}
-					case 3: {
+void aggiuntatratta()
+{
 
 
-					return;
+}
 
-					}
-                    default:{
+void menutratte()
+{
 
-					printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
-                    }
-				}
-                    break;
-			}while(choice !=1 || choice !=2 || choice !=3);
+    int choice;
 
-		}
+    do
+    {
 
-        void aggiuntatratta(){
+        printf("\n\n---Menu' gestione tratte---\n\n");
+        printf("1 - Aggiungere tratta\n");
+        printf("2 - Rimuovi tratta\n");
+        printf("3 - Esci\n");
 
+        choice=readint();
+
+        switch (choice)
+        {
+
+        case 1:
+        {
+
+            aggiuntatratta();
+
+            break;
+        }
+        case 2:
+        {
+            //implementare funzioni rimuovi nodi e archi
+            break;
+        }
+        case 3:
+        {
+
+
+            return;
 
         }
+        default:
+        {
+
+            printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+        }
+        }
+        break;
+    }
+    while(choice !=1 || choice !=2 || choice !=3);
+
+}
+
 

@@ -11,13 +11,16 @@ char* read()
     int c, i;
 
     size = i = 0;
-    do {
+    do
+    {
         size += BUFSIZE;
         buf = realloc(buf, size);
         while (i < size && (c = getchar()) != '\n')
             buf[i++] = c;
-    } while (c != '\n');
-    if (!i) {
+    }
+    while (c != '\n');
+    if (!i)
+    {
         free(buf);
         return NULL;
     }

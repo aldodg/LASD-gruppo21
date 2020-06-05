@@ -3,20 +3,23 @@
 
 
 
-	void registra(Customers **L, char *name, char * surname, char * username, char * password){
+void registra(Customers **L, char *name, char * surname, char * username, char * password)
+{
 
-		Customers *new= malloc(sizeof(Customers));
+    Customers *new= malloc(sizeof(Customers));
 
-		new->nome=name;
-		new->cognome=surname;
-		new->user=username;
-		new->password=password;
+    new->nome=name;
+    new->cognome=surname;
+    new->user=username;
+    new->password=password;
 
-		 if (!*L) {
+    if (!*L)
+    {
         *L = new;
         new->next = NULL;
     }
-    else {
+    else
+    {
         Customers *n = *L;
         while (n->next && n->cognome > surname)
             n = n->next;
@@ -25,41 +28,51 @@
     }
 
 
-	}
+}
 
 
-		int UserGiaPresente(Customers *L, char *username){
+int UserGiaPresente(Customers *L, char *username)
+{
 
-		Customers *current = L;
+    Customers *current = L;
 
-		while(current!=NULL && strcmp(current->user,username)!=0){
-			current=current->next;
-		}
-		if(current!=NULL){
-		return 1;
+    while(current!=NULL && strcmp(current->user,username)!=0)
+    {
+        current=current->next;
+    }
+    if(current!=NULL)
+    {
+        return 1;
 
-		}else{
+    }
+    else
+    {
 
-			return 0;
-		}
-
-
-	}
-
-		int controllaCredenziali(Customers *L,char * username, char * password){
-			Customers *current = L;
-
-		while(current!=NULL && strcmp(current->user,username)!=0 && strcmp (current->password, password)!= 0){
-			current=current->next;
-		}
-		if(current!=NULL){
-		return 1;
-
-		}else{
-
-			return 0;
-		}
+        return 0;
+    }
 
 
+}
 
-	}
+int controllaCredenziali(Customers *L,char * username, char * password)
+{
+    Customers *current = L;
+
+    while(current!=NULL && strcmp(current->user,username)!=0 && strcmp (current->password, password)!= 0)
+    {
+        current=current->next;
+    }
+    if(current!=NULL)
+    {
+        return 1;
+
+    }
+    else
+    {
+
+        return 0;
+    }
+
+
+
+}

@@ -1,36 +1,67 @@
 # depslib dependency file v1.0
-1590686015 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
+1591177490 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
 	"customers.h"
 
-1590686015 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.h
+1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.h
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
+	"prenotazione.h"
 
-1590686015 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
+1591177490 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
 	"graph.h"
 
-1590686015 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
+1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1590686015 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
-	"graph.h"
+1591369562 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
 	"customers.h"
 	"stdinutils.h"
 	"mainfunction.h"
+	"gettonate.h"
 
 1590686015 c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.h
 
-1590686015 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.h
-	"customers.h"
+1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.h
 
-1590686015 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
+1591369837 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
 	"mainfunction.h"
+	"stdinutils.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 
 1590686015 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.c
 	<stdio.h>
 	<stdlib.h>
 	"stdinutils.h"
+
+1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1591317382 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.c
+	"gettonate.h"
+
+1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1591317382 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
+	"prenotazione.h"
+
+1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
+	"customers.h"
+
+1590686015 c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.c
+	<stdio.h>
+	<stdlib.h>
+	"stdinutils.h"
+
+1591369080 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
+	"mainfunction.h"
 

@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="customers.h" />
+		<Unit filename="gettonate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gettonate.h" />
 		<Unit filename="graph.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -46,6 +50,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mainfunction.h" />
+		<Unit filename="prenotazione.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="prenotazione.h" />
 		<Unit filename="stdinutils.c">
 			<Option compilerVar="CC" />
 		</Unit>
