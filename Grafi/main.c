@@ -28,6 +28,25 @@ int main(int argc, const char * argv[])
     printf("\n\n");
     stampa_lista_nomi(NM);
     //aggiorna_grafo_file(L);
+    printf("--------------------------------------------\n");
+    removeEdge(L, 15, 14); //rimuovo la tratta da Catanzaro a reggio calabria
+    printGraph(L);
+    printf("--------------------------------------------\n");
+    addEdge (L, 15, 14, 40, 25); //rimetto la tratta, impostando un costo di 40 euro e durata di 25 min
+    printGraph(L);
+    printf("----------------------------------------\n");
+    removeNode (L, 15, &NM); //rimuovo catanzaro come aeroporto;
+    printGraph(L);
+    printf("\n\n");
+    stampa_lista_nomi(NM);
+    printf("-------------------------------------------\n");
+    aggiungi_aeroporto(L, &NM);
+    printGraph(L);
+    printf("\n\n");
+    stampa_lista_nomi(NM);
+
+    freeGraph(L);
+    cancellaListaNomi(NM);
 
     return 0;
 }

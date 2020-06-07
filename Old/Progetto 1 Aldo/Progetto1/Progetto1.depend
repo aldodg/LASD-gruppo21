@@ -71,3 +71,39 @@
 	<stdio.h>
 	<stdlib.h>
 
+1589277605 source:c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\deposito_libri.c
+	"deposito_libri.h"
+	"prestito.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1589277605 c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\deposito_libri.h
+
+1588875203 c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\prestito.h
+	"deposito_libri.h"
+
+1589280383 source:c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"deposito_libri.h"
+	"restituzione.h"
+	"prestito.h"
+
+1588971450 c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\restituzione.h
+	"deposito_libri.h"
+	"prestito.h"
+
+1589280383 source:c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\prestito.c
+	"prestito.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1589277112 source:c:\users\pc\documents\github\lasd-gruppo21\old\progetto 1 aldo\progetto1\restituzione.c
+	"restituzione.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+

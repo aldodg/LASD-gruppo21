@@ -15,6 +15,7 @@ typedef struct TGraph* Graph;
 struct nomi {
     char *nome_luogo;
     int id;
+    int contatore_voli;
     struct nomi *next;
 };
 
@@ -42,13 +43,16 @@ void addNode(Graph G);
 
 // Rimuovi un nodo dal grafo, sistemando
 // gli indici e riallocando la memoria
-void removeNode(Graph G, int node_to_remove);
+void removeNode(Graph G, int node_to_remove, Nomi_Luoghi*);
 List checkListRemoval(List L, int node_to_remove);
 
 Nomi_Luoghi aggiungi_nome_citta(Nomi_Luoghi, int, char*);
 void stampa_lista_nomi(Nomi_Luoghi NM);
-
+Nomi_Luoghi checkListRemoval_perNomiLuoghi (Nomi_Luoghi L, int node_to_remove);
 Graph popola_grafo_file (Graph, Nomi_Luoghi*);
+void cancellaListaNomi(Nomi_Luoghi L);
+void aggiungi_aeroporto(Graph, Nomi_Luoghi*);
+void scelta_visualizza_elenco (Nomi_Luoghi NM);
 //void aggiorna_grafo_file (Graph);
 
 #endif

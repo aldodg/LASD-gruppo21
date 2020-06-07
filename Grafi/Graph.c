@@ -5,9 +5,134 @@
 #include <string.h>
 #include "Graph.h"
 #define GRANDEZZA_GRAFO 20
-#define MAXLEN_LUOGO 30
+#define MAXLEN_LUOGO 30 //lunghezza massima del nome di un luogo nel quale si trova un aeroporto
 
-//crea il grafo, della dimensione specificata, e inizializza i suoi nodi allocandone anche la memoria per ognuno
+int empty_graph(Graph G)
+{
+    return G==NULL;
+}
+
+int numeroVertici(Graph g)
+{
+
+    int ret;
+
+    if(!empty_graph(g))
+    {
+        ret = g->nodes_count;
+    }
+    else
+    {
+        ret = 0;
+    }
+
+    return ret;
+}
+
+
+
+int numeroArchi(Graph g)
+{
+
+    int ret = 0;
+    int i;
+    List curr;
+
+    if(!empty_graph(g))
+    {
+        for(i = 0; i < g->nodes_count; i++) //per tutte le liste di adiacenza del vettore
+        {
+
+            curr = g->adj[i];//partendo dall'inizio
+
+            while(curr != NULL) //scorre la lista e conta gli elementi, potenzialmente 0
+            {
+                ret = ret + 1;
+                curr = curr->next;
+            }
+        }
+    }
+    return ret;
+}
+
+int esisteArco(Graph g, int partenza, int arrivo)
+{
+
+    int ret = 0;
+    List curr;
+
+    if(!empty_graph(g))
+    {
+        if(partenza <= g->nodes_count && arrivo <= g->nodes_count)
+        {
+
+            curr = g->adj[partenza];
+            while(curr != NULL && ret == 0)
+            {
+
+                if(curr->target == arrivo)
+                {
+                    ret = 1;
+                }
+                curr = curr->next;
+            }
+        }
+        else
+        {
+            printf("ERRORE in esisteArco: vertice di partenza o arrivo fuori dal range\n");
+        }
+    }
+    else
+    {
+        printf("ERRORE in esisteArco: grafo vuoto\n");
+    }
+
+    return ret;
+}
+
+
+
+int costoArco(Graph g, int partenza, int arrivo)
+{
+
+    List curr = NULL;
+    int ret = 0;
+
+    if(!empty_graph(g))
+    {
+        if(esisteArco(g, partenza, arrivo)) //forse esisteArco dovrebbe anche in qualche modo ritornare un puntatore all'arco se esiste?
+        {
+
+            curr = g->adj[partenza];
+            while(curr->target != arrivo)
+            {
+                curr = curr->next;
+            }
+            ret = curr->costo_tratta;
+        }
+        else
+        {
+            printf("ERRORE in pesoArco: l'arco non esiste\n");
+        }
+    }
+    else
+    {
+        printf("ERRORE in pesoArco: grafo vuoto\n");
+    }
+
+    return ret;
+}
+
+int esisteVertice(Graph g, int v)
+{
+    return v < g->nodes_count;
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+//crea il Graph, della dimensione specificata, e inizializza i suoi nodi allocandone anche la memoria per ognuno
 Graph initGraph(int nodes_count)
 {
     Graph G = malloc(sizeof(struct TGraph));
@@ -62,7 +187,7 @@ void addEdge(Graph G, int source, int target, int costo_tratta, int durata_tratt
 }
 
 
-void removeEdge(Graph G, int source, int target)
+void removeEdge(Graph G, int source, int target) //rimuove un arco
 {
     assert(G != NULL);
     assert(source < G->nodes_count);
@@ -74,18 +199,17 @@ void removeEdge(Graph G, int source, int target)
 }
 
 
-void addNode(Graph G)
+void addNode(Graph G) //QUESTA FUNZIONE ALLOCA SOLO MEMORIA PER IL NUOVO NODO
 {
     if (G != NULL)
     {
         G->adj = realloc(G->adj, (G->nodes_count+1) * sizeof(List));
-        G->nodes_count += 1;
+        G->nodes_count ++;
         G->adj[G->nodes_count] = NULL;
     }
 }
 
-
-void removeNode(Graph G, int node_to_remove)
+void removeNode(Graph G, int node_to_remove, Nomi_Luoghi *NM) //rimuove un vertice o nodo, un nuovo luogo in pratica
 {
     if (G != NULL)
     {
@@ -93,7 +217,7 @@ void removeNode(Graph G, int node_to_remove)
         int x = 0;
         List *tmp = G->adj;
         G->adj = calloc(G->nodes_count, sizeof(List));
-        for (i = 0; i <= G->nodes_count; i++)
+        for (i = 0; i < G->nodes_count; i++) //i<=GNODES c'era prima boh controlla
         {
             if (i != node_to_remove)
             {
@@ -105,8 +229,21 @@ void removeNode(Graph G, int node_to_remove)
                 freeList(G->adj[x]);
             }
         }
+
+        int target=G->adj[0]->target;
+        int costo_tratta=G->adj[0]->costo_tratta;
+        int durata_tratta=G->adj[0]->durata_tratta;
+
         free(*tmp);
+
+        G->adj[0]->target=target;
+        G->adj[0]->costo_tratta=costo_tratta;
+        G->adj[0]->durata_tratta=durata_tratta;
+
         G->nodes_count -= 1;
+
+        //il codice che segue serve ad aggiornare la lista delle corrispondenze id luoghi e nome del luogo
+        *NM=checkListRemoval_perNomiLuoghi(*NM, node_to_remove);
     }
 }
 
@@ -125,6 +262,27 @@ List checkListRemoval(List L, int node_to_remove)
         else if (L->target > node_to_remove)
         {
             L->target -= 1;
+        }
+    }
+    return L;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+Nomi_Luoghi checkListRemoval_perNomiLuoghi(Nomi_Luoghi L, int node_to_remove)
+{
+    if (L != NULL)
+    {
+        L->next = checkListRemoval_perNomiLuoghi(L->next, node_to_remove);
+        if (L->id == node_to_remove)
+        {
+            Nomi_Luoghi tmp = L->next;
+            free(L);
+            return tmp;
+        }
+        else if (L->id > node_to_remove)
+        {
+            L->id -= 1;
         }
     }
     return L;
@@ -252,6 +410,47 @@ Graph popola_grafo_file (Graph L, Nomi_Luoghi *NM)
     return L;
 
 }
+
+void cancellaListaNomi(Nomi_Luoghi L)
+{
+    if (L != NULL)
+    {
+        cancellaListaNomi(L->next);
+        free(L);
+    }
+}
+
+void scelta_visualizza_elenco (Nomi_Luoghi NM)
+{
+
+    char visualizza_elenco[2];
+
+    printf("Vuoi visualizzare la lista degli aeroporti disponibili?\nPremi 1 e poi invio per visualizzare, altrimenti 0 e invio:\t");
+    scanf("%2s", visualizza_elenco);
+    //la funzione seguente impedisce all'utente di fare inserimenti non validi o addirittura dannosi per il programma
+    //non ci sarebbero errori qualora scrivesse una stringa e neanche un intero valido ma seguito da uno spazio e poi altro
+    while ((visualizza_elenco[0]!='1' && visualizza_elenco[0]!='0') || visualizza_elenco[1]!='\0')
+    {
+        while (getchar()!='\n');
+        printf("\nMi dispiace, scelta non valida. Riprova.\t");
+        scanf("%2s",visualizza_elenco );
+
+    }
+    while (getchar()!='\n'); //pulisco buffer in ingresso (stdin)
+    if (atoi(visualizza_elenco)) stampa_lista_nomi(NM);
+    printf("\n\n");
+}
+
+void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM) {
+
+    scelta_visualizza_elenco(*NM);
+
+    addNode(G);
+
+
+
+}
+
 /*
 //la funzione aggiorna il database locale del grafo all'uscita del programma
 void aggiorna_grafo (Graph L)

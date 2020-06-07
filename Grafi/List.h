@@ -2,7 +2,7 @@
 #define Graph_List_h
 
 struct TList {
-    int target; //identificativo univoco del nodo considerato
+    int target; //nodo della destinazione a cui ci stiamo riferendo
     int costo_tratta; //considerato come peso dell'arco
     int durata_tratta; //durata prevista del volo in minuti
     struct TList* next;
