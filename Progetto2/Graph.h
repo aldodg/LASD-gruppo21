@@ -55,4 +55,15 @@ void aggiungi_aeroporto(Graph, Nomi_Luoghi*);
 void scelta_visualizza_elenco (Nomi_Luoghi NM);
 //void aggiorna_grafo_file (Graph);
 
+int empty_graph(Graph G);
+int numeroVertici(Graph g);
+
+int numeroArchi(Graph g);
+
+int esisteArco(Graph g, int partenza, int arrivo);
+
+int costoArco(Graph g, int partenza, int arrivo);
+
+int esisteVertice(Graph g, int v);
+
 #endif

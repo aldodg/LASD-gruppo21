@@ -8,15 +8,19 @@
 	<stdlib.h>
 	"prenotazione.h"
 
-1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
-	"graph.h"
-
-1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
+1591651598 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
 	<stdio.h>
 	<stdlib.h>
+	<time.h>
+	<assert.h>
 	<string.h>
+	"Graph.h"
 
-1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
+1591651737 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
+	"List.h"
+
+1591652881 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
+	"Graph.h"
 	"customers.h"
 	"stdinutils.h"
 	"mainfunction.h"
@@ -38,12 +42,12 @@
 	<stdlib.h>
 	"stdinutils.h"
 
-1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
+1591545744 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 
-1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.c
+1591380067 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.c
 	"gettonate.h"
 
 1591317382 c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.h
@@ -51,7 +55,7 @@
 	<string.h>
 	<stdlib.h>
 
-1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
+1591545744 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
 	"prenotazione.h"
 
 1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
@@ -64,4 +68,12 @@
 
 1591369080 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
 	"mainfunction.h"
+
+1591486877 c:\users\pc\documents\github\lasd-gruppo21\progetto2\list.h
+
+1591237332 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
 

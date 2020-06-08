@@ -2,9 +2,10 @@
 @authors
 Abbate Carmine
 Fabio De Martino
-Aldo Di Giovanni*/
+Aldo Di Giovanni
+*/
 
-//#include"graph.c"
+#include"Graph.h"
 #include"customers.h"
 #include"stdinutils.h"
 #include"mainfunction.h"
@@ -13,10 +14,41 @@ Aldo Di Giovanni*/
 int main()
 {
 
+    //inizio test grafi
+    Graph L=NULL;
+    Nomi_Luoghi NM = NULL;
+
+    L=popola_grafo_file(L, &NM);
+    printGraph(L);
+    printf("\n\n");
+    stampa_lista_nomi(NM);
+    //aggiorna_grafo_file(L);
+    printf("--------------------------------------------\n");
+    removeEdge(L, 15, 14); //rimuovo la tratta da Catanzaro a reggio calabria
+    printGraph(L);
+    printf("--------------------------------------------\n");
+    addEdge (L, 15, 14, 40, 25); //rimetto la tratta, impostando un costo di 40 euro e durata di 25 min
+    printGraph(L);
+    printf("----------------------------------------\n");
+    removeNode (L, 15, &NM); //rimuovo catanzaro come aeroporto;
+    printGraph(L);
+    printf("\n\n");
+    stampa_lista_nomi(NM);
+    printf("-------------------------------------------\n");
+    aggiungi_aeroporto(L, &NM);
+    printGraph(L);
+    printf("\n\n");
+    stampa_lista_nomi(NM);
+    printf("Il nodo ha %d archi. Ne aspetto 68 perche' ho rimosso catanzaro\n", numeroArchi(L));
+    printf("aspetto 1: %d\n", esisteArco(L, 15, 14)); //controllo se esista la tratta da cosenza a reggio calabria
+    printf("aspetto 0: %d\n", esisteArco(L, 18, 17)); //controllo se esista la tratta da salerno a bari
+    printf("aspetto 45: %d\n", costoArco(L, 15, 14)); //costo della tratta da cosenza a reggio calabria
+
+    freeGraph(L);
+    cancellaListaNomi(NM);
+    //fine test grafi
+
     Customers *Utenti=NULL;
-
-
-
     int choice;
 
     /*Menu da aggiustare sia esteticamente per le funzioni*/

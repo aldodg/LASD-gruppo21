@@ -456,6 +456,26 @@ int calcola_id (Nomi_Luoghi NM)
     return count;
 }
 
+//restituisce vero se il luogo che si tenta di inserire abbia stesso nome di uno gia' presente
+int luogo_gia_presente (Nomi_Luoghi NM, char *nuovo_luogo)
+{
+
+    int res=0;
+
+    while (NM!=NULL && !res)
+    {
+        if (!strcmp(NM->nome_luogo, nuovo_luogo))
+        {
+            res=1;
+            printf("Mi dispiace, il luogo e' gia' presente.\n");
+        }
+        NM=NM->next;
+    }
+
+    return res;
+
+}
+
 void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM)
 {
 
@@ -465,10 +485,14 @@ void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM)
     scanf("%29[^\n]", nuovo_luogo);
     //pulisco buffer in ingresso (stdin) per scongiurare comportamenti bizzarri del programma qualora l'utente inserisca input strani
     while (getchar()!='\n');
-    //FACCIO LE TRE COSE DI SEGUITO SOLO SE LA STESSA CITTA NON SIA GIA PRESENTE, COMPLETARE
-    addNode(G);
-    aggiungi_nome_citta(*NM, calcola_id(*NM), nuovo_luogo);
-    scelta_visualizza_elenco(*NM);
+    if (!luogo_gia_presente(*NM, nuovo_luogo))
+    {
+
+        addNode(G);
+        aggiungi_nome_citta(*NM, calcola_id(*NM), nuovo_luogo);
+        scelta_visualizza_elenco(*NM);
+
+    }
 }
 
 /*

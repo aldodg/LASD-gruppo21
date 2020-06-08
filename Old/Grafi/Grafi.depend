@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1591651598 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\graph.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<assert.h>
+	<string.h>
+	"Graph.h"
+
+1591651737 c:\users\pc\documents\github\lasd-gruppo21\grafi\graph.h
+	"List.h"
+
+1591177489 c:\users\pc\documents\github\lasd-gruppo21\grafi\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+
+1591486877 c:\users\pc\documents\github\lasd-gruppo21\grafi\list.h
+
+1591237332 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+
+1591651528 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Graph.h"
+
+1591651598 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\grafi\graph.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<assert.h>
+	<string.h>
+	"Graph.h"
+
+1591651737 c:\users\pc\documents\github\lasd-gruppo21\progetto2\grafi\graph.h
+	"List.h"
+
+1591486877 c:\users\pc\documents\github\lasd-gruppo21\progetto2\grafi\list.h
+
+1591237332 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\grafi\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+

@@ -40,7 +40,7 @@
 		</Unit>
 		<Unit filename="List.h" />
 		<Unit filename="db_grafo.txt" />
-		<Unit filename="main.c">
+		<Unit filename="main_test_grafi.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

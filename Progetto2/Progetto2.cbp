@@ -31,18 +31,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Graph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Graph.h" />
+		<Unit filename="List.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="List.h" />
 		<Unit filename="customers.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="customers.h" />
+		<Unit filename="db_grafo.txt" />
 		<Unit filename="gettonate.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="gettonate.h" />
-		<Unit filename="graph.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="graph.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

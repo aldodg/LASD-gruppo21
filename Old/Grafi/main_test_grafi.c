@@ -44,6 +44,10 @@ int main(int argc, const char * argv[])
     printGraph(L);
     printf("\n\n");
     stampa_lista_nomi(NM);
+    printf("Il nodo ha %d archi. Ne aspetto 68 perche' ho rimosso catanzaro\n", numeroArchi(L));
+    printf("aspetto 1: %d\n", esisteArco(L, 15, 14)); //controllo se esista la tratta da cosenza a reggio calabria
+    printf("aspetto 0: %d\n", esisteArco(L, 18, 17)); //controllo se esista la tratta da salerno a bari
+    printf("aspetto 45: %d\n", costoArco(L, 15, 14)); //costo della tratta da cosenza a reggio calabria
 
     freeGraph(L);
     cancellaListaNomi(NM);
