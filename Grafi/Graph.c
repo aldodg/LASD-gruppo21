@@ -230,7 +230,7 @@ void removeNode(Graph G, int node_to_remove, Nomi_Luoghi *NM) //rimuove un verti
             }
         }
 
-        int target=G->adj[0]->target;
+        /*int target=G->adj[0]->target;
         int costo_tratta=G->adj[0]->costo_tratta;
         int durata_tratta=G->adj[0]->durata_tratta;
 
@@ -238,12 +238,12 @@ void removeNode(Graph G, int node_to_remove, Nomi_Luoghi *NM) //rimuove un verti
 
         G->adj[0]->target=target;
         G->adj[0]->costo_tratta=costo_tratta;
-        G->adj[0]->durata_tratta=durata_tratta;
-
+        G->adj[0]->durata_tratta=durata_tratta;*/
+        free(tmp);
         G->nodes_count -= 1;
 
         //il codice che segue serve ad aggiornare la lista delle corrispondenze id luoghi e nome del luogo
-        *NM=checkListRemoval_perNomiLuoghi(*NM, node_to_remove);
+        // *NM=checkListRemoval_perNomiLuoghi(*NM, node_to_remove);
     }
 }
 
@@ -332,7 +332,7 @@ void stampa_lista_nomi(Nomi_Luoghi NM)
 {
     if (NM != NULL)
     {
-        printf("Nodo %d\t-> %s\n", NM->id, NM->nome_luogo);
+        printf("Nodo %d\t-> %-25s Persone che gia' ci sono andate -> %d\n", NM->id, NM->nome_luogo, NM->contatore_voli);
         stampa_lista_nomi(NM->next);
     }
 }
@@ -354,6 +354,7 @@ Nomi_Luoghi aggiungi_nome_citta (Nomi_Luoghi L, int id, char *luogo)
         nuovo->id=id;
         nuovo->nome_luogo=(char*)malloc((strlen(luogo)+1)*sizeof(char));
         strcpy(nuovo->nome_luogo, luogo);
+        nuovo->contatore_voli=0;
         nuovo->next=NULL;
         L = nuovo;
     }
@@ -441,14 +442,33 @@ void scelta_visualizza_elenco (Nomi_Luoghi NM)
     printf("\n\n");
 }
 
-void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM) {
+int calcola_id (Nomi_Luoghi NM)
+{
 
-    scelta_visualizza_elenco(*NM);
+    int count=0;
 
+    while (NM!=NULL)
+    {
+        NM=NM->next;
+        count++;
+    }
+
+    return count;
+}
+
+void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM)
+{
+
+    char nuovo_luogo[MAXLEN_LUOGO];
+
+    printf("Inserisci il nome del nuovo luogo:\t");
+    scanf("%29[^\n]", nuovo_luogo);
+    //pulisco buffer in ingresso (stdin) per scongiurare comportamenti bizzarri del programma qualora l'utente inserisca input strani
+    while (getchar()!='\n');
+    //FACCIO LE TRE COSE DI SEGUITO SOLO SE LA STESSA CITTA NON SIA GIA PRESENTE, COMPLETARE
     addNode(G);
-
-
-
+    aggiungi_nome_citta(*NM, calcola_id(*NM), nuovo_luogo);
+    scelta_visualizza_elenco(*NM);
 }
 
 /*

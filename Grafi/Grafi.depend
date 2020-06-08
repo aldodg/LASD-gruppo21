@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1591500290 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\graph.c
+1591575763 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\graph.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -24,7 +24,7 @@
 	<time.h>
 	"List.h"
 
-1591543035 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\main.c
+1591576007 source:c:\users\pc\documents\github\lasd-gruppo21\grafi\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
