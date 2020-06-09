@@ -1,4 +1,5 @@
 #include "prenotazione.h"
+//#include "customers.h"
 
 Prenotati initNode(char *partenza, char *destinazione, int costo, int durata)
 {
@@ -68,3 +69,26 @@ void freeVoliPrenotati(Prenotati P)
     }
 }
 
+
+
+
+//void prenotaVolo () {}
+
+
+
+
+/* la commento perche' non riesce a vedere customers come tipo. tuttavia se aggiungo l'include in alto commentato da' tutto un casino
+
+void visualizza_prenotazioni_effettuate(char *username, Customers Utenti_registrati)
+{
+
+    //ho il dubbio che possa andare in seg scritta cosi' in un caso particolare ma in effetti non credo
+    //se dovesse dare problemi basta mettere la strcmp in un if dentro il ciclo e aggiornare una flag quando entra nell'if per uscire dal ciclo
+    while (Utenti_registrati!=NULL && !strcmp(Utenti_registrati->user, username))
+    {
+        Utenti_registrati=Utenti_registrati->next;
+    }
+    printVoliPrenotati(Utenti_registrati->elenco_prenotazioni);
+
+}
+*/

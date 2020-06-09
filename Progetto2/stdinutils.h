@@ -2,7 +2,7 @@
  #define STDINUTILS
 
 #ifndef BUFSIZE
- #define BUFSIZE 256
+#define BUFSIZE 256
 #endif
 
 char* read();

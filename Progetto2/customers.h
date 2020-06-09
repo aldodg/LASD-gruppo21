@@ -14,7 +14,7 @@ struct customer
     char * nome;
     char * user;
     char * password;
-    Prenotati *prenotato;
+    Prenotati *elenco_prenotazioni;
     int sconto;
     struct customer *next;
 
@@ -33,10 +33,6 @@ char *adpass;
 void registra(Customers ** L, char *name, char * surname, char * username, char * password);//Funzione che riempie la lista delle registrazioni utente
 int	UserGiaPresente(Customers *L, char *username);//Funzione booleana che controlla se uno username è gia presente
 int controllaCredenziali(Customers *L,char * username, char * password);
-
-
-
-
 
 
 

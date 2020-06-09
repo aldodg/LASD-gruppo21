@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+//gli deve arrivare username dell'utente loggato!! ci sta un modo per controllare che l'username sia univoco?
+//deve arrivare anche la lista di tutti gli utenti registrati e non so che altro
 
 void login()
 {
@@ -30,7 +32,7 @@ void login()
 
 
         case 2:
-            //printVoliPrenotati();
+            //visualizza_prenotazioni_effettuate(username, Utenti_registrati);
             break;
 
         case 3:

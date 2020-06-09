@@ -1,0 +1,60 @@
+# depslib dependency file v1.0
+1591635875 source:c:\users\fabio\desktop\prova random\vediamo\cazzarola\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+
+1591637723 c:\users\fabio\desktop\prova random\vediamo\cazzarola\list.h
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<assert.h>
+
+1591637240 source:c:\users\fabio\desktop\prova random\vediamo\cazzarola\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+	"List.h"
+
+1591637114 c:\users\fabio\desktop\prova random\vediamo\cazzarola\libreria.h
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<assert.h>
+	"List.h"
+
+1591637677 source:c:\users\fabio\desktop\prova random\vediamo\cazzarola\libreria.c
+	"libreria.h"
+
+1591728453 source:c:\users\pc\documents\github\lasd-gruppo21\vediamo\vediamo\cazzarola\libreria.c
+	"libreria.h"
+
+1591637116 c:\users\pc\documents\github\lasd-gruppo21\vediamo\vediamo\cazzarola\libreria.h
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<assert.h>
+	"List.h"
+
+1591637724 c:\users\pc\documents\github\lasd-gruppo21\vediamo\vediamo\cazzarola\list.h
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<assert.h>
+
+1591635876 source:c:\users\pc\documents\github\lasd-gruppo21\vediamo\vediamo\cazzarola\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+
+1591728453 source:c:\users\pc\documents\github\lasd-gruppo21\vediamo\vediamo\cazzarola\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+	"List.h"
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+

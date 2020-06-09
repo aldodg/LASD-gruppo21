@@ -2,13 +2,13 @@
 1591370053 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
 	"customers.h"
 
-1591655329 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.h
+1591745185 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.h
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 	"prenotazione.h"
 
-1591651598 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
+1591724805 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -19,18 +19,20 @@
 1591651737 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
 	"List.h"
 
-1591665109 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
+1591745184 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
 	"Graph.h"
 	"customers.h"
 	"stdinutils.h"
 	"mainfunction.h"
 	"gettonate.h"
+	"List.h"
+	"Dijkstra.h"
 
-1590686015 c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.h
+1591719789 c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.h
 
 1591665140 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.h
 
-1591665399 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
+1591745185 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
 	"mainfunction.h"
 	"stdinutils.h"
 	<stdio.h>
@@ -42,7 +44,7 @@
 	<stdlib.h>
 	"stdinutils.h"
 
-1591655329 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
+1591745383 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -55,7 +57,7 @@
 	<string.h>
 	<stdlib.h>
 
-1591663498 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
+1591745383 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
 	"prenotazione.h"
 
 1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
@@ -76,4 +78,14 @@
 	<stdlib.h>
 	<time.h>
 	"List.h"
+
+1591743760 c:\users\pc\documents\github\lasd-gruppo21\progetto2\dijkstra.h
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<assert.h>
+	"Graph.h"
+
+1591745526 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\dijkstra.c
+	"Dijkstra.h"
 

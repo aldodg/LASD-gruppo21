@@ -243,7 +243,7 @@ void removeNode(Graph G, int node_to_remove, Nomi_Luoghi *NM) //rimuove un verti
         G->nodes_count -= 1;
 
         //il codice che segue serve ad aggiornare la lista delle corrispondenze id luoghi e nome del luogo
-        // *NM=checkListRemoval_perNomiLuoghi(*NM, node_to_remove);
+        *NM=checkListRemoval_perNomiLuoghi(*NM, node_to_remove);
     }
 }
 

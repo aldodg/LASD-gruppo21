@@ -28,3 +28,7 @@ void printVoliPrenotati(Prenotati P);
 /* DEALLOCA LA LISTA DEI VOLI PRENOTATI */
 void freeVoliPrenotati(Prenotati P);
 
+//prenotaVolo();
+
+//void visualizza_prenotazioni_effettuate(char *username, Customers Utenti_registrati);
+
