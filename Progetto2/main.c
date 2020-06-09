@@ -5,10 +5,10 @@ Fabio De Martino
 Aldo Di Giovanni
 */
 
-#include"Graph.h"
-#include"customers.h"
-#include"stdinutils.h"
-#include"mainfunction.h"
+#include "Graph.h"
+#include "customers.h"
+#include "stdinutils.h"
+#include "mainfunction.h"
 #include "gettonate.h"
 
 int main()
@@ -22,7 +22,6 @@ int main()
     printGraph(L);
     printf("\n\n");
     stampa_lista_nomi(NM);
-    //aggiorna_grafo_file(L);
     printf("--------------------------------------------\n");
     removeEdge(L, 15, 14); //rimuovo la tratta da Catanzaro a reggio calabria
     printGraph(L);
@@ -60,6 +59,7 @@ int main()
         printf("1 - Registrati\n");
         printf("2 - Accedi con credenziali\n");
         printf("3 - Pannello admin\n");
+        printf("4 - Esci\n");
         choice=readint();
         switch (choice)
         {
@@ -96,12 +96,12 @@ int main()
 
                 registra(&Utenti,nome,cognome,username, pass);
                 printf("\nRegistrazione avvenuta con successo!\n");
-                login();//se tutto ok passiamo alle funzionalità del menù login
+                login(&NM);//se tutto ok passiamo alle funzionalità del menù login
             }
             else
             {
 
-                printf("\nLo username scelto non e' disponibile, riprovare!\n");//altrimenti ritorna al menu login
+                printf("\nL'username scelto non e' disponibile, riprovare per favore.\n");//altrimenti ritorna al menu login
             }
 
             break;
@@ -117,13 +117,13 @@ int main()
 
             if (!controllaCredenziali(Utenti, username,pass))
             {
-                printf("\nNon esiste un utente %s o password errata, controllare e riprovare\n\n", username);
+                printf("\nNon esiste un utente %s oppure la password e' errata, controllare e riprovare.\n\n", username);
                 break;
             }
             else
             {
                 printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", username);
-                login();
+                login(&NM);
             }
 
 
@@ -149,6 +149,8 @@ int main()
             }
             break;
         }
+        case 4:
+            return 0;
 
         default:
         {
@@ -162,13 +164,7 @@ int main()
         }
 
     }
-    while(choice!=1 || choice !=2 || choice !=3);
-
-
-
-
-
-
+    while(choice!=1 || choice !=2 || choice !=3 || choice !=4);
 
 
     return 0;

@@ -8,6 +8,7 @@ Prenotati initNode(char *partenza, char *destinazione, int costo, int durata)
     P->costo = costo;
     P->durata = durata;
     P->next = NULL;
+
     return P;
 }
 
@@ -22,6 +23,7 @@ Prenotati insertTail(Prenotati P, char *partenza, char *destinazione, int costo,
     {
         P = initNode(partenza,destinazione,costo,durata);
     }
+
     return P;
 }
 
@@ -36,8 +38,10 @@ Prenotati insertHead(Prenotati P, char *partenza,char *destinazione, int costo, 
         X->costo = costo;
         X->durata=durata;
         X->next = P;
+
         return X;
     }
+
     return initNode(partenza, destinazione, costo, durata);
 }
 
@@ -50,6 +54,7 @@ void printVoliPrenotati(Prenotati P)
         printf(" %d ", P->costo);
         printf(" %d ", P->durata);
         printVoliPrenotati(P->next);
+        printf("\n");
     }
 }
 
@@ -62,3 +67,4 @@ void freeVoliPrenotati(Prenotati P)
         free(P);
     }
 }
+

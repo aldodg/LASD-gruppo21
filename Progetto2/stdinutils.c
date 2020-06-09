@@ -16,7 +16,9 @@ char* read()
         size += BUFSIZE;
         buf = realloc(buf, size);
         while (i < size && (c = getchar()) != '\n')
+        {
             buf[i++] = c;
+        }
     }
     while (c != '\n');
     if (!i)
