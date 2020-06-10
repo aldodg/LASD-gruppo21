@@ -481,7 +481,7 @@ void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM)
 
     char nuovo_luogo[MAXLEN_LUOGO];
 
-    printf("Inserisci il nome del nuovo luogo:\t");
+    printf("Inserisci il nome del nuovo aeroporto:\t");
     scanf("%29[^\n]", nuovo_luogo);
     //pulisco buffer in ingresso (stdin) per scongiurare comportamenti bizzarri del programma qualora l'utente inserisca input strani
     while (getchar()!='\n');

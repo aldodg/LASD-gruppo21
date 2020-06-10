@@ -21,6 +21,8 @@ struct nomi {
 
 typedef struct nomi* Nomi_Luoghi;
 
+
+
 // Inizializza un nuovo grafo
 // specifica in ingresso quanti nodi vuoi nel grafo
 Graph initGraph(int nodes_count);
@@ -65,5 +67,7 @@ int esisteArco(Graph g, int partenza, int arrivo);
 int costoArco(Graph g, int partenza, int arrivo);
 
 int esisteVertice(Graph g, int v);
+
+
 
 #endif

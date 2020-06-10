@@ -47,8 +47,8 @@ int main()
     printf("aspetto 0: %d\n", esisteArco(G, 18, 17)); //controllo se esista la tratta da salerno a bari
     printf("aspetto 45: %d\n", costoArco(G, 15, 14)); //costo della tratta da cosenza a reggio calabria
 
-    freeGraph(G);
-    cancellaListaNomi(NM);
+    //freeGraph(G);
+  //  cancellaListaNomi(NM);
     //fine test grafi
 
     //inizio test dijstra
@@ -87,7 +87,7 @@ int main()
     printf("La tratta piu' economica ti costera' %d.\n", dijkstra_costo(G, 0, 8));
     printf("La tratta piu' breve ti costera' %d.\n", dijkstra_durata(G, 0, 8));
 
-    freeGraph(G);
+  //  freeGraph(G);
     //fine test dijstra
 
     Customers *Utenti=NULL;
@@ -139,7 +139,7 @@ int main()
 
                 registra(&Utenti,nome,cognome,username, pass);
                 printf("\nRegistrazione avvenuta con successo!\n");
-                login(&NM);//se tutto ok passiamo alle funzionalità del menù login
+                login();//se tutto ok passiamo alle funzionalità del menù login
             }
             else
             {
@@ -166,7 +166,7 @@ int main()
             else
             {
                 printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", username);
-                login(&NM);
+                login();
             }
 
 
@@ -182,7 +182,7 @@ int main()
             {
 
                 printf("\nPassword corretta, benvenuto!\n");
-                menutratte();
+                menutratte(G, NM);
 
             }
             else 	if ( strcmp (adpass,"Admin")!=0 || strcmp (adpass, "admin")!=0)

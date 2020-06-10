@@ -51,16 +51,16 @@ void login()
 }
 
 
-void aggiungiTratta()  //SONO BUONE NON CANCELLARE
+void aggiungiTratta(Graph G, Nomi_Luoghi NM)  //SONO BUONE NON CANCELLARE
 {
-    /*int choice, partenza, destinazione, costo, durata;
+    int choice, partenza, destinazione, costo, durata;
 
     do
     {
 
         printf("\n\n---Menu' gestione aggiungi tratta---\n\n");
-        printf("1 - Aggiungi viaggio\n");
-        printf("2 - Aggiungi luogo\n");
+        printf("1 - Aggiungi nuova tratta\n");
+        printf("2 - Aggiungi nuovo aeroporto\n");
         printf("3 - Esci\n");
 
         choice=readint();
@@ -71,14 +71,14 @@ void aggiungiTratta()  //SONO BUONE NON CANCELLARE
         case 1:
         {
 
-            scelta_visualizza_elenco();
-            printf("Imposta la partenza.\t");
+            scelta_visualizza_elenco(NM);
+            printf("Imposta la partenza: \n");
             partenza=readint();
-            printf("Imposta la destinazione.\t");
-            partenza=readint();
-            printf("Imposta il costo.\t");
+            printf("\nImposta la destinazione: \n");
+            destinazione=readint();
+            printf("\nImposta il costo in euro \n");
             costo=readint();
-            printf("Imposta la durata.\t");
+            printf("\nImposta la durata in minuti: \n");
             durata=readint();
             addEdge(G, partenza, destinazione, costo, durata);
             printf("Fatto!");
@@ -87,7 +87,7 @@ void aggiungiTratta()  //SONO BUONE NON CANCELLARE
         }
         case 2:
         {
-            aggiungi_aeroporto(G, *NM);
+            aggiungi_aeroporto(G, &NM);
             break;
         }
         case 3:
@@ -100,18 +100,18 @@ void aggiungiTratta()  //SONO BUONE NON CANCELLARE
         default:
         {
 
-            //printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+        printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
         }
         }
         break;
     }
     while(choice !=1 || choice !=2 || choice !=3);
-*/
+
 }
 
-void rimuoviTratta()    //SONO BUONE NON CANCELLARE
+void rimuoviTratta(Graph G, Nomi_Luoghi NM)    //SONO BUONE NON CANCELLARE
 {
-    /*int choice, partenza, destinazione, nodo_da_rimuovere;
+    int choice, partenza, destinazione, nodo_da_rimuovere;
 
     do
     {
@@ -129,11 +129,11 @@ void rimuoviTratta()    //SONO BUONE NON CANCELLARE
         case 1:
         {
 
-            scelta_visualizza_elenco();
+            scelta_visualizza_elenco(NM);
             printf("Imposta la partenza.\t");
             partenza=readint();
             printf("Imposta la destinazione.\t");
-            partenza=readint();
+            destinazione=readint();
             removeEdge(G, partenza, destinazione);
             printf("Fatto!\n");
 
@@ -141,10 +141,10 @@ void rimuoviTratta()    //SONO BUONE NON CANCELLARE
         }
         case 2:
         {
-            scelta_visualizza_elenco();
+            scelta_visualizza_elenco(NM);
             printf("Scegli il luogo da rimuovere.\t");
             nodo_da_rimuovere=readint();
-            removeNode(G, nodo_da_rimuovere, NM);
+            removeNode(G, nodo_da_rimuovere, &NM);
             printf("Fatto!\n");
 
             break;
@@ -159,17 +159,18 @@ void rimuoviTratta()    //SONO BUONE NON CANCELLARE
         default:
         {
 
-            //printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+            printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
         }
         }
         break;
     }
     while(choice !=1 || choice !=2 || choice !=3);
-*/
+
 }
 
-void menutratte()
+void menutratte(Graph G, Nomi_Luoghi NM)
 {
+    Nomi_Luoghi Luoghi = NM;
 
     int choice;
 
@@ -189,13 +190,13 @@ void menutratte()
         case 1:
         {
 
-            aggiungiTratta();
+            aggiungiTratta(G, Luoghi);
 
             break;
         }
         case 2:
         {
-            rimuoviTratta();
+            rimuoviTratta(G, Luoghi);
 
             break;
         }
