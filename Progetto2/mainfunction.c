@@ -208,7 +208,7 @@ void menutratte(Graph G, Nomi_Luoghi NM)
         }
         default:
         {
-            //printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+            printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
         }
         }
         break;
@@ -217,4 +217,38 @@ void menutratte(Graph G, Nomi_Luoghi NM)
 
 }
 
+    void    prenotavolo(Graph Grafo , Customers Cliente, char * username, Nomi_Luoghi NM){
 
+        char* scelta;
+
+        while( Cliente!=NULL && strcmp (Cliente->user,username )!=0){
+            Cliente= Cliente->next;
+        }
+        if (Cliente ->sconto >0){
+            printf("\n Hai accumulato %d euro di sconto sui tuoi viaggi.\nVuoi usare lo sconto?[S/n]\n",Cliente->sconto) ;
+
+        }
+
+
+
+        printf("\nVuoi vedere le mete più gettonate[S\n]?\n");
+        fflush(stdin);
+        scelta=read();
+        if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0){
+
+                while( NM!=NULL ){
+
+                if (NM->contatore_voli>4){
+                printf("id: %d - %s con %d visite totali ricevute",NM->id,NM->nome_luogo, NM->contatore_voli);
+                }
+                NM=NM->next;
+
+                }
+
+        }
+
+
+
+
+
+    }
