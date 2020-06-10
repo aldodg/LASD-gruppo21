@@ -145,7 +145,7 @@ int *calcolaGradoOut(Graph G){
   return gradiOut;
 }
 
-void stampaGradi(Graph G, int * in, int * out){
+void stampaGradi(Graph G, int  in, int  out){
   int i;
   if(G){
     for( i=0; i < G->nodes_count ; i++)
