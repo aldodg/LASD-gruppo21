@@ -42,6 +42,6 @@ int *calcolaGradoIn(Graph G);
 
 int *calcolaGradoOut(Graph G);
 
-void stampaGradi(Graph G , int *, int *);
+void stampaGradi(Graph G , int , int );
 
 #endif
