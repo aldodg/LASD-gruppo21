@@ -217,9 +217,10 @@ void menutratte(Graph G, Nomi_Luoghi NM)
 
 }
 
-    void    prenotavolo(Graph Grafo , Customers Cliente, char * username, Nomi_Luoghi NM){
+    void    prenotavolo(Graph Grafo , Customers Cliente, char * username, Nomi_Luoghi NM, Prenotati P){
 
         char* scelta;
+        int partenza,arrivo,costo_comp,durata_comp;
 
         while( Cliente!=NULL && strcmp (Cliente->user,username )!=0){
             Cliente= Cliente->next;
@@ -242,6 +243,17 @@ void menutratte(Graph G, Nomi_Luoghi NM)
                 printf("id: %d - %s con %d visite totali ricevute",NM->id,NM->nome_luogo, NM->contatore_voli);
                 }
                 NM=NM->next;
+
+                }
+
+                printf("\nVuoi andare in uno dei luoghi più gettonati[S\n]?\n");
+                fflush(stdin);
+                scelta=read();
+                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0){
+
+
+
+
 
                 }
 

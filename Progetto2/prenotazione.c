@@ -29,7 +29,7 @@ Prenotati insertTail(Prenotati P, char *partenza, char *destinazione, int costo,
 }
 
 
-Prenotati insertHead(Prenotati P, char *partenza,char *destinazione, int costo, int durata)
+Prenotati insertHead(Prenotati P, int partenza,int destinazione, int costo, int durata)
 {
     if (P != NULL)
     {

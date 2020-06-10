@@ -4,10 +4,10 @@
 
 struct voliPrenotati
 {
-    char *partenza;
-    char *destinazione;
-    int costo;
-    int durata;
+    int partenza;
+    int destinazione;
+    int costo_complessivo;
+    int durata_complessiva;
     struct voliPrenotati *next;
 };
 typedef struct voliPrenotati *Prenotati;
@@ -20,7 +20,7 @@ Prenotati initNode(char *,char *, int, int);
 Prenotati insertTail(Prenotati P, char *, char *, int, int);
 
 /* FUNZIONE CHE AGGIUNGE UN NODO IN TESTA ALLA LISTA*/
-Prenotati insertHead(Prenotati P, char *,char *, int, int);
+Prenotati insertHead(Prenotati P, int,int, int, int);
 
 /* STAMPA LA LISTA DEI VOLI PRENOTATI*/
 void printVoliPrenotati(Prenotati P);

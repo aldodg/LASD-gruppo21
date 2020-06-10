@@ -17,7 +17,7 @@ Aldo Di Giovanni
 
 int main()
 {
-    /*
+
     //inizio test grafi
     Graph G=NULL;
     Nomi_Luoghi NM = NULL;
@@ -47,8 +47,8 @@ int main()
     printf("aspetto 0: %d\n", esisteArco(G, 18, 17)); //controllo se esista la tratta da salerno a bari
     printf("aspetto 45: %d\n", costoArco(G, 15, 14)); //costo della tratta da cosenza a reggio calabria
 
-    freeGraph(G);
-    cancellaListaNomi(NM);
+    //freeGraph(G);
+  //  cancellaListaNomi(NM);
     //fine test grafi
 
     //inizio test dijstra
@@ -87,19 +87,11 @@ int main()
     printf("La tratta piu' economica ti costera' %d.\n", dijkstra_costo(G, 0, 8));
     printf("La tratta piu' breve ti costera' %d.\n", dijkstra_durata(G, 0, 8));
 
-    freeGraph(G);
-    fine test dijstra
-    */
+  //  freeGraph(G);
+    //fine test dijstra
+
     Customers *Utenti=NULL;
     int choice;
-    Graph G=NULL;
-    Nomi_Luoghi NM = NULL;
-
-    G=popola_grafo_file(G, &NM);
-    printGraph(G);
-    printf("\n\n");
-    stampa_lista_nomi(NM);
-    printf("--------------------------------------------\n");
 
     /*Menu da aggiustare sia esteticamente per le funzioni*/
     do
@@ -201,14 +193,7 @@ int main()
             break;
         }
         case 4:
-        {
-
-            freeGraph(G);
-            cancellaListaNomi(NM);
-            printf("Arrivederci!\n");
-
             return 0;
-        }
 
         default:
         {
