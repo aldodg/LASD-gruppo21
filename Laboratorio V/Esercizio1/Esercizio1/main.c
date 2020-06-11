@@ -12,7 +12,6 @@ int main()
     int* entrante;
     int* uscente;
     A=randomGraph(10,0,4);
-    //printf("\nA= \n");
     printGraph(A);
     uscente=calcolaGradoUscente(A);
     entrante=calcolaGradoEntrante(A);

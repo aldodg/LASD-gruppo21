@@ -1,6 +1,11 @@
 #ifndef Matrix_Graph_H
 #define Matrix_Graph_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
 struct graphmat{
   int *adj;
   int nodes_count;
@@ -36,5 +41,7 @@ void removeNodeMat(Graphmat G, int node_to_remove);
 int *calcolaGradoIn(Graphmat G);
 
 int *calcolaGradoOut(Graphmat G);
+
+void stampaGradi(Graphmat G , int* in, int* out);
 
 #endif // Matrix_Graph_H

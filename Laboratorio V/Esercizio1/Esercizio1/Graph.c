@@ -153,16 +153,3 @@ void stampaGradi(Graph G, int * in, int * out){
   }
 }
 
-/*
-void calcolaGradi(Graph G, int * inDeg, int * outDeg){
-	int i = 0;
-	List edge = NULL;
-	for( ; i<G->nodes_count ; i++){
-		for(edge = G->adj[i]; edge ; edge = edge->next){
-			inDeg[edge->target]++;
-			outDeg++;
-		}
-	}
-}
-
-*/

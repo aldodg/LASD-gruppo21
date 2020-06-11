@@ -140,36 +140,36 @@ void removeNodeMat(Graphmat G, int node_to_remove) {
 }
 
 
-int *calcolaGradoIn(Graphmat  G){
-  int *gradiIn = NULL;
+int *calcolaGradoUscente(Graphmat  G){
+  int * gradiEntr = NULL;
   if(G){
-    int i = 0;
-    gradiIn = (int *)calloc(G->nodes_count,sizeof(int));
-    Graphmat *currEdge = NULL;
-    for( ; i < G->nodes_count ; i++ )
-      for( currEdge = G->adj ; currEdge ; currEdge = currEdge->weights)
-        gradiIn[currEdge->weights]++;
+    int i;
+    gradiEntr = (int *)calloc(G->nodes_count,sizeof(int));
+    int *  currEdge = NULL;
+    for(i=0 ; i < G->nodes_count ; i++ )
+    for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->weights)
+         gradiEntr[i]++;
   }
-  return gradiIn;
+  return gradiEntr;
 }
 
-int *calcolaGradoOut(Graphmat G){
-  int * gradiOut = NULL;
+int *calcolaGradoEntrante(Graphmat G){
+  int * gradiEntr = NULL;
   if(G){
-    int i = 0;
-    gradiOut = (int *)calloc(G->nodes_count,sizeof(int));
-    Graphmat  currEdge = NULL;
-    for( ; i < G->nodes_count ; i++ )
-    for( currEdge = G->adj ; currEdge ; currEdge = currEdge->weights)
-      gradiOut[currEdge->weights]++;
+    int i;
+    gradiEntr = (int *)calloc(G->nodes_count,sizeof(int));
+    int *  currEdge = NULL;
+    for(i=0 ; i < G->nodes_count ; i++ )
+    for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->weights)
+      gradiEntr[currEdge->target]++;
   }
-  return gradiOut;
+  return gradiEntr;
 }
 
-void stampaGradi(Graphmat G, int  in, int  out){
-  int i = 0;
+void stampaGradi(Graphmat G, int * in, int * out){
+  int i;
   if(G){
-    for( ; i < G->nodes_count ; i++)
-      printf("Nodo [%03d] - IN: %d - OUT: %d\n",i,in,out);
+    for( i=0; i < G->nodes_count ; i++)
+      printf("Nodo [%d] - Grado Entrante: %d - Grado uscente: %d\n",i,in[i],out[i]);
   }
 }

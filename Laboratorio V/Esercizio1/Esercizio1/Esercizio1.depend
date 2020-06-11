@@ -34,17 +34,18 @@
 
 1591028783 c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\list.h
 
-1591808807 c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\graph.h
+1591887020 c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\graph.h
 	"List.h"
 
-1591803417 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\main.c
+1591890807 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"List.h"
 	"Graph.h"
+	<string.h>
 
-1591808807 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\graph.c
+1591891391 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\graph.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
