@@ -38,10 +38,12 @@ void removeNode(Graph G, int node_to_remove);
 
 List checkListRemoval(List L, int );
 
-int *calcolaGradoIn(Graph G);
+int *calcolaGradoEntrante(Graph G);
 
-int *calcolaGradoOut(Graph G);
+int *calcolaGradoUscente(Graph G);
 
-void stampaGradi(Graph G , int , int );
+void stampaGradi(Graph G , int* in, int* out);
+
+
 
 #endif
