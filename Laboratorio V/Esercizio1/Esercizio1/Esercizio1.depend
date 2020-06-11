@@ -25,3 +25,29 @@
 	"List.h"
 	"Graph.h"
 
+1591028731 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+	"Graph.h"
+
+1591028783 c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\list.h
+
+1591808807 c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\graph.h
+	"List.h"
+
+1591803417 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+	"Graph.h"
+
+1591808807 source:c:\users\fabio\documents\github\lasd-gruppo21\laboratorio v\esercizio1\esercizio1\graph.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<assert.h>
+	"Graph.h"
+
