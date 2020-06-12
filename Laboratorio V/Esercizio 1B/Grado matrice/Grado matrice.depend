@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1584209020 source:c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio 1b\grado matrice\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1591806461 source:c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio 1b\grado matrice\matrice.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	"matrice.h"
+
+1591806493 c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio 1b\grado matrice\matrice.h
+

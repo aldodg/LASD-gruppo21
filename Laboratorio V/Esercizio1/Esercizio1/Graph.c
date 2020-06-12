@@ -119,37 +119,37 @@ List checkListRemoval(List L, int node_to_remove) {
     return L;
 }
 
-int *calcolaGradoIn(Graph  G){
-  int *gradiIn = NULL;
+int *calcolaGradoUscente(Graph  G){
+  int * gradiEntr = NULL;
   if(G){
     int i;
-    gradiIn = (int *)calloc(G->nodes_count,sizeof(int));
-    List currEdge = NULL;
-    for(i=0 ; i < G->nodes_count ; i++ )
-      for( currEdge = G->adj ; currEdge ; currEdge = currEdge->next)
-        gradiIn[currEdge->target]++;
-  }
-  return gradiIn;
-}
-
-int *calcolaGradoOut(Graph G){
-  int * gradiOut = NULL;
-  if(G){
-    int i;
-    gradiOut = (int *)calloc(G->nodes_count,sizeof(int));
+    gradiEntr = (int *)calloc(G->nodes_count,sizeof(int));
     List  currEdge = NULL;
     for(i=0 ; i < G->nodes_count ; i++ )
-    for( currEdge = G->adj ; currEdge ; currEdge = currEdge->next)
-      gradiOut[currEdge->target]++;
+    for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->next)
+         gradiEntr[i]++;
   }
-  return gradiOut;
+  return gradiEntr;
 }
 
-void stampaGradi(Graph G, int  in, int  out){
+int *calcolaGradoEntrante(Graph G){
+  int * gradiEntr = NULL;
+  if(G){
+    int i;
+    gradiEntr = (int *)calloc(G->nodes_count,sizeof(int));
+    List  currEdge = NULL;
+    for(i=0 ; i < G->nodes_count ; i++ )
+    for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->next)
+      gradiEntr[currEdge->target]++;
+  }
+  return gradiEntr;
+}
+
+void stampaGradi(Graph G, int * in, int * out){
   int i;
   if(G){
     for( i=0; i < G->nodes_count ; i++)
-      printf("Nodo [%03d] - IN: %d - OUT: %d\n",i,in,out);
+      printf("Nodo [%d] - Grado Entrante: %d - Grado uscente: %d\n",i,in[i],out[i]);
   }
 }
 
