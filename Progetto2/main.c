@@ -8,12 +8,12 @@ Aldo Di Giovanni
 */
 
 #include "Graph.h"
-#include "customers.h"
+
 #include "stdinutils.h"
 #include "mainfunction.h"
-//#include "List.h"
-//#include "Dijkstra.h"
-//#include "prenotazione.h"
+#include "List.h"
+#include "Dijkstra.h"
+#include "prenotazione.h"
 
 int main()
 {

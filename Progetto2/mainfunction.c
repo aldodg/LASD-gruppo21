@@ -1,5 +1,5 @@
 #include "mainfunction.h"
-//#include "stdinutils.h"
+#include "stdinutils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

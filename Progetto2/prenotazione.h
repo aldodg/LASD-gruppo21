@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-//#include "customers.h"
-//#include "Graph.h"
+
+#include "Graph.h"
 #include "Dijkstra.h"
 
 struct voliPrenotati
@@ -16,6 +16,37 @@ struct voliPrenotati
     struct voliPrenotati *next;
 };
 typedef struct voliPrenotati *Prenotati;
+
+struct customer
+{
+
+    char * cognome;
+    char * nome;
+    char * user;
+    char * password;
+    Prenotati *elenco_prenotazioni;
+    int punti;
+    struct customer *next;
+
+};
+
+typedef struct customer Customers;
+
+char *username;
+char *nome;
+char *cognome;
+char *pass;
+char *pass2;
+char *adpass;
+
+
+void registra(Customers ** L, char *name, char * surname, char * username, char * password);//Funzione che riempie la lista delle registrazioni utente
+int	UserGiaPresente(Customers *L, char *username);//Funzione booleana che controlla se uno username è gia presente
+int controllaCredenziali(Customers *L,char * username, char * password);
+
+
+
+
 
 
 /* INIZIALIZZA UN NUOVO NODO*/
