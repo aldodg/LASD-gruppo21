@@ -2,6 +2,7 @@
 //#include "customers.h"
 //#include "Graph.h"
 //#include "Dijkstra.h"
+#include "stdinutils.h"
 
 #define MIN_VOLI_PER_GETTONATI 2
 
@@ -118,16 +119,16 @@ Prenotati insertHead(Prenotati P, int partenza,int destinazione, int peso)
     return initNode(partenza, destinazione, peso);
 }
 
-
-void printVoliPrenotati(Prenotati P, int i)
+/*
+void printVoliPrenotati(Prenotati *P, int i)
 {
     if (P != NULL)
     {
-        printf("%d) %d -> %d ", i, P->partenza, P->destinazione);
-        printVoliPrenotati(P->next, i+1);
+        printf("%d) %d -> %d ", i, (*P)->partenza, (*P)->destinazione);
+        printVoliPrenotati(, i+1);
         printf("\n");
     }
-}
+}*/
 
 
 void freeVoliPrenotati(Prenotati P)
@@ -140,12 +141,13 @@ void freeVoliPrenotati(Prenotati P)
 }
 
 
-
-void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
+/*
+void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 {
 
     char* scelta;
     int partenza, destinazione, costo_comp, durata_comp, scelta2;
+    int esistono_mete_gettonate=0, destinazione_gia_scelta=0;
 
     while( Cliente!=NULL && strcmp (Cliente->user,username )!=0)
     {
@@ -157,7 +159,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
         printf("\n Hai accumulato %d punti.\n",Cliente->punti) ;
     }
 
-    printf("\nVuoi vedere le mete più gettonate[S\n]?\n");
+    printf("\nVuoi vedere le mete piu' gettonate[S\\n]?\t");
     fflush(stdin);
     scelta=read();
     if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
@@ -168,13 +170,18 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
 
             if (NM->contatore_voli>MIN_VOLI_PER_GETTONATI)
             {
-                printf("id: %d - %s con %d visite totali ricevute",NM->id,NM->nome_luogo, NM->contatore_voli);
+                printf("id: %d - %s con %d visite totali ricevute\n",NM->id,NM->nome_luogo, NM->contatore_voli);
+                esistono_mete_gettonate=1;
             }
             NM=NM->next;
 
         }
+        if (!esistono_mete_gettonate)
+        {
+            printf("Non abbiamo delle mete da consigliarti in questo momento, sono tutte ugualmente belle!\n");
 
-        printf("\nVuoi andare in uno dei luoghi più gettonati[S\n]?\n");
+
+        printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
         fflush(stdin);
         scelta=read();
         if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
@@ -182,17 +189,19 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
             printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
             fflush(stdin);
             destinazione=readint();
+            destinazione_gia_scelta=1;
+        }
         }
     }
-    else
+    if (!destinazione_gia_scelta)
     {
         scelta_visualizza_elenco(NM);
         printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
         fflush(stdin);
-        destinazione=read();
+        destinazione=readint();
     }
 
-    printf("Perfetto. Ora inserisci il numero corrispondente al luogo di partenza.\t");
+    printf("Perfetto.\nOra inserisci il numero corrispondente al luogo di partenza.\t");
     fflush(stdin);
     partenza=readint();
 
@@ -214,7 +223,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
     {
         if (Cliente ->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\n]?\t", Cliente->punti);
+            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", Cliente->punti);
             fflush(stdin);
             scelta=read();
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
@@ -224,7 +233,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
                 Cliente->punti=0;
             }
         }
-        Cliente->elenco_prenotazioni=insertHead(Cliente->elenco_prenotazioni, partenza, destinazione, costo_comp);
+        *Cliente->elenco_prenotazioni=insertHead(*Cliente->elenco_prenotazioni, partenza, destinazione, costo_comp);
         Cliente->punti=(costo_comp/100)*10; //il 10% dell'ordine
         break;
     }
@@ -233,7 +242,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
 
         if (Cliente ->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\n]?\t", Cliente->punti);
+            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", Cliente->punti);
             fflush(stdin);
             scelta=read();
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
@@ -243,7 +252,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
                 Cliente->punti=0;
             }
         }
-        Cliente->elenco_prenotazioni=insertHead(Cliente->elenco_prenotazioni, partenza, destinazione, durata_comp);
+        *Cliente->elenco_prenotazioni=insertHead(*Cliente->elenco_prenotazioni, partenza, destinazione, durata_comp);
         Cliente->punti=(durata_comp/100)*10; //il 10% dell'ordine
         break;
     }
@@ -259,6 +268,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
 
 
 }
+*/
 
 void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
 {
@@ -269,7 +279,16 @@ void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
     {
         Utente=Utente->next;
     }
-    printVoliPrenotati(Utente->elenco_prenotazioni, 1);
+    //printVoliPrenotati(Utente->elenco_prenotazioni, 1);
+    /*
+    struct voliPrenotati **tmp=(Utente->elenco_prenotazioni); int i=0;
+    while (*tmp!=NULL) {
+        printf("%d) %d -> %d \n", i, tmp.partenza, *tmp->destinazione);
+        printf("\n");
+        *tmp=*tmp->next;
+        i++;
+    }*/
+    printf("%d)  ", *(Utente->elenco_prenotazioni)->partenza);
 
 }
 
@@ -278,26 +297,26 @@ void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
 void registra(Customers **L, char *name, char * surname, char * username, char * password)
 {
 
-    Customers *new= malloc(sizeof(Customers));
+    Customers *new_node= malloc(sizeof(Customers));
 
-    new->nome=name;
-    new->cognome=surname;
-    new->user=username;
-    new->password=password;
-    new->punti=0;
+    new_node->nome=name;
+    new_node->cognome=surname;
+    new_node->user=username;
+    new_node->password=password;
+    new_node->punti=0;
 
     if (!*L)
     {
-        *L = new;
-        new->next = NULL;
+        *L = new_node;
+        new_node->next = NULL;
     }
     else
     {
         Customers *n = *L;
         while (n->next && n->cognome > surname)
             n = n->next;
-        new->next = n->next;
-        n->next = new;
+        new_node->next = n->next;
+        n->next = new_node;
     }
 
 

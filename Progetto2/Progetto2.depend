@@ -8,7 +8,7 @@
 	<stdlib.h>
 	"prenotazione.h"
 
-1591909297 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
+1591974779 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -19,25 +19,21 @@
 1591910037 c:\users\pc\documents\github\lasd-gruppo21\progetto2\graph.h
 	"List.h"
 
-1591896405 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
+1591985778 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\main.c
 	"Graph.h"
-	"customers.h"
 	"stdinutils.h"
 	"mainfunction.h"
-	"gettonate.h"
 	"List.h"
 	"Dijkstra.h"
+	"prenotazione.h"
 
 1591719789 c:\users\pc\documents\github\lasd-gruppo21\progetto2\stdinutils.h
 
-1591905811 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.h
+1591985778 c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.h
 	"Graph.h"
-	"List.h"
-	"customers.h"
-	"stdinutils.h"
 	"prenotazione.h"
 
-1591892969 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
+1591986444 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\mainfunction.c
 	"mainfunction.h"
 	"stdinutils.h"
 	<stdio.h>
@@ -49,12 +45,12 @@
 	<stdlib.h>
 	"stdinutils.h"
 
-1591905630 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
+1591993679 c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.h
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
-	"customers.h"
 	"Graph.h"
+	"Dijkstra.h"
 
 1591380067 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\gettonate.c
 	"gettonate.h"
@@ -64,11 +60,9 @@
 	<string.h>
 	<stdlib.h>
 
-1591892686 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
+1591994283 source:c:\users\pc\documents\github\lasd-gruppo21\progetto2\prenotazione.c
 	"prenotazione.h"
-	"customers.h"
-	"Graph.h"
-	"Dijkstra.h"
+	"stdinutils.h"
 
 1591177490 c:\users\pc\documents\github\lasd-gruppo21\progetto2\customers.c
 	"customers.h"

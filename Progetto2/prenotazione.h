@@ -46,9 +46,6 @@ int controllaCredenziali(Customers *L,char * username, char * password);
 
 
 
-
-
-
 /* INIZIALIZZA UN NUOVO NODO*/
 Prenotati initNode(int, int, int);
 
@@ -59,12 +56,12 @@ Prenotati insertTail(Prenotati P, int, int, int);
 Prenotati insertHead(Prenotati P, int,int,  int);
 
 /* STAMPA LA LISTA DEI VOLI PRENOTATI*/
-void printVoliPrenotati(Prenotati P, int);
+//void printVoliPrenotati(Prenotati *P, int);
 
 /* DEALLOCA LA LISTA DEI VOLI PRENOTATI */
 void freeVoliPrenotati(Prenotati P);
 
-void prenotaVolo(Graph G, Customers *Utenti, char *,Nomi_Luoghi NM);
+//void prenotaVolo(Graph G, Customers *Utenti, char *,Nomi_Luoghi NM);
 
 void visualizza_prenotazioni_effettuate(char *username, Customers *Utente);
 

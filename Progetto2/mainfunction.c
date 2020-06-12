@@ -10,7 +10,7 @@
 //gli deve arrivare username dell'utente loggato!! ci sta un modo per controllare che l'username sia univoco?
 //deve arrivare anche la lista di tutti gli utenti registrati e non so che altro
 
-void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
+void login(Graph G, Customers **Utenti, char *Username, Nomi_Luoghi NM)
 {
     int choice;
 
@@ -30,12 +30,12 @@ void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 
         case 1:
 
-            prenotaVolo(G, Utenti, Username, NM);
+            //prenotaVolo(G, Utenti, Username, NM);
             break;
 
 
         case 2:
-            visualizza_prenotazioni_effettuate(username, Utenti);
+            visualizza_prenotazioni_effettuate(username, *Utenti);
             break;
 
         case 3:

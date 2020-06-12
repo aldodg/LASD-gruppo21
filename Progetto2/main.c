@@ -147,7 +147,7 @@ int main()
 
                 registra(&Utenti,nome,cognome,username, pass);
                 printf("\nRegistrazione avvenuta con successo!\n");
-                login(G, Utenti, username, NM);//se tutto ok passiamo alle funzionalità del menù login
+                login(G, &Utenti, username, NM);//se tutto ok passiamo alle funzionalità del menù login
             }
             else
             {
@@ -174,7 +174,7 @@ int main()
             else
             {
                 printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", username);
-                login(G, Utenti, username, NM);
+                login(G, &Utenti, username, NM);
             }
 
 

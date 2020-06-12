@@ -332,7 +332,7 @@ void stampa_lista_nomi(Nomi_Luoghi NM)
 {
     if (NM != NULL)
     {
-        printf("Nodo %d\t-> %-25s Persone che gia' ci sono andate -> %d\n", NM->id, NM->nome_luogo, NM->contatore_voli);
+        printf("id: %d\t-> %-25s Persone che gia' ci sono andate -> %d\n", NM->id, NM->nome_luogo, NM->contatore_voli);
         stampa_lista_nomi(NM->next);
     }
 }
