@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "Graph.h"
 
-typedef struct nomi* Nomi_Luoghi;
+//typedef struct nomi* Nomi_Luoghi;
 
 // Structure to represent a min heap node
 struct MinHeapNode

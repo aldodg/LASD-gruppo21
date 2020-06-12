@@ -1,13 +1,16 @@
 #include "mainfunction.h"
-#include "stdinutils.h"
+//#include "stdinutils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include "prenotazione.h"
+
+
 
 //gli deve arrivare username dell'utente loggato!! ci sta un modo per controllare che l'username sia univoco?
 //deve arrivare anche la lista di tutti gli utenti registrati e non so che altro
 
-void login()
+void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 {
     int choice;
 
@@ -18,7 +21,7 @@ void login()
         printf("\n\n---Menu' Principale Aeroporto---\n\n");
         printf("1 - Prenota un volo\n");
         printf("2 - Visualizza prenotazioni effettuate\n");
-        printf("3 - Esci\n");
+        printf("3 - Esci\nScegli:\t");
 
         choice=readint();
 
@@ -27,12 +30,12 @@ void login()
 
         case 1:
 
-            //prenotaVolo(Lista_prenotazioni);
+            prenotaVolo(G, Utenti, Username, NM);
             break;
 
 
         case 2:
-            //visualizza_prenotazioni_effettuate(username, Utenti_registrati);
+            visualizza_prenotazioni_effettuate(username, Utenti);
             break;
 
         case 3:
@@ -41,7 +44,7 @@ void login()
 
         default:
 
-            printf("\nScelta non corretta\nDigitare 1 per prenotare un volot\n2Per visualizzare le prenotazioni effettuate\n3Per uscire");
+            printf("\nScelta non corretta\nDigitare 1 per prenotare un volot\n2Per visualizzare le prenotazioni effettuate\n3Per uscire\nScegli:\t");
 
         }
 
@@ -59,9 +62,9 @@ void aggiungiTratta(Graph G, Nomi_Luoghi NM)  //SONO BUONE NON CANCELLARE
     {
 
         printf("\n\n---Menu' gestione aggiungi tratta---\n\n");
-        printf("1 - Aggiungi nuova tratta\n");
+        printf("1 - Aggiungi nuovo viaggio\n");
         printf("2 - Aggiungi nuovo aeroporto\n");
-        printf("3 - Esci\n");
+        printf("3 - Esci\nScegli:\t");
 
         choice=readint();
 
@@ -82,6 +85,9 @@ void aggiungiTratta(Graph G, Nomi_Luoghi NM)  //SONO BUONE NON CANCELLARE
             durata=readint();
             addEdge(G, partenza, destinazione, costo, durata);
             printf("Fatto!");
+            printGraph(G);
+            printf("\n\n");
+            stampa_lista_nomi(NM);
 
             break;
         }
@@ -100,7 +106,7 @@ void aggiungiTratta(Graph G, Nomi_Luoghi NM)  //SONO BUONE NON CANCELLARE
         default:
         {
 
-        printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+            printf("\nScelta non corretta:\nDigitare 1 per aggiungere un viaggio\nDigitare 2 per aggiungere un luogo\nDigitare 3 per uscire\nScegli:\t");
         }
         }
         break;
@@ -119,7 +125,7 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)    //SONO BUONE NON CANCELLARE
         printf("\n\n---Menu' gestione rimuovi tratta---\n\n");
         printf("1 - Rimuovi viaggio\n");
         printf("2 - Rimuovi luogo\n");
-        printf("3 - Esci\n");
+        printf("3 - Esci\nScegli:\t");
 
         choice=readint();
 
@@ -129,13 +135,17 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)    //SONO BUONE NON CANCELLARE
         case 1:
         {
 
-            scelta_visualizza_elenco(NM);
+            printGraph(G);
+            printf("\n\n");
+            stampa_lista_nomi(NM);
             printf("Imposta la partenza.\t");
             partenza=readint();
             printf("Imposta la destinazione.\t");
             destinazione=readint();
             removeEdge(G, partenza, destinazione);
             printf("Fatto!\n");
+            printGraph(G);
+            printf("\n\n");
 
             break;
         }
@@ -146,6 +156,7 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)    //SONO BUONE NON CANCELLARE
             nodo_da_rimuovere=readint();
             removeNode(G, nodo_da_rimuovere, &NM);
             printf("Fatto!\n");
+            stampa_lista_nomi(NM);
 
             break;
         }
@@ -159,7 +170,7 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)    //SONO BUONE NON CANCELLARE
         default:
         {
 
-            printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+            printf("\nScelta non corretta:\nDigitare 1 per rimuovere un viaggio\nDigitare 2 per eliminare un luogo\nDigitare 3 per uscire\nScegli:\t");
         }
         }
         break;
@@ -180,7 +191,7 @@ void menutratte(Graph G, Nomi_Luoghi NM)
         printf("\n\n---Menu' gestione tratte---\n\n");
         printf("1 - Aggiungere tratta\n");
         printf("2 - Rimuovi tratta\n");
-        printf("3 - Esci\n");
+        printf("3 - Esci\nScegli:\t");
 
         choice=readint();
 
@@ -208,7 +219,7 @@ void menutratte(Graph G, Nomi_Luoghi NM)
         }
         default:
         {
-            printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire");
+            printf("\nScelta non corretta:\nDigitare 1 per aggiungere una tratta\nDigitare 2 per eliminare una tratta\nDigitare 3 per uscire.\nScegli:\t");
         }
         }
         break;
@@ -217,50 +228,3 @@ void menutratte(Graph G, Nomi_Luoghi NM)
 
 }
 
-    void    prenotavolo(Graph Grafo , Customers Cliente, char * username, Nomi_Luoghi NM, Prenotati P){
-
-        char* scelta;
-        int partenza,arrivo,costo_comp,durata_comp;
-
-        while( Cliente!=NULL && strcmp (Cliente->user,username )!=0){
-            Cliente= Cliente->next;
-        }
-        if (Cliente ->sconto >0){
-            printf("\n Hai accumulato %d euro di sconto sui tuoi viaggi.\nVuoi usare lo sconto?[S/n]\n",Cliente->sconto) ;
-
-        }
-
-
-
-        printf("\nVuoi vedere le mete più gettonate[S\n]?\n");
-        fflush(stdin);
-        scelta=read();
-        if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0){
-
-                while( NM!=NULL ){
-
-                if (NM->contatore_voli>4){
-                printf("id: %d - %s con %d visite totali ricevute",NM->id,NM->nome_luogo, NM->contatore_voli);
-                }
-                NM=NM->next;
-
-                }
-
-                printf("\nVuoi andare in uno dei luoghi più gettonati[S\n]?\n");
-                fflush(stdin);
-                scelta=read();
-                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0){
-
-
-
-
-
-                }
-
-        }
-
-
-
-
-
-    }

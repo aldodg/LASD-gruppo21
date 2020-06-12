@@ -24,3 +24,4 @@ void printMeteGettonate(Gettonate G);
 
 /* DEALLOCA LA LISTA DELLE METE GETTONATE */
 void freeListGettonate(Gettonate G);
+

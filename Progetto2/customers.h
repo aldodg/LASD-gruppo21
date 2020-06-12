@@ -2,10 +2,11 @@
 #define CUSTOMERS_H_INCLUDED
 
 /*Questa libreria contiene i metodi e la lista degli utenti che usano la app*/
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include "prenotazione.h"
+//#include "prenotazione.h"
 
 struct customer
 {
@@ -15,7 +16,7 @@ struct customer
     char * user;
     char * password;
     Prenotati *elenco_prenotazioni;
-    int sconto;
+    int punti;
     struct customer *next;
 
 };

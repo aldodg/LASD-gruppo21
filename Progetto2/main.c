@@ -11,13 +11,13 @@ Aldo Di Giovanni
 #include "customers.h"
 #include "stdinutils.h"
 #include "mainfunction.h"
-#include "gettonate.h"
-#include "List.h"
-#include "Dijkstra.h"
+//#include "List.h"
+//#include "Dijkstra.h"
+//#include "prenotazione.h"
 
 int main()
 {
-
+    /*
     //inizio test grafi
     Graph G=NULL;
     Nomi_Luoghi NM = NULL;
@@ -47,8 +47,8 @@ int main()
     printf("aspetto 0: %d\n", esisteArco(G, 18, 17)); //controllo se esista la tratta da salerno a bari
     printf("aspetto 45: %d\n", costoArco(G, 15, 14)); //costo della tratta da cosenza a reggio calabria
 
-    //freeGraph(G);
-  //  cancellaListaNomi(NM);
+    freeGraph(G);
+    cancellaListaNomi(NM);
     //fine test grafi
 
     //inizio test dijstra
@@ -87,11 +87,19 @@ int main()
     printf("La tratta piu' economica ti costera' %d.\n", dijkstra_costo(G, 0, 8));
     printf("La tratta piu' breve ti costera' %d.\n", dijkstra_durata(G, 0, 8));
 
-  //  freeGraph(G);
+    //  freeGraph(G);
     //fine test dijstra
-
+    */
     Customers *Utenti=NULL;
     int choice;
+    Graph G=NULL;
+    Nomi_Luoghi NM = NULL;
+
+    G=popola_grafo_file(G, &NM);
+    printGraph(G);
+    printf("\n\n");
+    stampa_lista_nomi(NM);
+    printf("--------------------------------------------\n");
 
     /*Menu da aggiustare sia esteticamente per le funzioni*/
     do
@@ -102,7 +110,7 @@ int main()
         printf("1 - Registrati\n");
         printf("2 - Accedi con credenziali\n");
         printf("3 - Pannello admin\n");
-        printf("4 - Esci\n");
+        printf("4 - Esci\nScegli:\t");
         choice=readint();
         switch (choice)
         {
@@ -139,7 +147,7 @@ int main()
 
                 registra(&Utenti,nome,cognome,username, pass);
                 printf("\nRegistrazione avvenuta con successo!\n");
-                login();//se tutto ok passiamo alle funzionalità del menù login
+                login(G, Utenti, username, NM);//se tutto ok passiamo alle funzionalità del menù login
             }
             else
             {
@@ -166,7 +174,7 @@ int main()
             else
             {
                 printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", username);
-                login();
+                login(G, Utenti, username, NM);
             }
 
 
@@ -193,12 +201,16 @@ int main()
             break;
         }
         case 4:
-            return 0;
+        {
 
+            freeGraph(G);
+            cancellaListaNomi(NM);
+            return 0;
+        }
         default:
         {
 
-            printf("\nDigitare 1 per registrarsi\nDigitare 2 per accedere con credenziali\nDigitare 3 per gestire le tratte\n");
+            printf("\nDigitare 1 per registrarsi\nDigitare 2 per accedere con credenziali\nDigitare 3 per gestire le tratte\nScegli:\t");
 
             break;
 

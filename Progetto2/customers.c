@@ -12,6 +12,7 @@ void registra(Customers **L, char *name, char * surname, char * username, char *
     new->cognome=surname;
     new->user=username;
     new->password=password;
+    new->punti=0;
 
     if (!*L)
     {

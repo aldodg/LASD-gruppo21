@@ -48,10 +48,6 @@
 		</Unit>
 		<Unit filename="customers.h" />
 		<Unit filename="db_grafo.txt" />
-		<Unit filename="gettonate.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="gettonate.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
