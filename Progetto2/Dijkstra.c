@@ -221,7 +221,7 @@ int dijkstra_durata(Graph G, int src, int destinazione)
     int dist[nodes_count];     // dist values used to pick minimum weight edge in cut
 
     // minHeap represents set E
-    struct MinHeap* minHeap = createMinHeap(nodes_count);
+    struct MinHeap* minHeap = NULL; minHeap=createMinHeap(nodes_count);
 
     // Initialize min heap with all vertices. dist value of all vertices
     for (int v = 0; v < nodes_count; ++v)

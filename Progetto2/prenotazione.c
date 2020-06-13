@@ -140,14 +140,31 @@ void freeVoliPrenotati(Prenotati P)
     }
 }
 
+int esistono_mete_gettonate (Nomi_Luoghi NM)
+{
 
+    int esistono_mete_gettonate=0;
+    while(NM!=NULL )
+    {
 
-void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi *NM)
+        if ((NM)->contatore_voli>MIN_VOLI_PER_GETTONATI)
+        {
+            printf("id: %d - %s con %d visite totali ricevute\n",(NM)->id,(NM)->nome_luogo, (NM)->contatore_voli);
+            esistono_mete_gettonate=1;
+        }
+        NM=(NM)->next;
+
+    }
+
+    return esistono_mete_gettonate;
+}
+
+void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
 {
 
     char scelta[2];
-    int partenza, destinazione, costo_comp, durata_comp, scelta2;
-    int esistono_mete_gettonate=0, destinazione_gia_scelta=0;
+    int partenza, destinazione, costo_comp=0, durata_comp=0, scelta2;
+    int  destinazione_gia_scelta=0;
 
     while( Cliente!=NULL && strcmp((*Cliente)->user,username ))
     {
@@ -158,7 +175,7 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi *NM)
     {
         printf("\n Hai accumulato %d punti.\n",(*Cliente)->punti) ;
     }
-printf("%d", (*NM)->contatore_voli);
+    printf("%d", (NM)->contatore_voli);
     printf("\nVuoi vedere le mete piu' gettonate[S\\n]?\t");
     fflush(stdin);
     //scelta=read();
@@ -166,22 +183,13 @@ printf("%d", (*NM)->contatore_voli);
     if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
     {
 
-        while(*NM!=NULL )
-        {
 
-            if ((*NM)->contatore_voli>MIN_VOLI_PER_GETTONATI)
-            {
-                printf("id: %d - %s con %d visite totali ricevute\n",(*NM)->id,(*NM)->nome_luogo, (*NM)->contatore_voli);
-                esistono_mete_gettonate=1;
-            }
-            *NM=(*NM)->next;
-
-        }
-        if (!esistono_mete_gettonate)
+        if (!esistono_mete_gettonate(NM))
         {
             printf("Non abbiamo delle mete da consigliarti in questo momento, sono tutte ugualmente belle!\n");
         }
-        else {
+        else
+        {
             printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
             fflush(stdin);
             //scelta=read();
@@ -197,7 +205,7 @@ printf("%d", (*NM)->contatore_voli);
     }
     if (!destinazione_gia_scelta)
     {
-        scelta_visualizza_elenco(*NM);
+        scelta_visualizza_elenco(NM);
         printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
         fflush(stdin);
         //destinazione=readint();
@@ -209,10 +217,10 @@ printf("%d", (*NM)->contatore_voli);
     //partenza=readint();
     scanf("%d", &partenza);
 
-    costo_comp=dijkstra_costo(G, partenza, destinazione);
+    /*costo_comp=dijkstra_costo(G, partenza, destinazione);
     printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
     durata_comp=dijkstra_durata(G, partenza, destinazione);
-    printf("La tratta piu' breve ti costera' %d.\n", durata_comp);
+    printf("La tratta piu' breve ti costera' %d.\n", durata_comp);*/
 
 
     printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
@@ -228,7 +236,7 @@ printf("%d", (*NM)->contatore_voli);
     {
         if ((*Cliente)->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
+            printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
             fflush(stdin);
             //scelta=read();
             scanf("%s", scelta);

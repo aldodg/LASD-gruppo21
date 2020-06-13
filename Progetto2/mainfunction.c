@@ -10,7 +10,7 @@
 //gli deve arrivare username dell'utente loggato!! ci sta un modo per controllare che l'username sia univoco?
 //deve arrivare anche la lista di tutti gli utenti registrati e non so che altro
 
-void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi *NM)
+void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 {
     int choice;
 
