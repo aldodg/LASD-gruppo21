@@ -103,7 +103,7 @@ Prenotati insertTail(Prenotati P, int partenza, int destinazione, int peso)
 }
 
 
-Prenotati insertHead(Prenotati P, int partenza,int destinazione, int peso)
+Prenotati insertHead(Prenotati *P, int partenza,int destinazione, int peso)
 {
     if (P != NULL)
     {
@@ -111,7 +111,7 @@ Prenotati insertHead(Prenotati P, int partenza,int destinazione, int peso)
         X->partenza = partenza;
         X->destinazione = destinazione;
         X->peso=peso;
-        X->next = P;
+        X->next = *P;
 
         return X;
     }
@@ -141,69 +141,73 @@ void freeVoliPrenotati(Prenotati P)
 }
 
 
-/*
-void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
+
+void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi *NM)
 {
 
-    char* scelta;
+    char scelta[2];
     int partenza, destinazione, costo_comp, durata_comp, scelta2;
     int esistono_mete_gettonate=0, destinazione_gia_scelta=0;
 
-    while( Cliente!=NULL && strcmp (Cliente->user,username )!=0)
+    while( Cliente!=NULL && strcmp((*Cliente)->user,username ))
     {
-        Cliente= Cliente->next;
+        *Cliente= (*Cliente)->next;
     }
 
-    if (Cliente ->punti >0)
+    if ((*Cliente) ->punti >0)
     {
-        printf("\n Hai accumulato %d punti.\n",Cliente->punti) ;
+        printf("\n Hai accumulato %d punti.\n",(*Cliente)->punti) ;
     }
-
+printf("%d", (*NM)->contatore_voli);
     printf("\nVuoi vedere le mete piu' gettonate[S\\n]?\t");
     fflush(stdin);
-    scelta=read();
+    //scelta=read();
+    scanf("%s", scelta);
     if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
     {
 
-        while( NM!=NULL )
+        while(*NM!=NULL )
         {
 
-            if (NM->contatore_voli>MIN_VOLI_PER_GETTONATI)
+            if ((*NM)->contatore_voli>MIN_VOLI_PER_GETTONATI)
             {
-                printf("id: %d - %s con %d visite totali ricevute\n",NM->id,NM->nome_luogo, NM->contatore_voli);
+                printf("id: %d - %s con %d visite totali ricevute\n",(*NM)->id,(*NM)->nome_luogo, (*NM)->contatore_voli);
                 esistono_mete_gettonate=1;
             }
-            NM=NM->next;
+            *NM=(*NM)->next;
 
         }
         if (!esistono_mete_gettonate)
         {
             printf("Non abbiamo delle mete da consigliarti in questo momento, sono tutte ugualmente belle!\n");
-
-
-        printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
-        fflush(stdin);
-        scelta=read();
-        if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
-        {
-            printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
-            fflush(stdin);
-            destinazione=readint();
-            destinazione_gia_scelta=1;
         }
+        else {
+            printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
+            fflush(stdin);
+            //scelta=read();
+            scanf("%s", scelta);
+            if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+            {
+                printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
+                fflush(stdin);
+                destinazione=readint();
+                destinazione_gia_scelta=1;
+            }
         }
     }
     if (!destinazione_gia_scelta)
     {
-        scelta_visualizza_elenco(NM);
+        scelta_visualizza_elenco(*NM);
         printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
         fflush(stdin);
-        destinazione=readint();
+        //destinazione=readint();
+        scanf("%d", &destinazione);
     }
 
     printf("Perfetto.\nOra inserisci il numero corrispondente al luogo di partenza.\t");
     fflush(stdin);
-    partenza=readint();
+    //partenza=readint();
+    scanf("%d", &partenza);
 
     costo_comp=dijkstra_costo(G, partenza, destinazione);
     printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
@@ -214,46 +218,49 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
     printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
            "piu' il viaggio sara' costoso piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
     fflush(stdin);
-    scelta2=readint();
+    //scelta2=readint();
+    scanf("%d", &scelta2);
     switch (scelta2)
     {
 
     case 1:
 
     {
-        if (Cliente ->punti >0)
+        if ((*Cliente)->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", Cliente->punti);
+            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
             fflush(stdin);
-            scelta=read();
+            //scelta=read();
+            scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
-                costo_comp=costo_comp-Cliente->punti;
+                costo_comp=costo_comp-(*Cliente)->punti;
 
-                Cliente->punti=0;
+                (*Cliente)->punti=0;
             }
         }
-        *Cliente->elenco_prenotazioni=insertHead(*Cliente->elenco_prenotazioni, partenza, destinazione, costo_comp);
-        Cliente->punti=(costo_comp/100)*10; //il 10% dell'ordine
+        *((*Cliente)->elenco_prenotazioni)=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+        (*Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
         break;
     }
     case 2:
     {
 
-        if (Cliente ->punti >0)
+        if ((*Cliente )->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", Cliente->punti);
+            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
             fflush(stdin);
-            scelta=read();
+            //scelta=read();
+            scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
-                costo_comp=costo_comp-Cliente->punti;
+                costo_comp=costo_comp-(*Cliente)->punti;
 
-                Cliente->punti=0;
+                (*Cliente)->punti=0;
             }
         }
-        *Cliente->elenco_prenotazioni=insertHead(*Cliente->elenco_prenotazioni, partenza, destinazione, durata_comp);
-        Cliente->punti=(durata_comp/100)*10; //il 10% dell'ordine
+        *((*Cliente)->elenco_prenotazioni)=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, durata_comp);
+        (*Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
         break;
     }
     case 3:
@@ -265,19 +272,19 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 
     }
 
-
-
 }
-*/
+
 
 void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
 {
 
+    int i=0;
     //ho il dubbio che possa andare in seg scritta cosi' in un caso particolare ma in effetti non credo
     //se dovesse dare problemi basta mettere la strcmp in un if dentro il ciclo e aggiornare una flag quando entra nell'if per uscire dal ciclo
-    while (Utente!=NULL && !strcmp(Utente->user, username))
+    printf ("%s kkk", (*Utente)->user);
+    while (*Utente!=NULL && strcmp((*Utente)->user, username))
     {
-        Utente=Utente->next;
+        *Utente=(*Utente)->next;
     }
     //printVoliPrenotati(Utente->elenco_prenotazioni, 1);
     /*
@@ -288,47 +295,58 @@ void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
         *tmp=*tmp->next;
         i++;
     }*/
-    printf("%d)  ", *(Utente->elenco_prenotazioni)->partenza);
+    //printf("%d)  ", *(Utente->elenco_prenotazioni)->partenza);
+    if ((*Utente)->elenco_prenotazioni==NULL) printf("casas");
+    while ((*Utente)->elenco_prenotazioni!=NULL)
+    {
+        printf("%d) %d -> %d \n", i, (*(*Utente)->elenco_prenotazioni)->partenza, (*(*Utente)->elenco_prenotazioni)->destinazione);
+        printf("\n");
+        *(*Utente)->elenco_prenotazioni=(*(*Utente)->elenco_prenotazioni)->next;
+        i++;
+    }
 
 }
 
 
 
-void registra(Customers **L, char *name, char * surname, char * username, char * password)
+void registra(Customers *L, char *name, char * surname, char * username, char * password)
 {
 
-    Customers *new_node= malloc(sizeof(Customers));
-
-    new_node->nome=name;
-    new_node->cognome=surname;
-    new_node->user=username;
-    new_node->password=password;
+    Customers new_node= malloc(sizeof(Customers));
+    printf("%s ddd", cognome);
+    strcpy(new_node->nome,name);
+    strcpy(new_node->cognome,surname);
+    strcpy(new_node->user,username);
+    strcpy(new_node->password,password);
     new_node->punti=0;
+    new_node->elenco_prenotazioni=NULL;
+    new_node->next=NULL;
 
-    if (!*L)
+    if (*L==NULL)
     {
         *L = new_node;
         new_node->next = NULL;
     }
     else
     {
-        Customers *n = *L;
-        while (n->next && n->cognome > surname)
-            n = n->next;
-        new_node->next = n->next;
-        n->next = new_node;
+        //Customers n = *L;
+        //while (n->next && n->cognome > surname)
+        //    n = n->next;
+        new_node->next = *L;
+        //n->next = new_node;
+        *L=new_node;
     }
 
 
 }
 
 
-int UserGiaPresente(Customers *L, char *username)
+int UserGiaPresente(Customers L, char *username)
 {
+    Customers current = L;
+    int presente=0;
 
-    Customers *current = L;
-
-    while(current!=NULL && strcmp(current->user,username)!=0)
+    /*while(current!=NULL && strcmp(current->user,username)!=0)
     {
         current=current->next;
     }
@@ -341,14 +359,20 @@ int UserGiaPresente(Customers *L, char *username)
     {
 
         return 0;
+    }*/
+    while(current!=NULL && !presente)
+    {
+        if (!strcmp(current->user,username)) presente=1;
+        current=current->next;
     }
 
+    return presente;
 
 }
 
-int controllaCredenziali(Customers *L,char * username, char * password)
+int controllaCredenziali(Customers L,char * username, char * password)
 {
-    Customers *current = L;
+    Customers current = L;
 
     while(current!=NULL && strcmp(current->user,username)!=0 && strcmp (current->password, password)!= 0)
     {

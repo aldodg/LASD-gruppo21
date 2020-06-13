@@ -90,7 +90,7 @@ int main()
     //  freeGraph(G);
     //fine test dijstra
     */
-    Customers *Utenti=NULL;
+    Customers Utenti=NULL;
     int choice;
     Graph G=NULL;
     Nomi_Luoghi NM = NULL;
@@ -146,8 +146,10 @@ int main()
             {
 
                 registra(&Utenti,nome,cognome,username, pass);
+                printf("%s ddd", Utenti->cognome);
                 printf("\nRegistrazione avvenuta con successo!\n");
-                login(G, &Utenti, username, NM);//se tutto ok passiamo alle funzionalità del menù login
+                login(G, &Utenti, username, &NM);//se tutto ok passiamo alle funzionalità del menù login
+                //printf("%d ggg", (Utenti)->punti);
             }
             else
             {
@@ -174,7 +176,7 @@ int main()
             else
             {
                 printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", username);
-                login(G, &Utenti, username, NM);
+                login(G,&Utenti, username, &NM);
             }
 
 

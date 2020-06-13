@@ -10,7 +10,7 @@
 //gli deve arrivare username dell'utente loggato!! ci sta un modo per controllare che l'username sia univoco?
 //deve arrivare anche la lista di tutti gli utenti registrati e non so che altro
 
-void login(Graph G, Customers **Utenti, char *Username, Nomi_Luoghi NM)
+void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi *NM)
 {
     int choice;
 
@@ -23,19 +23,23 @@ void login(Graph G, Customers **Utenti, char *Username, Nomi_Luoghi NM)
         printf("2 - Visualizza prenotazioni effettuate\n");
         printf("3 - Esci\nScegli:\t");
 
-        choice=readint();
+        //choice=readint();
+        scanf("%d", &choice);
 
         switch (choice)
         {
 
         case 1:
 
-            //prenotaVolo(G, Utenti, Username, NM);
+            (*Utenti)->punti=4;
+            prenotaVolo(G, Utenti, Username, NM);
+
+            //printf("%d ggg", (*Utenti)->punti);
             break;
 
 
         case 2:
-            visualizza_prenotazioni_effettuate(username, *Utenti);
+            visualizza_prenotazioni_effettuate(username, Utenti);
             break;
 
         case 3:
