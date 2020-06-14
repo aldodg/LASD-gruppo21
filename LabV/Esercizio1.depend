@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1591031179 source:c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio1\esercizio1\graph.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<assert.h>
+	"Graph.h"
+
+1591031359 c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio1\esercizio1\graph.h
+	"List.h"
+
+1591028783 c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio1\esercizio1\list.h
+
+1591028731 source:c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio1\esercizio1\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+	"Graph.h"
+
+1591802730 source:c:\users\fabio\desktop\università\2° anno\lasd\murano\esercizi corso 2020\laboratorio v\esercizio1\esercizio1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+	"Graph.h"
+
