@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 #include "List.h"
 #include "Graph.h"
-#include "stdinutils.h"
+#include"stdinutils.h"
+#include<string.h>
 
+//@author Abbate Carmine
+//N86002234
 int main()
 {
     int choice;
@@ -15,7 +17,7 @@ int main()
     srand(time(NULL));
 
     Graph A;
-    Graph B;
+
 
     int* entrante;
     int* uscente;
@@ -135,6 +137,7 @@ int main()
         creaSottografo(A);
 
 
+        freeGraph(A);
 
 //printGraph(B);
         break;
@@ -172,9 +175,12 @@ int main()
 
             printf("\nIl grafo e' aciclico\n");
         }else{
-        printf("\nIl grafo possiede almeno un ciclo\n");}
+        printf("\nIl grafo possiede almeno un ciclo\n");
+        printf("\nRimozione nodo che causa il ciclo\n");
+        printGraph(A);
+        }
 
-
+        freeGraph(A);
         break;
         }
         case 5: {

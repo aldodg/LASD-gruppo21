@@ -48,4 +48,10 @@ void stampaGradi(Graph G , int* in, int* out);
 Graph pozzo(int nodes,  int target);
 
 void creaSottografo(Graph G );
+
+int CheckGrafo(Graph G, int V, int visited[], int Stack[]);
+
+int TrovaCicli(Graph G);
+
+void verificaArchi(Graph Grafo ,Graph SottoGrafo, int i, List currEdge);
 #endif
