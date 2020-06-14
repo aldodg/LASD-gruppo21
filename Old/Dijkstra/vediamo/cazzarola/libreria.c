@@ -169,13 +169,27 @@ if (minHeap->pos[v] < minHeap->size)
 return 0;
 }
 
+void printPath (struct MinHeapNode *last)
+{
+    while (last != NULL)
+    {
+        printf ("%d -> ", last->v);
+
+        last = last->parent;
+    }
+
+    printf ("NULL\n");
+}
+
 // A utility function used to print the solution
 void printArr(int dist[], int n)
 {
     printf("Vertex Distance from Source\n");
     for (int i = 0; i < n; ++i)
-        printf("%d \t\t %d\n", i, dist[i]);
+        printf("%d \t\t %d \n", i, dist[i]);
 }
+
+
 
 // The main function that calulates distances of shortest paths from src to all
 // vertices. It is a O(ELogV) function
@@ -204,13 +218,23 @@ void dijkstra(Graph G, int src)
     // Initially size of min heap is equal to V
     minHeap->size = nodes_count;
 
+    //Now whenever you do a extractMin() operation, the address you get, you can store it in some temporary variable,
+    //and assign it to the minHeapNode->parent
+
+    struct MinHeapNode *prev = NULL;
     // In the followin loop, min heap contains all nodes
     // whose shortest distance is not yet finalized.
     while (!isEmpty(minHeap))
     {
         // Extract the vertex with minimum distance value
         struct MinHeapNode* minHeapNode = extractMin(minHeap);
+
+        // Storing the previous node's address
+        minHeapNode->parent = prev;
+        prev = minHeapNode;
+
         int u = minHeapNode->v; // Store the extracted vertex number
+
 
         // Traverse through all adjacent vertices of u (the extracted
         // vertex) and update their distance values
@@ -230,7 +254,9 @@ void dijkstra(Graph G, int src)
                 decreaseKey(minHeap, v, dist[v]);
             }
             pCrawl = pCrawl->next;
+
         }
+        printPath(prev); /////////////
     }
 
     // print the calculated shortest distances

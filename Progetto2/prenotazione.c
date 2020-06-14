@@ -75,7 +75,7 @@ void freeVoliPrenotati(Prenotati P)
     }
 }
 */
-
+/*
 Prenotati initNode(int partenza, int destinazione, int peso)
 {
     Prenotati P = (Prenotati)malloc(sizeof(struct voliPrenotati));
@@ -86,26 +86,26 @@ Prenotati initNode(int partenza, int destinazione, int peso)
 
     return P;
 }
-
-
-Prenotati insertTail(Prenotati P, int partenza, int destinazione, int peso)
+*/
+/*
+Prenotati insertTail(Prenotati *P, int partenza, int destinazione, int peso)
 {
-    if (P != NULL)
+    if (*P != NULL)
     {
-        P->next = insertTail(P->next, partenza, destinazione, peso);
+        *P->next = insertTail(*P->next, partenza, destinazione, peso);
     }
     else
     {
-        P = initNode(partenza,destinazione,peso);
+        *P = initNode(partenza,destinazione,peso);
     }
 
     return P;
 }
+*/
 
-
-Prenotati insertHead(Prenotati *P, int partenza,int destinazione, int peso)
+Prenotati * insertHead(Prenotati *P, int partenza,int destinazione, int peso)
 {
-    if (P != NULL)
+    /*if (P != NULL)
     {
         Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
         X->partenza = partenza;
@@ -116,19 +116,28 @@ Prenotati insertHead(Prenotati *P, int partenza,int destinazione, int peso)
         return X;
     }
 
-    return initNode(partenza, destinazione, peso);
+    return initNode(partenza, destinazione, peso);*/
+    Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
+    (X)->partenza = partenza;
+    (X)->destinazione = destinazione;
+    (X)->peso=peso;
+    (X)->next = *P;
+
+    *P=(X);
+
+    return P;
 }
 
-/*
+
 void printVoliPrenotati(Prenotati *P, int i)
 {
     if (P != NULL)
     {
         printf("%d) %d -> %d ", i, (*P)->partenza, (*P)->destinazione);
-        printVoliPrenotati(, i+1);
+        printVoliPrenotati(P, i+1);
         printf("\n");
     }
-}*/
+}
 
 
 void freeVoliPrenotati(Prenotati P)
@@ -217,10 +226,10 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
     //partenza=readint();
     scanf("%d", &partenza);
 
-    /*costo_comp=dijkstra_costo(G, partenza, destinazione);
+    costo_comp=dijkstra_costo(G, partenza, destinazione);
     printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
     durata_comp=dijkstra_durata(G, partenza, destinazione);
-    printf("La tratta piu' breve ti costera' %d.\n", durata_comp);*/
+    printf("La tratta piu' breve ti costera' %d.\n", durata_comp);
 
 
     printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
@@ -247,7 +256,26 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
                 (*Cliente)->punti=0;
             }
         }
-        *((*Cliente)->elenco_prenotazioni)=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+        //printf("cascca\n");
+        (*Cliente)->elenco_prenotazioni=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+
+        /*Prenotati *X = malloc(sizeof(Prenotati));
+        (*X)->partenza = partenza;
+        (*X)->destinazione = destinazione;
+        (*X)->peso=costo_comp;
+        (*X)->next = *(*Cliente)->elenco_prenotazioni;
+
+        (*Cliente)->elenco_prenotazioni=(X);
+        (*Cliente)->elenco_prenotazioni = (Prenotati)malloc(sizeof(struct voliPrenotati));
+        (X)->partenza = partenza;
+        (X)->destinazione = destinazione;
+        (X)->peso=costo_comp;
+        (X)->next = *(*Cliente)->elenco_prenotazioni;
+
+        (*Cliente)->elenco_prenotazioni=(&X);*/
+
+        //if ((*Cliente)->elenco_prenotazioni ==NULL) printf("llkkmkm");
+        printf("Prenotazione confermata e registrata!\n");
         (*Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
         break;
     }
@@ -267,7 +295,8 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
                 (*Cliente)->punti=0;
             }
         }
-        *((*Cliente)->elenco_prenotazioni)=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, durata_comp);
+        (*Cliente)->elenco_prenotazioni=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+        printf("Prenotazione confermata e registrata!\n");
         (*Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
         break;
     }
@@ -286,15 +315,15 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
 void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
 {
 
-    int i=0;
+    int i=1;
     //ho il dubbio che possa andare in seg scritta cosi' in un caso particolare ma in effetti non credo
     //se dovesse dare problemi basta mettere la strcmp in un if dentro il ciclo e aggiornare una flag quando entra nell'if per uscire dal ciclo
-    printf ("%s kkk", (*Utente)->user);
+    //printf ("%s kkk", (*Utente)->user);
     while (*Utente!=NULL && strcmp((*Utente)->user, username))
     {
         *Utente=(*Utente)->next;
     }
-    //printVoliPrenotati(Utente->elenco_prenotazioni, 1);
+    printVoliPrenotati((*Utente)->elenco_prenotazioni, 1);
     /*
     struct voliPrenotati **tmp=(Utente->elenco_prenotazioni); int i=0;
     while (*tmp!=NULL) {
@@ -305,6 +334,7 @@ void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
     }*/
     //printf("%d)  ", *(Utente->elenco_prenotazioni)->partenza);
     if ((*Utente)->elenco_prenotazioni==NULL) printf("casas");
+    else printf("altro");
     while ((*Utente)->elenco_prenotazioni!=NULL)
     {
         printf("%d) %d -> %d \n", i, (*(*Utente)->elenco_prenotazioni)->partenza, (*(*Utente)->elenco_prenotazioni)->destinazione);
@@ -321,13 +351,13 @@ void registra(Customers *L, char *name, char * surname, char * username, char * 
 {
 
     Customers new_node= malloc(sizeof(Customers));
-    printf("%s ddd", cognome);
+   // printf("%s ddd", cognome);
     strcpy(new_node->nome,name);
     strcpy(new_node->cognome,surname);
     strcpy(new_node->user,username);
     strcpy(new_node->password,password);
     new_node->punti=0;
-    new_node->elenco_prenotazioni=NULL;
+    new_node->elenco_prenotazioni=(Prenotati*)malloc(sizeof(Prenotati));
     new_node->next=NULL;
 
     if (*L==NULL)

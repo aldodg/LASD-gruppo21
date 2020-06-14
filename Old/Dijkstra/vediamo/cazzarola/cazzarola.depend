@@ -61,7 +61,7 @@
 1591728453 source:c:\users\pc\documents\github\lasd-gruppo21\old\dijkstra\vediamo\cazzarola\libreria.c
 	"libreria.h"
 
-1591637116 c:\users\pc\documents\github\lasd-gruppo21\old\dijkstra\vediamo\cazzarola\libreria.h
+1592097144 c:\users\pc\documents\github\lasd-gruppo21\old\dijkstra\vediamo\cazzarola\libreria.h
 	<stdio.h>
 	<stdlib.h>
 	<limits.h>
@@ -80,7 +80,7 @@
 	<time.h>
 	"List.h"
 
-1591733235 source:c:\users\pc\documents\github\lasd-gruppo21\old\dijkstra\vediamo\cazzarola\main.c
+1592097706 source:c:\users\pc\documents\github\lasd-gruppo21\old\dijkstra\vediamo\cazzarola\main.c
 	<stdio.h>
 	<stdlib.h>
 	"libreria.h"

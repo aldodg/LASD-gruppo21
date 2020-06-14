@@ -31,7 +31,7 @@ void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 
         case 1:
 
-            (*Utenti)->punti=4;
+            //(*Utenti)->punti=4;
             prenotaVolo(G, Utenti, Username, NM);
 
             //printf("%d ggg", (*Utenti)->punti);

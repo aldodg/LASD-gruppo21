@@ -41,6 +41,7 @@ struct MinHeapNode
 {
     int v;
     int dist;
+    struct MinHeapNode *parent; //Keep some extra information like a parent pointer which points to the previous node discovered.
 };
 
 // Structure to represent a min heap
