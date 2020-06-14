@@ -87,6 +87,8 @@ void printGraph(Graph G) {
     int mezzi=(G->nodes_count/2)-2;//Il sottografo dovrà avere misure ridotte rispetto al grafo originale
 
     Graph B=initGraph(mezzi);
+    Graph C=initGraph(mezzi);
+    int intrand;
     int i;
     List  currEdge = NULL;
 
@@ -99,16 +101,66 @@ void printGraph(Graph G) {
         addEdge(B,i,currEdge->target, rand()%10 *currEdge->peso);
 
 
+
     }
-    printf("\nTrovato il seguente sottografo H con pesi multipli di G\n");
+
+    for (i=mezzi/3; i<mezzi; i++){
+        for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->next)
+
+        //Scorro il primo grafo ed aggiungo solo i vertici e archi che mi interessano
+        // Non partendo dall'inizio.
+        //Il peso è un multiplo dei pesi del primo grafo
+        addEdge(C,i,currEdge->target, rand()%50);
+
+
+
+    }
+    intrand=rand()%1;
+
+    if(intrand==0){
+
+    printf("\nTrovato il seguente sottografo H\n");
     for (i=mezzi/3; i<mezzi; i++)
 
     {
         printf("%d ->", i);
         printList(B->adj[i]);
         printf("\n");
-    }
-    freeGraph(B);
+   }
+    printf("Verifica sull'esistenza di pesi multipli\n");
+
+   for(i=mezzi/3; i<mezzi; i++){
+
+    verificaArchi(G,B,i,currEdge);
+   }
+   printf("\nTutti gli archi di H hanno peso multiplo di G, quindi H e' sottografo con pesi multipli\n");
+   freeGraph(B);
+}
+
+
+if(intrand==1){
+
+    printf("\nTrovato il seguente sottografo H\n");
+    for (i=mezzi/3; i<mezzi; i++)
+
+    {
+        printf("%d ->", i);
+        printList(C->adj[i]);
+        printf("\n");
+   }
+    printf("Verifica sull'esistenza di pesi multipli\n");
+
+   for(i=mezzi/3; i<mezzi; i++){
+
+    verificaArchi(G,C,i, currEdge);
+   }
+   printf("\nEsistono archi con pesi non multipli, quindi H  e' sottografo, ma non multiplo di G");
+   freeGraph(C);
+}
+
+
+
+
     }
 
 void addEdge(Graph G, int source, int target, int peso) {
@@ -295,3 +347,17 @@ void gestioneSottografo(Graph A, Graph B, int vertici , int edge_min, int edge_m
 
 }
 */
+void  verificaArchi(Graph Grafo ,Graph SottoGrafo, int i, List currEdge){
+
+    for( currEdge = Grafo->adj[i] ; currEdge ; currEdge = currEdge->next){
+    if ((SottoGrafo->adj[i]->peso % Grafo->adj[i]->peso)==0){
+
+        printf("%d e %d nel grafo H hanno pesi multipli dello stesso arco di G\n", i, currEdge->target);
+
+
+    }
+
+    }
+
+}
+
