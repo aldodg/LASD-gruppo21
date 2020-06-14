@@ -140,12 +140,12 @@ void removeNodeMat(Graphmat G, int node_to_remove) {
 }
 
 
-int *calcolaGradoUscente(Graphmat  G){
+int *calcolaGradoUscente(Graphmat G){
   int * gradiEntr = NULL;
   if(G){
     int i;
     gradiEntr = (int *)calloc(G->nodes_count,sizeof(int));
-    int *  currEdge = NULL;
+    int * currEdge = NULL;
     for(i=0 ; i < G->nodes_count ; i++ )
     for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->weights)
          gradiEntr[i]++;
@@ -158,7 +158,7 @@ int *calcolaGradoEntrante(Graphmat G){
   if(G){
     int i;
     gradiEntr = (int *)calloc(G->nodes_count,sizeof(int));
-    int *  currEdge = NULL;
+    int * currEdge = NULL;
     for(i=0 ; i < G->nodes_count ; i++ )
     for( currEdge = G->adj[i] ; currEdge ; currEdge = currEdge->weights)
       gradiEntr[currEdge->target]++;

@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "List.h"
 #include "Graph.h"
-#include"stdinutils.h"
-#include<string.h>
+#include "stdinutils.h"
+
 int main()
 {
     int choice;

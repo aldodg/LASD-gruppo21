@@ -9,19 +9,19 @@
 
 //typedef struct nomi* Nomi_Luoghi;
 
-// Structure to represent a min heap node
+// Struttura che rappresenta il nodo minimo dello Heap
 struct MinHeapNode
 {
     int v;
     int dist;
 };
 
-// Structure to represent a min heap
+// Struttura che rappresenta lo Heap minimo
 struct MinHeap
 {
-    int size;    // Number of heap nodes present currently
-    int capacity; // Capacity of min heap
-    int *pos;    // This is needed for decreaseKey()
+    int size;    // Numero di nodi heap attualmente presenti
+    int capacity; // capienza del min heap
+    int *pos;    // serve per decrementare la chiave
     struct MinHeapNode **array;
 };
 

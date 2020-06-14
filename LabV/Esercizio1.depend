@@ -25,3 +25,38 @@
 	"List.h"
 	"Graph.h"
 
+1592136770 source:c:\users\fabio\documents\github\lasd-gruppo21\labv\graph.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<assert.h>
+	"Graph.h"
+
+1592136770 c:\users\fabio\documents\github\lasd-gruppo21\labv\graph.h
+	"List.h"
+
+1592136771 c:\users\fabio\documents\github\lasd-gruppo21\labv\list.h
+
+1592136770 source:c:\users\fabio\documents\github\lasd-gruppo21\labv\list.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"List.h"
+	"Graph.h"
+
+1592136991 source:c:\users\fabio\documents\github\lasd-gruppo21\labv\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"List.h"
+	"Graph.h"
+	"stdinutils.h"
+
+1592136771 c:\users\fabio\documents\github\lasd-gruppo21\labv\stdinutils.h
+
+1592136771 source:c:\users\fabio\documents\github\lasd-gruppo21\labv\stdinutils.c
+	<stdio.h>
+	<stdlib.h>
+	"stdinutils.h"
+
