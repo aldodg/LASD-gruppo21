@@ -209,8 +209,6 @@ int dijkstra_costo(Graph G, int src, int destinazione)
         }
     }
 
-    // stampa le distanze più brevi calcolate
-
     return estrai_distanza_minore (dist, destinazione, nodes_count);
 }
 
@@ -257,15 +255,12 @@ int dijkstra_durata(Graph G, int src, int destinazione)
                     pCrawl->durata_tratta + dist[u] < dist[v])
             {
                 dist[v] = dist[u] + pCrawl->durata_tratta;
-// aggiorna anche il valore della distanza nell'heap minimo
+                // aggiorna anche il valore della distanza nell'heap minimo
                 decreaseKey(minHeap, v, dist[v]);
             }
             pCrawl = pCrawl->next;
         }
     }
-
-    // stampa le distanze più brevi calcolate
-    printArr(dist, nodes_count);
 
     return estrai_distanza_minore (dist, destinazione, nodes_count);
 }

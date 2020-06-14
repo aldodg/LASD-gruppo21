@@ -100,7 +100,7 @@ int costoArco(Graph g, int partenza, int arrivo)
 
     if(!empty_graph(g))
     {
-        if(esisteArco(g, partenza, arrivo)) //forse esisteArco dovrebbe anche in qualche modo ritornare un puntatore all'arco se esiste?
+        if(esisteArco(g, partenza, arrivo))
         {
 
             curr = g->adj[partenza];
@@ -217,7 +217,7 @@ void removeNode(Graph G, int node_to_remove, Nomi_Luoghi *NM) //rimuove un verti
         int x = 0;
         List *tmp = G->adj;
         G->adj = calloc(G->nodes_count, sizeof(List));
-        for (i = 0; i < G->nodes_count; i++) //i<=GNODES c'era prima boh controlla
+        for (i = 0; i < G->nodes_count; i++)
         {
             if (i != node_to_remove)
             {
@@ -230,19 +230,11 @@ void removeNode(Graph G, int node_to_remove, Nomi_Luoghi *NM) //rimuove un verti
             }
         }
 
-        /*int target=G->adj[0]->target;
-        int costo_tratta=G->adj[0]->costo_tratta;
-        int durata_tratta=G->adj[0]->durata_tratta;
 
-        free(*tmp);
-
-        G->adj[0]->target=target;
-        G->adj[0]->costo_tratta=costo_tratta;
-        G->adj[0]->durata_tratta=durata_tratta;*/
         free(tmp);
         G->nodes_count -= 1;
 
-        //il codice che segue serve ad aggiornare la lista delle corrispondenze id luoghi e nome del luogo
+        //la chiamata che segue serve ad aggiornare la lista delle corrispondenze id luoghi e nome del luogo
         *NM=checkListRemoval_perNomiLuoghi(*NM, node_to_remove);
     }
 }
@@ -494,33 +486,4 @@ void aggiungi_aeroporto(Graph G, Nomi_Luoghi *NM)
 
     }
 }
-
-/*
-//la funzione aggiorna il database locale del grafo all'uscita del programma
-void aggiorna_grafo (Graph L)
-{
-
-    Node *tmp=top;
-    FILE *ptr;
-
-
-    if ((ptr=fopen("db_grafo.txt", "w"))==NULL)
-    {
-        perror("");
-        printf("Ci dispiace ma purtroppo si e' verificato un errore con il salvataggio, contattaci per favore.\n");
-        chiudi_finestra();
-        exit(-1);
-    }
-    else
-    {
-        while (tmp!=NULL)
-        {
-            fprintf(ptr, "%s|%d|%d|%d|%d|%d\n", tmp->nome_libro, tmp->numero_copia, tmp->matricola_studenteCheHaIlLibro);
-            tmp=tmp->next;
-        }
-    }
-    fclose(ptr);
-}
-*/
-
 
