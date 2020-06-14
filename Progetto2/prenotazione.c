@@ -1,122 +1,12 @@
 #include "prenotazione.h"
-//#include "customers.h"
-//#include "Graph.h"
-//#include "Dijkstra.h"
 #include "stdinutils.h"
 
 #define MIN_VOLI_PER_GETTONATI 2
 
-/*
-Prenotati initNode(char *partenza, char *destinazione, int costo, int durata)
-{
-    Prenotati P = (Prenotati)malloc(sizeof(struct voliPrenotati));
-    P->partenza = partenza;
-    P->destinazione = destinazione;
-    P->costo = costo;
-    P->durata = durata;
-    P->next = NULL;
-
-    return P;
-}
-
-
-Prenotati insertTail(Prenotati P, char *partenza, char *destinazione, int costo, int durata)
-{
-    if (P != NULL)
-    {
-        P->next = insertTail(P->next, partenza, destinazione, costo, durata);
-    }
-    else
-    {
-        P = initNode(partenza,destinazione,costo,durata);
-    }
-
-    return P;
-}
-
-
-Prenotati insertHead(Prenotati P, int partenza,int destinazione, int costo, int durata)
-{
-    if (P != NULL)
-    {
-        Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
-        X->partenza = partenza;
-        X->destinazione = destinazione;
-        X->costo = costo;
-        X->durata=durata;
-        X->next = P;
-
-        return X;
-    }
-
-    return initNode(partenza, destinazione, costo, durata);
-}
-
-
-void printVoliPrenotati(Prenotati P)
-{
-    if (P != NULL)
-    {
-        printf(" %s %s ", P->partenza, P->destinazione);
-        printf(" %d ", P->costo);
-        printf(" %d ", P->durata);
-        printVoliPrenotati(P->next);
-        printf("\n");
-    }
-}
-
-
-void freeVoliPrenotati(Prenotati P)
-{
-    if (P != NULL)
-    {
-        freeVoliPrenotati(P->next);
-        free(P);
-    }
-}
-*/
-/*
-Prenotati initNode(int partenza, int destinazione, int peso)
-{
-    Prenotati P = (Prenotati)malloc(sizeof(struct voliPrenotati));
-    P->partenza = partenza;
-    P->destinazione = destinazione;
-    P->peso=peso;
-    P->next = NULL;
-
-    return P;
-}
-*/
-/*
-Prenotati insertTail(Prenotati *P, int partenza, int destinazione, int peso)
-{
-    if (*P != NULL)
-    {
-        *P->next = insertTail(*P->next, partenza, destinazione, peso);
-    }
-    else
-    {
-        *P = initNode(partenza,destinazione,peso);
-    }
-
-    return P;
-}
-*/
 
 Prenotati * insertHead(Prenotati *P, int partenza,int destinazione, int peso)
 {
-    /*if (P != NULL)
-    {
-        Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
-        X->partenza = partenza;
-        X->destinazione = destinazione;
-        X->peso=peso;
-        X->next = *P;
 
-        return X;
-    }
-
-    return initNode(partenza, destinazione, peso);*/
     Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
     (X)->partenza = partenza;
     (X)->destinazione = destinazione;
@@ -201,7 +91,6 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
         {
             printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
             fflush(stdin);
-            //scelta=read();
             scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
@@ -217,13 +106,11 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
         scelta_visualizza_elenco(NM);
         printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
         fflush(stdin);
-        //destinazione=readint();
         scanf("%d", &destinazione);
     }
 
     printf("Perfetto.\nOra inserisci il numero corrispondente al luogo di partenza.\t");
     fflush(stdin);
-    //partenza=readint();
     scanf("%d", &partenza);
 
     costo_comp=dijkstra_costo(G, partenza, destinazione);
@@ -235,7 +122,6 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
     printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
            "piu' il viaggio sara' costoso piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
     fflush(stdin);
-    //scelta2=readint();
     scanf("%d", &scelta2);
     switch (scelta2)
     {
@@ -247,7 +133,6 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
         {
             printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
             fflush(stdin);
-            //scelta=read();
             scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
@@ -256,25 +141,8 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
                 (*Cliente)->punti=0;
             }
         }
-        //printf("cascca\n");
         (*Cliente)->elenco_prenotazioni=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
 
-        /*Prenotati *X = malloc(sizeof(Prenotati));
-        (*X)->partenza = partenza;
-        (*X)->destinazione = destinazione;
-        (*X)->peso=costo_comp;
-        (*X)->next = *(*Cliente)->elenco_prenotazioni;
-
-        (*Cliente)->elenco_prenotazioni=(X);
-        (*Cliente)->elenco_prenotazioni = (Prenotati)malloc(sizeof(struct voliPrenotati));
-        (X)->partenza = partenza;
-        (X)->destinazione = destinazione;
-        (X)->peso=costo_comp;
-        (X)->next = *(*Cliente)->elenco_prenotazioni;
-
-        (*Cliente)->elenco_prenotazioni=(&X);*/
-
-        //if ((*Cliente)->elenco_prenotazioni ==NULL) printf("llkkmkm");
         printf("Prenotazione confermata e registrata!\n");
         (*Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
         break;
@@ -286,7 +154,6 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
         {
             printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
             fflush(stdin);
-            //scelta=read();
             scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
@@ -316,23 +183,13 @@ void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
 {
 
     int i=1;
-    //ho il dubbio che possa andare in seg scritta cosi' in un caso particolare ma in effetti non credo
-    //se dovesse dare problemi basta mettere la strcmp in un if dentro il ciclo e aggiornare una flag quando entra nell'if per uscire dal ciclo
-    //printf ("%s kkk", (*Utente)->user);
+
     while (*Utente!=NULL && strcmp((*Utente)->user, username))
     {
         *Utente=(*Utente)->next;
     }
     printVoliPrenotati((*Utente)->elenco_prenotazioni, 1);
-    /*
-    struct voliPrenotati **tmp=(Utente->elenco_prenotazioni); int i=0;
-    while (*tmp!=NULL) {
-        printf("%d) %d -> %d \n", i, tmp.partenza, *tmp->destinazione);
-        printf("\n");
-        *tmp=*tmp->next;
-        i++;
-    }*/
-    //printf("%d)  ", *(Utente->elenco_prenotazioni)->partenza);
+
     if ((*Utente)->elenco_prenotazioni==NULL) printf("casas");
     else printf("altro");
     while ((*Utente)->elenco_prenotazioni!=NULL)
@@ -351,7 +208,7 @@ void registra(Customers *L, char *name, char * surname, char * username, char * 
 {
 
     Customers new_node= malloc(sizeof(Customers));
-   // printf("%s ddd", cognome);
+
     strcpy(new_node->nome,name);
     strcpy(new_node->cognome,surname);
     strcpy(new_node->user,username);
@@ -367,11 +224,7 @@ void registra(Customers *L, char *name, char * surname, char * username, char * 
     }
     else
     {
-        //Customers n = *L;
-        //while (n->next && n->cognome > surname)
-        //    n = n->next;
         new_node->next = *L;
-        //n->next = new_node;
         *L=new_node;
     }
 
@@ -384,20 +237,7 @@ int UserGiaPresente(Customers L, char *username)
     Customers current = L;
     int presente=0;
 
-    /*while(current!=NULL && strcmp(current->user,username)!=0)
-    {
-        current=current->next;
-    }
-    if(current!=NULL)
-    {
-        return 1;
 
-    }
-    else
-    {
-
-        return 0;
-    }*/
     while(current!=NULL && !presente)
     {
         if (!strcmp(current->user,username)) presente=1;
@@ -426,7 +266,5 @@ int controllaCredenziali(Customers L,char * username, char * password)
 
         return 0;
     }
-
-
 
 }

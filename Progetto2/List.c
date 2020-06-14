@@ -14,16 +14,6 @@ List initNodeList(int info, int costo_tratta, int durata_tratta)
     return L;
 }
 
-/*
-List randomList(int index, int mod) {
-    List L = NULL;
-    int i = 0;
-    for (i = 0; i < index; i++) {
-        L = appendNodeList(L, rand() % mod, rand() % 50);
-    }
-    return L;
-}
-*/
 
 List appendNodeList(List L, int target, int costo_tratta, int durata_tratta)
 {
@@ -42,7 +32,7 @@ List appendNodeList(List L, int target, int costo_tratta, int durata_tratta)
     return L;
 }
 
-//dove viene chiamata??
+
 List addNodeHead(List L, int target, int costo_tratta, int durata_tratta)
 {
     if (L != NULL)

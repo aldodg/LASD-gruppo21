@@ -13,13 +13,6 @@ typedef struct TList* List;
 // Inizializza un nuovo nodo
 List initNodeList(int info, int costo_tratta, int durata_tratta);
 
-/*
-// Crea una lista random, per mod si
-// puo' specificare il modulo utilizzato la funzione rand()
-// La funzione ritorna sempre la testa della lista
-List randomList(int index, int mod);
-*/
-
 // Aggiunge un nodo alla fine della lista
 // controllandone l'esistenza
 // La funzione ritorna sempre la testa della lista

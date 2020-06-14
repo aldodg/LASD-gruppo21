@@ -2,9 +2,6 @@
 #define MAIN_H_INCLUDED
 
 #include "Graph.h"
-//#include "List.h"
-//#include "customers.h"
-//#include"stdinutils.h"
 #include"prenotazione.h"
 
 /*Questa libreria contiene le funzioni principali da usare nello switch case del main*/

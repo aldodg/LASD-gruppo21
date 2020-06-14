@@ -228,13 +228,13 @@ void dijkstra(Graph G, int src)
     {
         // Extract the vertex with minimum distance value
         struct MinHeapNode* minHeapNode = extractMin(minHeap);
-
+        if (minHeapNode->parent!=NULL) printf ("questo e il prec 1 : %d\n", minHeapNode->parent->v);
         // Storing the previous node's address
         minHeapNode->parent = prev;
         prev = minHeapNode;
 
         int u = minHeapNode->v; // Store the extracted vertex number
-
+        printf("questo e il precedente %d \n", u);
 
         // Traverse through all adjacent vertices of u (the extracted
         // vertex) and update their distance values
@@ -256,7 +256,7 @@ void dijkstra(Graph G, int src)
             pCrawl = pCrawl->next;
 
         }
-        printPath(prev); /////////////
+        //printPath(prev); /////////////
     }
 
     // print the calculated shortest distances

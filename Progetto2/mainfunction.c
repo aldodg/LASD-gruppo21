@@ -3,12 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "prenotazione.h"
-
-
-
-//gli deve arrivare username dell'utente loggato!! ci sta un modo per controllare che l'username sia univoco?
-//deve arrivare anche la lista di tutti gli utenti registrati e non so che altro
 
 void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 {
@@ -23,7 +17,7 @@ void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
         printf("2 - Visualizza prenotazioni effettuate\n");
         printf("3 - Esci\nScegli:\t");
 
-        //choice=readint();
+
         scanf("%d", &choice);
 
         switch (choice)
@@ -31,10 +25,8 @@ void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 
         case 1:
 
-            //(*Utenti)->punti=4;
-            prenotaVolo(G, Utenti, Username, NM);
 
-            //printf("%d ggg", (*Utenti)->punti);
+            prenotaVolo(G, Utenti, Username, NM);
             break;
 
 
@@ -58,7 +50,7 @@ void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 }
 
 
-void aggiungiTratta(Graph G, Nomi_Luoghi NM)  //SONO BUONE NON CANCELLARE
+void aggiungiTratta(Graph G, Nomi_Luoghi NM)
 {
     int choice, partenza, destinazione, costo, durata;
 
@@ -119,7 +111,7 @@ void aggiungiTratta(Graph G, Nomi_Luoghi NM)  //SONO BUONE NON CANCELLARE
 
 }
 
-void rimuoviTratta(Graph G, Nomi_Luoghi NM)    //SONO BUONE NON CANCELLARE
+void rimuoviTratta(Graph G, Nomi_Luoghi NM)
 {
     int choice, partenza, destinazione, nodo_da_rimuovere;
 

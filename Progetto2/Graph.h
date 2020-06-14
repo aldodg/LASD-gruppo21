@@ -56,7 +56,6 @@ Graph popola_grafo_file (Graph, Nomi_Luoghi*);
 void cancellaListaNomi(Nomi_Luoghi L);
 void aggiungi_aeroporto(Graph, Nomi_Luoghi*);
 void scelta_visualizza_elenco (Nomi_Luoghi NM);
-//void aggiorna_grafo_file (Graph);
 
 int empty_graph(Graph G);
 int numeroVertici(Graph g);
