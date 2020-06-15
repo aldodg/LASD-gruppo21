@@ -34,6 +34,7 @@ int main()
     char nomes[MAX];
     char psw[MAX];
     char psw2[MAX];
+    char adminpass[MAX];
 
     do
     {
@@ -84,7 +85,7 @@ int main()
             {
 
                 registra(&Utenti,nomes,cognomes,usernames, psw);
-                printf("%s ddd", Utenti->cognome);
+                //printf("%s ddd", Utenti->cognome);
                 printf("\nRegistrazione avvenuta con successo!\n");
                 login(G, Utenti, usernames, NM);//se tutto ok passiamo alle funzionalità del menù login
 
