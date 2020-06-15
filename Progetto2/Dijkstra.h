@@ -39,6 +39,6 @@ void decreaseKey(struct MinHeap* minHeap, int v, int dist);
 int isInMinHeap(struct MinHeap *minHeap, int v);
 void printArr(int dist[], int n);
 int dijkstra_durata(Graph G, int src, int);
-int dijkstra_costo(Graph G, int src, int);
+//int dijkstra_costo(Graph G, int src, int);
 
 #endif

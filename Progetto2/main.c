@@ -43,6 +43,7 @@ int main()
         printf("2 - Accedi con credenziali\n");
         printf("3 - Pannello admin\n");
         printf("4 - Esci\nScegli:\t");
+        fflush(stdin);
         choice=readint();
         switch (choice)
         {
@@ -65,15 +66,17 @@ int main()
             printf("\nRipeti Password\n");fflush(stdin);scanf("%s", psw2);
             //pass2=read();
 
-            /*if (strcmp (pass,pass2)!=0) // controllo sulle password
+            while (strcmp (psw,psw2)!=0) // controllo sulle password
             {
                 printf("\nPassword non coincidenti, reinserire password\n");
                 fflush(stdin);
                 printf("\nInserisci Password\n");
-                pass=read();
+                //pass=read();
+                fflush(stdin);scanf("%s", psw);
                 printf("\nRipeti Password\n");
-                pass2=read();
-            }*/
+                //pass2=read();
+                fflush(stdin);scanf("%s", psw2);
+            }
 
             /*Controllo su username, se già registrato impedisce la registrazione, altrimenti riempiamo la lista degli utenti*/
             if(!UserGiaPresente(Utenti,usercazz)) //se l'username cercato non esiste, allora lo registriamo in lista
@@ -98,19 +101,19 @@ int main()
 
             printf("Inserisci Username: \n");
             fflush(stdin);
-            username=read();
+            scanf("%s", usercazz);
             printf("Inserisci Password: \n");
-            pass=read();
+            fflush(stdin);scanf("%s", psw);
 
-            if (!controllaCredenziali(Utenti, username, pass))
+            if (!controllaCredenziali(Utenti, usercazz, psw))
             {
-                printf("\nNon esiste un utente %s oppure la password e' errata, controllare e riprovare.\n\n", username);
+                printf("\nNon esiste un utente %s oppure la password e' errata, controllare e riprovare.\n\n", usercazz);
                 break;
             }
             else
             {
-                printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", username);
-                login(G,&Utenti, username, NM);
+                printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", usercazz);
+                login(G,Utenti, usercazz, NM);
             }
 
 
@@ -138,7 +141,7 @@ int main()
         }
         case 4:
         {
-
+            printf("\nArrivederci!\n");
             freeGraph(G);
             cancellaListaNomi(NM);
             return 0;

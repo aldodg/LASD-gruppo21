@@ -80,7 +80,7 @@ void aggiungiTratta(Graph G, Nomi_Luoghi NM)
             printf("\nImposta la durata in minuti: \n");
             durata=readint();
             addEdge(G, partenza, destinazione, costo, durata);
-            printf("Fatto!");
+            printf("\n\nFatto!\n");
             printGraph(G);
             printf("\n\n");
             stampa_lista_nomi(NM);

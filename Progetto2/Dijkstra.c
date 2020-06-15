@@ -142,9 +142,32 @@ void printArr(int dist[], int n)
         printf("%d \t\t %d\n", i, dist[i]);
 }
 
+//estrae la posizione del nodo (e quindi l' id del relativo luogo) a minor distanza da quello di partenza
+int estrai_destinazione_con_distanza_minore (int dist[], int nodes_count)
+{
+
+    int posizione_distanza_minore=0, i;
+    int min=dist[0];
+
+    for (i=1; i<nodes_count; i++)
+    {
+
+        if (dist[i]<min)
+        {
+            min=dist[i];
+            posizione_distanza_minore=i;
+        }
+    }
+
+
+
+    return posizione_distanza_minore;
+
+}
+
 //questa funzione va a prendere la distanza (sia essa calcolata sulla durata o sul costo del volo, il peso scelto insomma)
 //dal nodo di partenza src della funzione dijkstra al nodo destinazione desiderato
-int estrai_distanza_minore (int dist[], int destinazione, int nodes_count)
+int estrai_distanza_minore_per_destinazione (int dist[], int destinazione, int nodes_count)
 {
 
     int i=0;
@@ -159,7 +182,7 @@ int estrai_distanza_minore (int dist[], int destinazione, int nodes_count)
 }
 
 // La funzione principale che calcola le distanze dei percorsi più brevi da src a tutti i vertici
-int dijkstra_costo(Graph G, int src, int destinazione)
+int dijkstra_costo(Graph G, int src, int destinazione, int output)
 {
     int nodes_count = G->nodes_count;// Ottieni il numero di vertici nel grafico
     int dist[nodes_count];     // valori dist usati per selezionare il bordo di peso minimo
@@ -209,7 +232,8 @@ int dijkstra_costo(Graph G, int src, int destinazione)
         }
     }
 
-    return estrai_distanza_minore (dist, destinazione, nodes_count);
+    if (output) return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count); //restituisce il costo per quella dest
+    else return estrai_destinazione_con_distanza_minore (dist, nodes_count);
 }
 
 int dijkstra_durata(Graph G, int src, int destinazione)
@@ -262,6 +286,6 @@ int dijkstra_durata(Graph G, int src, int destinazione)
         }
     }
 
-    return estrai_distanza_minore (dist, destinazione, nodes_count);
+    return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count);
 }
 

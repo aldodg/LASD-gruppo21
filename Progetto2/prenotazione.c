@@ -61,7 +61,7 @@ int esistono_mete_gettonate (Nomi_Luoghi NM)
 void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 {
 
-    char scelta[2];
+    int scelta;
     int partenza, destinazione, costo_comp=0, durata_comp=0, scelta2;
     int  destinazione_gia_scelta=0;
 
@@ -70,87 +70,23 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         Cliente= (Cliente)->next;
     }
 
-    if ((Cliente) ->punti >0)
-    {
-        printf("\n Hai accumulato %d punti.\n",(Cliente)->punti) ;
-    }
-    printf("%d", (NM)->contatore_voli);
-    printf("\nVuoi vedere le mete piu' gettonate[S\\n]?\t");
-    fflush(stdin);
-    //scelta=read();
-    scanf("%s", scelta);
-    if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
-    {
-
-
-        if (!esistono_mete_gettonate(NM))
-        {
-            printf("Non abbiamo delle mete da consigliarti in questo momento, sono tutte ugualmente belle!\n");
-        }
-        else
-        {
-            printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
-            fflush(stdin);
-            scanf("%s", scelta);
-            if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
-            {
-                printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
-                fflush(stdin);
-                destinazione=readint();
-                destinazione_gia_scelta=1;
-            }
-        }
-    }
-    if (!destinazione_gia_scelta)
-    {
-        scelta_visualizza_elenco(NM);
-        printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
-        fflush(stdin);
-        scanf("%d", &destinazione);
-    }
-
-    printf("Perfetto.\nOra inserisci il numero corrispondente al luogo di partenza.\t");
+    scelta_visualizza_elenco(NM);
+    printf("Per favore inserisci il numero corrispondente al luogo di partenza.\t");
     fflush(stdin);
     scanf("%d", &partenza);
 
-    costo_comp=dijkstra_costo(G, partenza, destinazione);
-    printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
-    durata_comp=dijkstra_durata(G, partenza, destinazione);
-    printf("La tratta piu' breve ti costera' %d.\n", durata_comp);
-
-
-    printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
-           "piu' il viaggio sara' costoso piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
+    printf("Inserisci\n1 per la tratta piu' economica in assoluto da dove vuoi partire\n2 per le mete piu' gettonate\n3 per inserire manualmente una destinazione\n4 per annullare\nScegli:\t");
     fflush(stdin);
-    scanf("%d", &scelta2);
-    switch (scelta2)
+    scanf("%d", &scelta);
+    switch (scelta)
     {
 
     case 1:
-
     {
-        if ((Cliente)->punti >0)
-        {
-            printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
-            fflush(stdin);
-            scanf("%s", scelta);
-            if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
-            {
-                costo_comp=costo_comp-(Cliente)->punti;
-
-                (Cliente)->punti=0;
-            }
-        }
-        printf("annagg ttcos");
-        (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
-        //printf("hhhfuh %d %d", (Cliente)->elenco_prenotazioni->destinazione);
-        printf("Prenotazione confermata e registrata!\n");
-        (Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
-        break;
-    }
-    case 2:
-    {
-
+        destinazione=dijkstra_costo(G, partenza, 0, 0);
+        costo_comp=dijkstra_costo(G, partenza, destinazione, 1);
+        printf("La tratta piu' economica ti costera' %d e sarebbe %d.\n", costo_comp, destinazione);
+        stampa_lista_nomi(NM);
         if ((Cliente )->punti >0)
         {
             printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
@@ -168,7 +104,121 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
         break;
     }
-    case 3:
+
+    case 2:
+    {
+
+
+        if (!esistono_mete_gettonate(NM))
+        {
+            printf("Non abbiamo delle mete da consigliarti in questo momento, sono tutte ugualmente belle!\n");
+        }
+        else
+        {
+            printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
+            fflush(stdin);
+            scanf("%s", scelta);
+            if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+            {
+                printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
+                fflush(stdin);
+                //destinazione=readint();
+                //destinazione_gia_scelta=1;
+                scanf("%d", &destinazione);
+            }
+
+            costo_comp=dijkstra_costo(G, partenza, destinazione, 1);
+            printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
+
+            if ((Cliente )->punti >0)
+            {
+                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+                fflush(stdin);
+                scanf("%s", scelta);
+                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                {
+                    costo_comp=costo_comp-(Cliente)->punti;
+
+                    (Cliente)->punti=0;
+                }
+            }
+            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+            printf("Prenotazione confermata e registrata!\n");
+            (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
+        }
+        break;
+    }
+    case 3 :
+    {
+
+        scelta_visualizza_elenco(NM);
+        printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
+        fflush(stdin);
+        scanf("%d", &destinazione);
+
+        costo_comp=dijkstra_costo(G, partenza, destinazione, 0);
+        printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
+        durata_comp=dijkstra_durata(G, partenza, destinazione);
+        printf("La tratta piu' breve ti costera' %d.\n", durata_comp);
+
+        printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
+               "piu' il viaggio sara' costoso piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
+        fflush(stdin);
+        scanf("%d", &scelta2);
+        switch (scelta2)
+        {
+
+        case 1:
+
+        {
+            if ((Cliente)->punti >0)
+            {
+                printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+                fflush(stdin);
+                scanf("%s", scelta);
+                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                {
+                    costo_comp=costo_comp-(Cliente)->punti;
+
+                    (Cliente)->punti=0;
+                }
+            }
+            //printf("annagg ttcos");
+            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+            //printf("hhhfuh %d %d", (Cliente)->elenco_prenotazioni->destinazione);
+            printf("Prenotazione confermata e registrata!\n");
+            (Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
+            break;
+        }
+        case 2:
+        {
+
+            if ((Cliente )->punti >0)
+            {
+                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+                fflush(stdin);
+                scanf("%s", scelta);
+                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                {
+                    durata_comp=durata_comp-(Cliente)->punti; //ZOZZIMMA DA SISTEMARE
+
+                    (Cliente)->punti=0;
+                }
+            }
+            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, durata_comp);
+            printf("Prenotazione confermata e registrata!\n");
+            (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
+            break;
+        }
+
+        break;
+
+        }
+
+
+    }
+
+    case 4:
 
     {
 
