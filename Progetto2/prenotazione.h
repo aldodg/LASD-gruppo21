@@ -62,6 +62,8 @@ Prenotati insertTail(Prenotati P, int, int, int);
 /* DEALLOCA LA LISTA DEI VOLI PRENOTATI */
 void freeVoliPrenotati(Prenotati P);
 
+//int metaGettonata();
+
 //void prenotaVolo(Graph G, Customers *Utenti, char *,Nomi_Luoghi NM);
 
 //void visualizza_prenotazioni_effettuate(char *username, Customers Utente);

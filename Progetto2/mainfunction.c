@@ -57,8 +57,8 @@ void aggiungiTratta(Graph G, Nomi_Luoghi NM)
     do
     {
 
-        printf("\n\n---Menu' gestione aggiungi tratta---\n\n");
-        printf("1 - Aggiungi nuovo viaggio\n");
+        printf("\n\n---Menu' gestione aggiungi viaggio---\n\n");
+        printf("1 - Aggiungi nuova tratta tra due aeroporti esistenti\n");
         printf("2 - Aggiungi nuovo aeroporto\n");
         printf("3 - Esci\nScegli:\t");
 
@@ -118,9 +118,9 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)
     do
     {
 
-        printf("\n\n---Menu' gestione rimuovi tratta---\n\n");
-        printf("1 - Rimuovi viaggio\n");
-        printf("2 - Rimuovi luogo\n");
+        printf("\n\n---Menu' gestione rimuovi viaggio---\n\n");
+        printf("1 - Rimuovi tratta tra due aeroporti\n");
+        printf("2 - Rimuovi aeroporto\n");
         printf("3 - Esci\nScegli:\t");
 
         choice=readint();
@@ -135,9 +135,10 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)
             printf("\n\n");
             stampa_lista_nomi(NM);
             printf("Imposta la partenza.\t");
-            partenza=readint();
+            scanf("%d",&partenza);
+
             printf("Imposta la destinazione.\t");
-            destinazione=readint();
+            scanf("%d",&destinazione);
             removeEdge(G, partenza, destinazione);
             printf("Fatto!\n");
             printGraph(G);
@@ -148,8 +149,9 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)
         case 2:
         {
             scelta_visualizza_elenco(NM);
-            printf("Scegli il luogo da rimuovere.\t");
-            nodo_da_rimuovere=readint();
+            printf("Scegli l'aeroporto da rimuovere.\t");
+            scanf("%d",&nodo_da_rimuovere);
+
             removeNode(G, nodo_da_rimuovere, &NM);
             printf("Fatto!\n");
             stampa_lista_nomi(NM);
@@ -185,8 +187,8 @@ void menutratte(Graph G, Nomi_Luoghi NM)
     {
 
         printf("\n\n---Menu' gestione tratte---\n\n");
-        printf("1 - Aggiungere tratta\n");
-        printf("2 - Rimuovi tratta\n");
+        printf("1 - Aggiungere viaggio\n");
+        printf("2 - Rimuovi viaggio\n");
         printf("3 - Esci\nScegli:\t");
 
         choice=readint();

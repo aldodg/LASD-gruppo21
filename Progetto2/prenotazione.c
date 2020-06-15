@@ -46,7 +46,7 @@ int esistono_mete_gettonate (Nomi_Luoghi NM)
     while(NM!=NULL )
     {
 
-        if ((NM)->contatore_voli>MIN_VOLI_PER_GETTONATI)
+        if ((NM)->contatore_voli>0);
         {
             printf("id: %d - %s con %d visite totali ricevute\n",(NM)->id,(NM)->nome_luogo, (NM)->contatore_voli);
             esistono_mete_gettonate=1;
@@ -116,6 +116,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         else
         {
             printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
+
             fflush(stdin);
             scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
@@ -143,6 +144,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
                 }
             }
             (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+            AggiornaContatore(&NM,destinazione);
             printf("Prenotazione confermata e registrata!\n");
             (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
         }
@@ -309,5 +311,51 @@ int controllaCredenziali(Customers L,char * username, char * password)
 
         return 0;
     }
+
+}
+
+int TrovaMetaGettonata(Nomi_Luoghi NM){
+
+
+
+
+    int max=(NM)->contatore_voli;
+    int metagettonata=0;
+    while(NM!=NULL )
+    {
+
+        if ((NM)->contatore_voli>max);
+        {
+            //printf("id: %d - %s con %d visite totali ricevute\n",(NM)->id,(NM)->nome_luogo, (NM)->contatore_voli);
+            //esistono_mete_gettonate=1;
+            max=(NM)->contatore_voli;
+        }
+        NM=(NM)->next;
+
+    }
+
+    while(NM!=NULL)
+    {
+    if(NM->contatore_voli==max)  {
+
+        metagettonata=NM->id;
+    }
+
+    }
+
+    return metagettonata;
+}
+
+void AggiornaContatore(Nomi_Luoghi * NM, int id)
+{
+
+   while(NM!=NULL){
+    if((*NM)->id==id){
+    (*NM)->contatore_voli++;
+
+    }
+
+    (*NM)->next;
+   }
 
 }
