@@ -25,7 +25,7 @@ struct customer
     char  nome[MAXLEN_NOMI];
     char  user[MAXLEN_NOMI];
     char  password[MAXLEN_NOMI];
-    Prenotati *elenco_prenotazioni;
+    Prenotati elenco_prenotazioni;
     int punti;
     struct customer *next;
 

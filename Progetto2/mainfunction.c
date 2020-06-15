@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
+void login(Graph G, Customers Utenti, char *Username, Nomi_Luoghi NM)
 {
     int choice;
 
@@ -31,7 +31,7 @@ void login(Graph G, Customers *Utenti, char *Username, Nomi_Luoghi NM)
 
 
         case 2:
-            visualizza_prenotazioni_effettuate(username, Utenti);
+            visualizza_prenotazioni_effettuate(Username, Utenti);
             break;
 
         case 3:

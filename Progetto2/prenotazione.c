@@ -4,27 +4,27 @@
 #define MIN_VOLI_PER_GETTONATI 2
 
 
-Prenotati * insertHead(Prenotati *P, int partenza,int destinazione, int peso)
+Prenotati insertHead(Prenotati P, int partenza,int destinazione, int peso)
 {
 
     Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
     (X)->partenza = partenza;
     (X)->destinazione = destinazione;
     (X)->peso=peso;
-    (X)->next = *P;
+    (X)->next = P;
 
-    *P=(X);
+    P=(X);
 
     return P;
 }
 
 
-void printVoliPrenotati(Prenotati *P, int i)
+void printVoliPrenotati(Prenotati P, int i)
 {
     if (P != NULL)
     {
-        printf("%d) %d -> %d ", i, (*P)->partenza, (*P)->destinazione);
-        printVoliPrenotati(P, i+1);
+        printf("%d) %d -> %d ", i, (P)->partenza, (P)->destinazione);
+        printVoliPrenotati(P->next, i+1);
         printf("\n");
     }
 }
@@ -58,21 +58,21 @@ int esistono_mete_gettonate (Nomi_Luoghi NM)
     return esistono_mete_gettonate;
 }
 
-void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
+void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 {
 
     char scelta[2];
     int partenza, destinazione, costo_comp=0, durata_comp=0, scelta2;
     int  destinazione_gia_scelta=0;
 
-    while( Cliente!=NULL && strcmp((*Cliente)->user,username ))
+    while( Cliente!=NULL && strcmp((Cliente)->user,username ))
     {
-        *Cliente= (*Cliente)->next;
+        Cliente= (Cliente)->next;
     }
 
-    if ((*Cliente) ->punti >0)
+    if ((Cliente) ->punti >0)
     {
-        printf("\n Hai accumulato %d punti.\n",(*Cliente)->punti) ;
+        printf("\n Hai accumulato %d punti.\n",(Cliente)->punti) ;
     }
     printf("%d", (NM)->contatore_voli);
     printf("\nVuoi vedere le mete piu' gettonate[S\\n]?\t");
@@ -129,42 +129,43 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
     case 1:
 
     {
-        if ((*Cliente)->punti >0)
+        if ((Cliente)->punti >0)
         {
-            printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
+            printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
             fflush(stdin);
             scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
-                costo_comp=costo_comp-(*Cliente)->punti;
+                costo_comp=costo_comp-(Cliente)->punti;
 
-                (*Cliente)->punti=0;
+                (Cliente)->punti=0;
             }
         }
-        (*Cliente)->elenco_prenotazioni=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
-
+        printf("annagg ttcos");
+        (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+        //printf("hhhfuh %d %d", (Cliente)->elenco_prenotazioni->destinazione);
         printf("Prenotazione confermata e registrata!\n");
-        (*Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
+        (Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
         break;
     }
     case 2:
     {
 
-        if ((*Cliente )->punti >0)
+        if ((Cliente )->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (*Cliente)->punti);
+            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
             fflush(stdin);
             scanf("%s", scelta);
             if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
             {
-                costo_comp=costo_comp-(*Cliente)->punti;
+                costo_comp=costo_comp-(Cliente)->punti;
 
-                (*Cliente)->punti=0;
+                (Cliente)->punti=0;
             }
         }
-        (*Cliente)->elenco_prenotazioni=insertHead((*Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+        (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
         printf("Prenotazione confermata e registrata!\n");
-        (*Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
+        (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
         break;
     }
     case 3:
@@ -179,26 +180,18 @@ void prenotaVolo(Graph G, Customers *Cliente, char * username, Nomi_Luoghi NM)
 }
 
 
-void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
+void visualizza_prenotazioni_effettuate(char *username, Customers Utente)
 {
 
     int i=1;
-
-    while (*Utente!=NULL && strcmp((*Utente)->user, username))
+    //printf("user: %s", username);
+    //printf("user: %s", (Utente)->user);
+    //printf ("uallr %d ", strcmp((Utente)->user, username));
+    while (Utente!=NULL && strcmp((Utente)->user, username))
     {
-        *Utente=(*Utente)->next;
+        Utente=(Utente)->next;
     }
-    printVoliPrenotati((*Utente)->elenco_prenotazioni, 1);
-
-    if ((*Utente)->elenco_prenotazioni==NULL) printf("casas");
-    else printf("altro");
-    while ((*Utente)->elenco_prenotazioni!=NULL)
-    {
-        printf("%d) %d -> %d \n", i, (*(*Utente)->elenco_prenotazioni)->partenza, (*(*Utente)->elenco_prenotazioni)->destinazione);
-        printf("\n");
-        *(*Utente)->elenco_prenotazioni=(*(*Utente)->elenco_prenotazioni)->next;
-        i++;
-    }
+    printVoliPrenotati((Utente)->elenco_prenotazioni, 1);
 
 }
 
@@ -207,14 +200,14 @@ void visualizza_prenotazioni_effettuate(char *username, Customers *Utente)
 void registra(Customers *L, char *name, char * surname, char * username, char * password)
 {
 
-    Customers new_node= malloc(sizeof(Customers));
+    Customers new_node= malloc(sizeof(struct customer));
 
     strcpy(new_node->nome,name);
     strcpy(new_node->cognome,surname);
     strcpy(new_node->user,username);
     strcpy(new_node->password,password);
     new_node->punti=0;
-    new_node->elenco_prenotazioni=(Prenotati*)malloc(sizeof(Prenotati));
+    new_node->elenco_prenotazioni=NULL;
     new_node->next=NULL;
 
     if (*L==NULL)
