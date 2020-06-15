@@ -68,5 +68,7 @@ void freeVoliPrenotati(Prenotati P);
 
 //void visualizza_prenotazioni_effettuate(char *username, Customers Utente);
 
+void AggiornaContatore(Nomi_Luoghi NM, int id);
+
 #endif
 
