@@ -138,7 +138,7 @@ int UserGiaPresente(Customers L, char *username)
 
 }
 
-int controllaCredenziali(Customers L,char * username, char * password)
+int controllaCredenziali(Customers L,char  username[], char  password[])
 {
     Customers current = L;
 
@@ -305,7 +305,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         fflush(stdin);
         scanf("%d", &destinazione);
 
-        costo_comp=dijkstra_costo(G, partenza, destinazione, 0, 1);
+        costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1);
         printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
         durata_comp=dijkstra_durata(G, partenza, destinazione, 1);
         printf("La tratta piu' breve ti costera' %d.\n", durata_comp);

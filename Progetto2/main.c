@@ -124,9 +124,9 @@ int main()
         {
             printf("\nMenu Admin, inserire password:\n");
             fflush(stdin);
-            adpass=read();
+            scanf("%s", adminpass);
 
-            if ( strcmp (adpass,"Admin")==0 || strcmp (adpass, "admin")==0)
+            if ( strcmp (adminpass,"Admin")==0 || strcmp (adminpass, "admin")==0)
             {
 
                 printf("\nPassword corretta, benvenuto!\n");
