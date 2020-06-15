@@ -147,12 +147,15 @@ int estrai_destinazione_con_distanza_minore (int dist[], int nodes_count)
 {
 
     int posizione_distanza_minore=0, i;
-    int min=dist[0];
+    int min;
 
-    for (i=1; i<nodes_count; i++)
+    if (dist[0]!=0) min=dist[0];
+    else min=dist[1];
+
+    for (i=0; i<nodes_count; i++)
     {
 
-        if (dist[i]<min)
+        if (dist[i]<min && dist[i]!=0)
         {
             min=dist[i];
             posizione_distanza_minore=i;
