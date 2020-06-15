@@ -14,6 +14,7 @@ Aldo Di Giovanni
 #include "List.h"
 #include "Dijkstra.h"
 #include "prenotazione.h"
+#define MAX 30
 
 int main()
 {
@@ -28,11 +29,11 @@ int main()
     printf("\n\n");
     stampa_lista_nomi(NM);
     printf("--------------------------------------------\n");
-    char usercazz[6];
-    char cogncazz[6];
-    char namecazz[6];
-    char psw[6];
-    char psw2[6];
+    char usernames[MAX];
+    char cognomes[MAX];
+    char nomes[MAX];
+    char psw[MAX];
+    char psw2[MAX];
 
     do
     {
@@ -54,12 +55,12 @@ int main()
             printf("\nBenvenuto nel menu' di registrazione!\n\n");
             fflush(stdin);
             printf("Inserisci Username: \n");fflush(stdin);
-            scanf("%s", usercazz);
+            scanf("%s", usernames);
             //username=read();
             printf("\nInserisci Cognome: \n");fflush(stdin);
             //cognome=read();
-            scanf("%s", cogncazz);
-            printf("\nInserisci Nome: \n");fflush(stdin);scanf("%s", namecazz);
+            scanf("%s", cognomes);
+            printf("\nInserisci Nome: \n");fflush(stdin);scanf("%s", nomes);
             //nome=read();scanf("%s", cogncazz);
             printf("\nInserisci Password\n");fflush(stdin);scanf("%s", psw);
             //pass=read();
@@ -79,13 +80,13 @@ int main()
             }
 
             /*Controllo su username, se già registrato impedisce la registrazione, altrimenti riempiamo la lista degli utenti*/
-            if(!UserGiaPresente(Utenti,usercazz)) //se l'username cercato non esiste, allora lo registriamo in lista
+            if(!UserGiaPresente(Utenti,usernames)) //se l'username cercato non esiste, allora lo registriamo in lista
             {
 
-                registra(&Utenti,namecazz,cogncazz,usercazz, psw);
+                registra(&Utenti,nomes,cognomes,usernames, psw);
                 printf("%s ddd", Utenti->cognome);
                 printf("\nRegistrazione avvenuta con successo!\n");
-                login(G, Utenti, usercazz, NM);//se tutto ok passiamo alle funzionalità del menù login
+                login(G, Utenti, usernames, NM);//se tutto ok passiamo alle funzionalità del menù login
 
             }
             else
@@ -101,19 +102,19 @@ int main()
 
             printf("Inserisci Username: \n");
             fflush(stdin);
-            scanf("%s", usercazz);
+            scanf("%s", usernames);
             printf("Inserisci Password: \n");
             fflush(stdin);scanf("%s", psw);
 
-            if (!controllaCredenziali(Utenti, usercazz, psw))
+            if (!controllaCredenziali(Utenti, usernames, psw))
             {
-                printf("\nNon esiste un utente %s oppure la password e' errata, controllare e riprovare.\n\n", usercazz);
+                printf("\nNon esiste un utente %s oppure la password e' errata, controllare e riprovare.\n\n", usernames);
                 break;
             }
             else
             {
-                printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", usercazz);
-                login(G,Utenti, usercazz, NM);
+                printf("\nAccesso Eseguito correttamente!\nBenvenuto %s \n", usernames);
+                login(G,Utenti, usernames, NM);
             }
 
 
