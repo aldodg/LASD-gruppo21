@@ -12,6 +12,7 @@ struct MinHeapNode
 {
     int v;
     int dist;
+    int precedente; //mi conservo il precedente per salvarmi il percorso esatto
 };
 
 // Struttura che rappresenta lo Heap minimo
@@ -35,10 +36,10 @@ void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b);
 void minHeapify(struct MinHeap* minHeap, int idx);
 int isEmpty(struct MinHeap* minHeap);
 struct MinHeapNode* extractMin(struct MinHeap* minHeap);
-void decreaseKey(struct MinHeap* minHeap, int v, int dist);
+void decreaseKey(struct MinHeap* minHeap, int, int v, int dist);
 int isInMinHeap(struct MinHeap *minHeap, int v);
 void printArr(int dist[], int n);
-int dijkstra_durata(Graph G, int src, int);
+//int dijkstra_durata(Graph G, int src, int);
 //int dijkstra_costo(Graph G, int src, int);
 
 #endif

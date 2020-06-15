@@ -63,7 +63,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 
     int scelta;
     int partenza, destinazione, costo_comp=0, durata_comp=0, scelta2;
-    int  destinazione_gia_scelta=0;
+    //int  destinazione_gia_scelta=0;
 
     while( Cliente!=NULL && strcmp((Cliente)->user,username ))
     {
@@ -83,16 +83,17 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 
     case 1:
     {
-        destinazione=dijkstra_costo(G, partenza, 0, 0);
-        costo_comp=dijkstra_costo(G, partenza, destinazione, 1);
+        destinazione=dijkstra_costo(G, partenza, 0, 0, 0);
+        costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1);
         printf("La tratta piu' economica ti costera' %d e sarebbe %d.\n", costo_comp, destinazione);
         stampa_lista_nomi(NM);
         if ((Cliente )->punti >0)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
             fflush(stdin);
-            scanf("%s", scelta);
-            if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+            scanf("%d", &scelta);
+            //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+            if (scelta)
             {
                 costo_comp=costo_comp-(Cliente)->punti;
 
@@ -115,10 +116,11 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         }
         else
         {
-            printf("\nVuoi andare in uno dei luoghi piu gettonati[S\\n]?\t");
+            printf("\nVuoi andare in uno dei luoghi piu gettonati[1\\0]?\t");
             fflush(stdin);
-            scanf("%s", scelta);
-            if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+            scanf("%d", &scelta);
+            //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+            if (scelta)
             {
                 printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
                 fflush(stdin);
@@ -127,15 +129,16 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
                 scanf("%d", &destinazione);
             }
 
-            costo_comp=dijkstra_costo(G, partenza, destinazione, 1);
+            costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1);
             printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
 
             if ((Cliente )->punti >0)
             {
-                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
                 fflush(stdin);
-                scanf("%s", scelta);
-                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                scanf("%d", &scelta);
+                //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                if (scelta)
                 {
                     costo_comp=costo_comp-(Cliente)->punti;
 
@@ -156,9 +159,9 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         fflush(stdin);
         scanf("%d", &destinazione);
 
-        costo_comp=dijkstra_costo(G, partenza, destinazione, 0);
+        costo_comp=dijkstra_costo(G, partenza, destinazione, 0, 1);
         printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
-        durata_comp=dijkstra_durata(G, partenza, destinazione);
+        durata_comp=dijkstra_durata(G, partenza, destinazione, 1);
         printf("La tratta piu' breve ti costera' %d.\n", durata_comp);
 
         printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
@@ -173,10 +176,11 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         {
             if ((Cliente)->punti >0)
             {
-                printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+                printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
                 fflush(stdin);
-                scanf("%s", scelta);
-                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                scanf("%d", &scelta);
+                //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                if (scelta)
                 {
                     costo_comp=costo_comp-(Cliente)->punti;
 
@@ -195,10 +199,11 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 
             if ((Cliente )->punti >0)
             {
-                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[S\\n]?\t", (Cliente)->punti);
+                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
                 fflush(stdin);
-                scanf("%s", scelta);
-                if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                scanf("%d", &scelta);
+               // if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
+                if (scelta)
                 {
                     durata_comp=durata_comp-(Cliente)->punti; //ZOZZIMMA DA SISTEMARE
 
@@ -233,7 +238,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 void visualizza_prenotazioni_effettuate(char *username, Customers Utente)
 {
 
-    int i=1;
+    //int i=1;
     //printf("user: %s", username);
     //printf("user: %s", (Utente)->user);
     //printf ("uallr %d ", strcmp((Utente)->user, username));

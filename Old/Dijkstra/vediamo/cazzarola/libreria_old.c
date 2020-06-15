@@ -1,7 +1,5 @@
 #include "libreria.h"
 
-
-
 void printGraph(Graph G)
 {
     if (G != NULL)
@@ -16,14 +14,10 @@ void printGraph(Graph G)
     }
 }
 
-
-
 int empty_graph(Graph G)
 {
     return G==NULL;
 }
-
-
 
 
 Graph initGraph(int nodes_count)
@@ -32,12 +26,8 @@ Graph initGraph(int nodes_count)
     G->adj = calloc(nodes_count, sizeof(List));
     G->nodes_count = nodes_count;
 
-
-
     return G;
 }
-
-
 
 
 void addEdge(Graph G, int source, int target, int costo_tratta, int durata_tratta)
@@ -52,8 +42,6 @@ void addEdge(Graph G, int source, int target, int costo_tratta, int durata_tratt
 }
 
 
-
-
 struct MinHeapNode* newMinHeapNode(int v, int dist)
 {
     struct MinHeapNode* minHeapNode =
@@ -62,8 +50,6 @@ struct MinHeapNode* newMinHeapNode(int v, int dist)
     minHeapNode->dist = dist;
     return minHeapNode;
 }
-
-
 
 struct MinHeap* createMinHeap(int capacity)
 {
@@ -77,8 +63,6 @@ struct MinHeap* createMinHeap(int capacity)
     return minHeap;
 }
 
-
-
 // A utility function to swap two nodes of min heap. Needed for min heapify
 void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b)
 {
@@ -86,8 +70,6 @@ void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b)
     *a = *b;
     *b = t;
 }
-
-
 
 // A standard function to heapify at given idx
 // This function also updates position of nodes when they are swapped.
@@ -99,19 +81,13 @@ void minHeapify(struct MinHeap* minHeap, int idx)
     left = 2 * idx + 1;
     right = 2 * idx + 2;
 
-
-
     if (left < minHeap->size &&
         minHeap->array[left]->dist < minHeap->array[smallest]->dist )
     smallest = left;
 
-
-
     if (right < minHeap->size &&
         minHeap->array[right]->dist < minHeap->array[smallest]->dist )
     smallest = right;
-
-
 
     if (smallest != idx)
     {
@@ -119,24 +95,16 @@ void minHeapify(struct MinHeap* minHeap, int idx)
         struct MinHeapNode *smallestNode = minHeap->array[smallest];
         struct MinHeapNode *idxNode = minHeap->array[idx];
 
-
-
         // Swap positions
         minHeap->pos[smallestNode->v] = idx;
         minHeap->pos[idxNode->v] = smallest;
 
-
-
         // Swap nodes
         swapMinHeapNode(&minHeap->array[smallest], &minHeap->array[idx]);
-
-
 
         minHeapify(minHeap, smallest);
     }
 }
-
-
 
 // A utility function to check if the given minHeap is ampty or not
 int isEmpty(struct MinHeap* minHeap)
@@ -144,56 +112,39 @@ int isEmpty(struct MinHeap* minHeap)
     return minHeap->size == 0;
 }
 
-
-
 // Standard function to extract minimum node from heap
 struct MinHeapNode* extractMin(struct MinHeap* minHeap)
 {
     if (isEmpty(minHeap))
         return NULL;
 
-
-
     // Store the root node
     struct MinHeapNode* root = minHeap->array[0];
-
-
 
     // Replace root node with last node
     struct MinHeapNode* lastNode = minHeap->array[minHeap->size - 1];
     minHeap->array[0] = lastNode;
 
-
-
     // Update position of last node
     minHeap->pos[root->v] = minHeap->size-1;
     minHeap->pos[lastNode->v] = 0;
-
-
 
     // Reduce heap size and heapify root
     --minHeap->size;
     minHeapify(minHeap, 0);
 
-
-
     return root;
 }
 
-
-
 // Function to decreasy dist value of a given vertex v. This function
 // uses pos[] of min heap to get the current index of node in min heap
-void decreaseKey(struct MinHeap* minHeap,int u, int v, int dist)
+void decreaseKey(struct MinHeap* minHeap, int v, int dist)
 {
     // Get the index of v in heap array
     int i = minHeap->pos[v];
 
-
-
     // Get the node and update its dist value
     minHeap->array[i]->dist = dist;
-    minHeap->array[i]->precedente=u;
 
     // Travel up while the complete tree is not hepified.
     // This is a O(Logn) loop
@@ -204,14 +155,10 @@ void decreaseKey(struct MinHeap* minHeap,int u, int v, int dist)
         minHeap->pos[minHeap->array[(i-1)/2]->v] = i;
         swapMinHeapNode(&minHeap->array[i], &minHeap->array[(i - 1) / 2]);
 
-
-
         // move to parent index
         i = (i - 1) / 2;
     }
 }
-
-
 
 // A utility function to check if a given vertex
 // 'v' is in min heap or not
@@ -222,39 +169,25 @@ if (minHeap->pos[v] < minHeap->size)
 return 0;
 }
 
-
-
 void printPath (struct MinHeapNode *last)
 {
     while (last != NULL)
     {
         printf ("%d -> ", last->v);
 
-
-
         last = last->parent;
     }
-
-
 
     printf ("NULL\n");
 }
 
-
-
 // A utility function used to print the solution
 void printArr(int dist[], int n)
 {
-
-
-
-    int i;
     printf("Vertex Distance from Source\n");
-    for ( i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
         printf("%d \t\t %d \n", i, dist[i]);
 }
-
-
 
 
 
@@ -262,43 +195,31 @@ void printArr(int dist[], int n)
 // vertices. It is a O(ELogV) function
 void dijkstra(Graph G, int src)
 {
-    struct MinHeapNode prova[20];
-    int a=0;
     int nodes_count = G->nodes_count;// Get the number of vertices in graph
     int dist[nodes_count];     // dist values used to pick minimum weight edge in cut
 
-
-
     // minHeap represents set E
     struct MinHeap* minHeap = createMinHeap(nodes_count);
-    int v;
+
     // Initialize min heap with all vertices. dist value of all vertices
-    for ( v = 0; v < nodes_count; ++v)
+    for (int v = 0; v < nodes_count; ++v)
     {
         dist[v] = INT_MAX;
         minHeap->array[v] = newMinHeapNode(v, dist[v]);
         minHeap->pos[v] = v;
     }
 
-
-
     // Make dist value of src vertex as 0 so that it is extracted first
     minHeap->array[src] = newMinHeapNode(src, dist[src]);
     minHeap->pos[src] = src;
     dist[src] = 0;
-    decreaseKey(minHeap, -1,src, dist[src]);
-
-
+    decreaseKey(minHeap, src, dist[src]);
 
     // Initially size of min heap is equal to V
     minHeap->size = nodes_count;
 
-
-
     //Now whenever you do a extractMin() operation, the address you get, you can store it in some temporary variable,
     //and assign it to the minHeapNode->parent
-
-
 
     struct MinHeapNode *prev = NULL;
     // In the followin loop, min heap contains all nodes
@@ -307,24 +228,20 @@ void dijkstra(Graph G, int src)
     {
         // Extract the vertex with minimum distance value
         struct MinHeapNode* minHeapNode = extractMin(minHeap);
-
+        //if (minHeapNode->parent!=NULL) printf ("questo e il prec 1 : %d\n", *minHeapNode->parent.v);
         // Storing the previous node's address
         minHeapNode->parent = prev;
         prev = minHeapNode;
 
-
-
         int u = minHeapNode->v; // Store the extracted vertex number
         printf("questo e il precedente %d \n", u);
-        prova[a].v=u;
+
         // Traverse through all adjacent vertices of u (the extracted
         // vertex) and update their distance values
         struct TList  *pCrawl = G->adj[u];
         while (pCrawl != NULL)
         {
             int v = pCrawl->target;
-
-
 
             // If shortest distance to v is not finalized yet, and distance to v
             // through u is less than its previously calculated distance
@@ -333,72 +250,15 @@ void dijkstra(Graph G, int src)
             {
                 dist[v] = dist[u] + pCrawl->costo_tratta;
 
-
-
                 // update distance value in min heap also
-                decreaseKey(minHeap,u, v, dist[v]);
+                decreaseKey(minHeap, v, dist[v]);
             }
-
             pCrawl = pCrawl->next;
-            prova[a].precedente=minHeapNode->precedente;
-            printf ("questo e il prec: %d\n", minHeapNode->precedente);
+
         }
-       // printPath(pCrawl->parent); /////////////
-    a++;
+        printPath(minHeapNode->parent); /////////////
     }
-
-
 
     // print the calculated shortest distances
     printArr(dist, nodes_count);
-
-
-
-printf(" vediamo se la prova funziona \n");
-int i;
-for(i=0;i<a;i++)
-printf("stampa nodo |%d| con il suo precedente |%d|  \n",prova[i].v,prova[i].precedente);
-
-
-
-
-
-
-int trattaEsatta[100];
-    int q=4; // inserisci nodo di arrivo
-    int b=0;
-    trattaEsatta[b]=4; // inserisci nodo di arrivo
-    b++;
-
-
-
-for(i=a;i>0;i--){
-
-
-
-        if(q == prova[i].v){
-            q=prova[i].precedente;
-
-
-
-            trattaEsatta[b]=q;
-            b++;
-            i=a;
-
-
-
-            if (q==-1){
-                break;
-            }
-            if(q==8)  //  a destra inserisci nodo di partenza
-                break;
-        }
-    }
-printf("questo e' il mio percorso\n");
-for(i=0;i<b;i++)
-printf(" |%d|-->",trattaEsatta[i]);
-
-
-
-
 }

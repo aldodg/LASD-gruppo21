@@ -3,6 +3,8 @@
 #include "libreria.h"
 #include "List.h"
 
+
+
 int main()
 {
     int V = 9;
@@ -36,7 +38,7 @@ int main()
     addEdge(G, 8,6, 6,5);
     addEdge(G, 8,7, 7,5);
     printGraph(G);
-    dijkstra(G, 0);
+    dijkstra(G, PARTENZA);
 
     return 0;
 }

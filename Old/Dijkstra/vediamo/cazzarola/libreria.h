@@ -7,6 +7,9 @@
 #include <assert.h>
 #include "List.h"
 
+#define PARTENZA 2
+#define ARRIVO 4
+
 //struttura del grafo
 struct TGraph {
     List *adj;
@@ -41,7 +44,6 @@ struct MinHeapNode
 {
     int v;
     int dist;
-    struct MinHeapNode *parent; //Keep some extra information like a parent pointer which points to the previous node discovered.
     int precedente;
 };
 
@@ -66,7 +68,7 @@ void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b);
 void minHeapify(struct MinHeap* minHeap, int idx);
 int isEmpty(struct MinHeap* minHeap);
 struct MinHeapNode* extractMin(struct MinHeap* minHeap);
-void decreaseKey(struct MinHeap* minHeap, int v, int dist);
+void decreaseKey(struct MinHeap* minHeap, int, int v, int dist);
 int isInMinHeap(struct MinHeap *minHeap, int v);
 void printArr(int dist[], int n);
 void dijkstra( Graph G, int src);
