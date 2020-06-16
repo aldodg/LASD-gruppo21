@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "List.h"
 
-#define PARTENZA 2
+#define PARTENZA 9
 #define ARRIVO 4
 
 //struttura del grafo

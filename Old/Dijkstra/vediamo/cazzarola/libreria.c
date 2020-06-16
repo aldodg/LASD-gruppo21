@@ -233,7 +233,7 @@ void printArr(int dist[], int n)
     int i;
     printf("Vertex Distance from Source\n");
     for ( i = 0; i < n; ++i)
-        printf("%d \t\t %d \n", i, dist[i]);
+        printf("%d \t\t %d \n", i, dist[i]==2147483647 ? (-1) : dist[i]);
 }
 
 

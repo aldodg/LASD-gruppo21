@@ -91,8 +91,8 @@ int esisteArco(Graph g, int partenza, int arrivo)
 }
 
 
-
-int costoArco(Graph g, int partenza, int arrivo)
+//il peso considerato e' il costo della tratta
+int pesoArco_Costo(Graph g, int partenza, int arrivo)
 {
 
     List curr = NULL;
@@ -109,6 +109,38 @@ int costoArco(Graph g, int partenza, int arrivo)
                 curr = curr->next;
             }
             ret = curr->costo_tratta;
+        }
+        else
+        {
+            printf("ERRORE in pesoArco: l'arco non esiste\n");
+        }
+    }
+    else
+    {
+        printf("ERRORE in pesoArco: grafo vuoto\n");
+    }
+
+    return ret;
+}
+
+//il peso considerato e' la durata della tratta, ho preferito "ricopiare" la funzione piuttosto che gestire un altro input per chiarezza
+int pesoArco_Durata(Graph g, int partenza, int arrivo)
+{
+
+    List curr = NULL;
+    int ret = 0;
+
+    if(!empty_graph(g))
+    {
+        if(esisteArco(g, partenza, arrivo))
+        {
+
+            curr = g->adj[partenza];
+            while(curr->target != arrivo)
+            {
+                curr = curr->next;
+            }
+            ret = curr->durata_tratta;
         }
         else
         {

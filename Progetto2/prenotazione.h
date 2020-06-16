@@ -13,7 +13,8 @@ struct voliPrenotati
 {
     int partenza;
     int destinazione;
-    int peso;
+    int costo_complessivo;
+    int durata_complessiva;
     struct voliPrenotati *next;
 };
 typedef struct voliPrenotati *Prenotati;

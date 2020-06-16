@@ -4,13 +4,14 @@
 #define MIN_VOLI_PER_GETTONATI 2
 
 
-Prenotati insertHead(Prenotati P, int partenza,int destinazione, int peso)
+Prenotati insertHead(Prenotati P, int partenza,int destinazione, int costo_complessivo, int durata_complessiva)
 {
 
     Prenotati X = (Prenotati )malloc(sizeof(struct voliPrenotati));
     (X)->partenza = partenza;
     (X)->destinazione = destinazione;
-    (X)->peso=peso;
+    X->costo_complessivo=costo_complessivo;
+    X->durata_complessiva=durata_complessiva;
     (X)->next = P;
 
     P=(X);
@@ -23,7 +24,7 @@ void printVoliPrenotati(Prenotati P, int i)
 {
     if (P != NULL)
     {
-        printf("%d) %d -> %d ", i, (P)->partenza, (P)->destinazione);
+        printf("%d)\t%d -> %d\t\t\t\t%d\t%d", i, (P)->partenza, (P)->destinazione, P->costo_complessivo, P->durata_complessiva);
         printf("\n");
         printVoliPrenotati(P->next, i+1);
 
@@ -45,12 +46,11 @@ int esistono_mete_gettonate (Nomi_Luoghi NM)
 
     int esistono_mete_gettonate=0;
 
-    while(NM!=NULL )
+    while(NM!=NULL && !esistono_mete_gettonate)
     {
 
         if ((NM)->contatore_voli>0)
         {
-            printf("id: %d - %s con %d visite totali ricevute\n",(NM)->id,(NM)->nome_luogo, (NM)->contatore_voli);
             esistono_mete_gettonate=1;
         }
         NM=(NM)->next;
@@ -62,13 +62,14 @@ int esistono_mete_gettonate (Nomi_Luoghi NM)
 
 void AggiornaContatore(Nomi_Luoghi NM, int id)
 {
+    int trovato=0;
 
-    while(NM!=NULL)
+    while(NM!=NULL && !trovato)
     {
         if((NM)->id==id)
         {
             (NM)->contatore_voli++;
-
+            trovato=1;
         }
 
         NM=(NM)->next;
@@ -80,14 +81,11 @@ void AggiornaContatore(Nomi_Luoghi NM, int id)
 void visualizza_prenotazioni_effettuate(char *username, Customers Utente)
 {
 
-    //int i=1;
-    //printf("user: %s", username);
-    //printf("user: %s", (Utente)->user);
-    //printf ("uallr %d ", strcmp((Utente)->user, username));
     while (Utente!=NULL && strcmp((Utente)->user, username))
     {
         Utente=(Utente)->next;
     }
+    printf("Prenotazioni in ordine dall'ultima effettuata.\n\nNumero  Partenza->Destinazione      Costo       Durata\n\n");
     printVoliPrenotati((Utente)->elenco_prenotazioni, 1);
 
 }
@@ -223,27 +221,42 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 
     case 1:
     {
-        destinazione=dijkstra_costo(G, partenza, 0, 0, 0);
-        costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1);
-        printf("La tratta piu' economica ti costera' %d e sarebbe %d.\n", costo_comp, destinazione);
-        stampa_lista_nomi(NM);
-        if ((Cliente )->punti >0)
+        durata_comp=0;
+        //prima chiamo dijkstra con parametro output 0, in modo che mi restituisca la localita' piu' vicina (in termini di costo del biglietto) a quella di partenza
+        destinazione=dijkstra_costo(G, partenza, 0, 0, 0, &durata_comp);
+        //ora la chiamo con parametro output 1 in modo che possa ottenere il costo per quella destinazione dalla partenza scelta
+        costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1, &durata_comp);
+        if (costo_comp==2147483647)
         {
-            printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
-            fflush(stdin);
-            scanf("%d", &scelta);
-            //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
-            if (scelta)
-            {
-                costo_comp=costo_comp-(Cliente)->punti;
-
-                (Cliente)->punti=0;
-            }
+            printf("Ci dispiace, questo viaggio non e' disponibile.\n");
+            return;
         }
-        (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
-        printf("Prenotazione confermata e registrata!\n");
-        AggiornaContatore(NM,destinazione);
-        (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
+        printf("La tratta piu' economica ti costera' %d e sarebbe %d.\n", costo_comp, destinazione);
+        printf("Durera' %d minuti.\n", durata_comp);
+        stampa_lista_nomi(NM);
+        printf("\nVuoi andarci?[1\\0]?\t");
+        fflush(stdin);
+        scanf("%d", &scelta);
+        if (scelta)
+        {
+
+            if ((Cliente )->punti >0)
+            {
+                printf("\n Ti ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
+                fflush(stdin);
+                scanf("%d", &scelta);
+                if (scelta)
+                {
+                    costo_comp=costo_comp-(Cliente)->punti;
+
+                    (Cliente)->punti=0;
+                }
+            }
+            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp, durata_comp);
+            printf("Prenotazione confermata e registrata!\n");
+            AggiornaContatore(NM,destinazione);
+            (Cliente)->punti +=(durata_comp/100)*10; //il 10% dell'ordine
+        }
         break;
     }
 
@@ -259,18 +272,14 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         {
             destinazione=TrovaMetaGettonata(NM);
             printf("la destinazione al momento piu' gettonata e': %d\n", destinazione);
-            //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
-            /*if (scelta)
+            durata_comp=0;
+            costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1, &durata_comp);
+            if (costo_comp==2147483647)
             {
-                printf("Inserisci il numero corrispondente alla destinazione desiderata.\t");
-                fflush(stdin);
-                //destinazione=readint();
-                //destinazione_gia_scelta=1;
-                scanf("%d", &destinazione);
-            }*/
-
-            costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1);
-            printf("La viaggio piu' economico per arrivarci ti costera' %d.\n", costo_comp);
+                printf("Ci dispiace, questo viaggio non e' disponibile.\n");
+                return;
+            }
+            printf("La viaggio piu' economico per arrivarci ti costera' %d e durera' %d minuti.\n", costo_comp, durata_comp);
             printf("\nVuoi andarci?[1\\0]?\t");
             fflush(stdin);
             scanf("%d", &scelta);
@@ -289,10 +298,10 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
                         (Cliente)->punti=0;
                     }
                 }
-                (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+                (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp, durata_comp);
                 AggiornaContatore(NM,destinazione);
                 printf("Prenotazione confermata e registrata!\n");
-                (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
+                (Cliente)->punti +=(durata_comp/100)*10; //il 10% dell'ordine
             }
         }
         break;
@@ -305,10 +314,24 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         fflush(stdin);
         scanf("%d", &destinazione);
 
-        costo_comp=dijkstra_costo(G, partenza, destinazione, 1, 1);
-        printf("La tratta piu' economica ti costera' %d.\n", costo_comp);
-        durata_comp=dijkstra_durata(G, partenza, destinazione, 1);
-        printf("La tratta piu' breve ti costera' %d.\n", durata_comp);
+        int durata_comp_economica=0;
+        int costo_comp_breve=0;
+        int costo_comp_economica=dijkstra_costo(G, partenza, destinazione, 1, 1, &durata_comp_economica);
+        if (costo_comp_economica==2147483647)
+        {
+            printf("Ci dispiace, questo viaggio non e' disponibile.\n");
+            return;
+        }
+        printf("La tratta piu' economica ti costera' %d e durera' %d minuti.\n", costo_comp_economica, durata_comp_economica);
+
+        int durata_comp_breve=dijkstra_durata(G, partenza, destinazione, 1, &costo_comp_breve);
+        printf("La tratta piu' breve ti costera' %d e durera' %d minuti.\n\n", costo_comp_breve, durata_comp_breve);
+
+        if (costo_comp_economica==costo_comp_breve)
+        {
+            printf("Come puoi osservare, la due migliori tratte disponibili hanno lo stesso prezzo, scegli quella con meno scali per\n"
+                   "un viaggio piu' confortevole o l'altra se ti senti un vero turista!\nQualora siano previsti gli stessi scali scegliere la prima o seconda sara' indifferente. Grazie!\n\n");
+        }
 
         printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
                "piu' il viaggio sara' costoso piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
@@ -325,20 +348,19 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
                 printf("\nTi ricordiamo che hai accumulato %d punti sui tuoi viaggi.\nVuoi usarli?[1\\0]?\t", (Cliente)->punti);
                 fflush(stdin);
                 scanf("%d", &scelta);
-                //if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
                 if (scelta)
                 {
-                    costo_comp=costo_comp-(Cliente)->punti;
+                    costo_comp_economica=costo_comp_economica-(Cliente)->punti;
 
                     (Cliente)->punti=0;
                 }
             }
             //printf("annagg ttcos");
-            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp);
+            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp_economica, durata_comp_economica);
             //printf("hhhfuh %d %d", (Cliente)->elenco_prenotazioni->destinazione);
             printf("Prenotazione confermata e registrata!\n");
             AggiornaContatore(NM,destinazione);
-            (Cliente)->punti=(costo_comp/100)*10; //il 10% dell'ordine
+            (Cliente)->punti=(Cliente)->punti + (costo_comp_economica/100)*10; //il 10% dell'ordine
             break;
         }
         case 2:
@@ -352,15 +374,15 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
                 // if (strcmp (scelta,"S")==0 || strcmp (scelta, "s")==0)
                 if (scelta)
                 {
-                    durata_comp=durata_comp-(Cliente)->punti; //ZOZZIMMA DA SISTEMARE
+                    costo_comp_breve=costo_comp_breve-(Cliente)->punti;
 
                     (Cliente)->punti=0;
                 }
             }
-            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, durata_comp);
+            (Cliente)->elenco_prenotazioni=insertHead((Cliente)->elenco_prenotazioni, partenza, destinazione, costo_comp_breve,durata_comp_breve);
             printf("Prenotazione confermata e registrata!\n");
             AggiornaContatore(NM,destinazione);
-            (Cliente)->punti=(durata_comp/100)*10; //il 10% dell'ordine
+            (Cliente)->punti=(Cliente)->punti + (costo_comp_breve/100)*10; //il 10% dell'ordine
             break;
         }
 

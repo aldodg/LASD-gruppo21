@@ -7,7 +7,7 @@
 
 int main()
 {
-    int V = 9;
+    int V = 10;
     Graph G = initGraph(V);
     addEdge(G, 0, 1, 4, 6);
     addEdge(G, 0, 7, 8, 2);
@@ -37,6 +37,7 @@ int main()
     addEdge(G, 8,2, 2,5);
     addEdge(G, 8,6, 6,5);
     addEdge(G, 8,7, 7,5);
+    //addEdge(G, 9, 1, 8, 5);
     printGraph(G);
     dijkstra(G, PARTENZA);
 

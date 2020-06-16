@@ -186,7 +186,7 @@ int estrai_distanza_minore_per_destinazione (int dist[], int destinazione, int n
 }
 
 // La funzione principale che calcola le distanze dei percorsi più brevi da src a tutti i vertici
-int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int stampa_percorso)
+int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int stampa_percorso, int *durata_complessiva)
 {
 
     int nodes_count = G->nodes_count;// Ottieni il numero di vertici nel grafico
@@ -242,8 +242,7 @@ int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int st
         a++;
     }
 
-    if (stampa_percorso)
-    {
+
         int Percorso[nodes_count];
         int q=destinazione; // inserisci nodo di arrivo
         int arrivo=0;
@@ -263,6 +262,8 @@ int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int st
                 i=a;
             }
         }
+        if (stampa_percorso)
+    {
         printf("\n\nQuesti sono i tuoi scali:\n\n");
         for(i=arrivo-1; i>0; i--)
         {
@@ -272,11 +273,18 @@ int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int st
         printf("\n-----------\n");
     }
 
+    for(i=arrivo-1; i>0; i--)
+    {
+        *durata_complessiva = *durata_complessiva + pesoArco_Durata(G, Percorso[i], Percorso[i-1]);
+    }
+
     if (scelta_output) return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count); //restituisce il costo per quella dest
     else return estrai_destinazione_con_distanza_minore (dist, nodes_count);
 }
 
-int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso)
+
+
+int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso, int *costo_complessivo)
 {
     int nodes_count = G->nodes_count;// Ottieni il numero di vertici nel grafico
     int dist[nodes_count];     // valori dist usati per selezionare il bordo di peso minimo
@@ -331,27 +339,30 @@ int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso)
         a++;
     }
 
+    int Percorso[nodes_count];
+    int costo_totale=0;
+    int q=destinazione; // inserisci nodo di arrivo
+    int arrivo=0;
+    int i;
+    Percorso[arrivo]=destinazione; // inserisci nodo di arrivo
+    arrivo++;
+
+    for(i=a; i>0 && q!=-1 && q!=src ; i--)
+    {
+
+        if(q == salva_percorso[i].v)
+        {
+            q=salva_percorso[i].precedente;
+
+            Percorso[arrivo]=q;
+            arrivo++;
+            i=a;
+        }
+    }
+
     if (stampa_percorso)
     {
-        int Percorso[nodes_count];
-        int q=destinazione; // inserisci nodo di arrivo
-        int arrivo=0;
-        int i;
-        Percorso[arrivo]=destinazione; // inserisci nodo di arrivo
-        arrivo++;
 
-        for(i=a; i>0 && q!=-1 && q!=src ; i--)
-        {
-
-            if(q == salva_percorso[i].v)
-            {
-                q=salva_percorso[i].precedente;
-
-                Percorso[arrivo]=q;
-                arrivo++;
-                i=a;
-            }
-        }
         printf("\n\nQuesti sono i tuoi scali:\n\n");
         for(i=arrivo-1; i>0; i--)
         {
@@ -361,6 +372,14 @@ int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso)
         printf("\n-----------\n");
     }
 
-    return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count);
+
+    for(i=arrivo-1; i>0; i--)
+    {
+        *costo_complessivo = *costo_complessivo + pesoArco_Costo(G, Percorso[i], Percorso[i-1]);
+    }
+
+
+
+    return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count); //restituisce la distanza per quella dest
 }
 
