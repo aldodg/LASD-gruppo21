@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*Funzione principale di gestione dei voli, viene chiamata una volta che le operazioni di login hanno successo*/
+
+/*Funzione d'azione per l'utente, viene chiamata una volta che le operazioni di login hanno successo*/
 void login(Graph G, Customers Utenti, char *Username, Nomi_Luoghi NM)
 {
     int choice;

@@ -38,7 +38,7 @@ int main()
     {
 
 
-        printf("\n\n------------Login----------\n\n");
+        printf("Benvenuto!\n\n------------Login----------\n\n");
         printf("1 - Registrati\n");
         printf("2 - Accedi con credenziali\n");
         printf("3 - Pannello admin\n");
@@ -56,19 +56,15 @@ int main()
             printf("Inserisci Username: \n");
             fflush(stdin);
             scanf("%s", usernames);
-
             printf("\nInserisci Cognome: \n");
             fflush(stdin);
-
             scanf("%s", cognomes);
             printf("\nInserisci Nome: \n");
             fflush(stdin);
             scanf("%s", nomes);
-
             printf("\nInserisci Password\n");
             fflush(stdin);
             scanf("%s", psw);
-
             printf("\nRipeti Password\n");
             fflush(stdin);
             scanf("%s", psw2);
@@ -79,11 +75,9 @@ int main()
                 printf("\nPassword non coincidenti, reinserire password\n");
                 fflush(stdin);
                 printf("\nInserisci Password\n");
-
                 fflush(stdin);
                 scanf("%s", psw);
                 printf("\nRipeti Password\n");
-
                 fflush(stdin);
                 scanf("%s", psw2);
             }
@@ -93,14 +87,12 @@ int main()
             {
 
                 registra(&Utenti,nomes,cognomes,usernames, psw);
-
                 printf("\nRegistrazione avvenuta con successo!\n");
                 login(G, Utenti, usernames, NM);//se tutto ok passiamo alle funzionalità del menù login
 
             }
             else
             {
-
                 printf("\nL'username scelto non e' disponibile, riprovare per favore.\n");//altrimenti ritorna al menu login
             }
 
@@ -156,6 +148,7 @@ int main()
             printf("\nArrivederci!\n");
             freeGraph(G);
             cancellaListaNomi(NM);
+            freeCustomers(Utenti);
             return 0;
         }
         default:

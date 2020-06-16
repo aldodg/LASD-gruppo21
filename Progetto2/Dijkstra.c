@@ -163,8 +163,6 @@ int estrai_destinazione_con_distanza_minore (int dist[], int nodes_count)
         }
     }
 
-
-
     return posizione_distanza_minore;
 
 }
@@ -182,10 +180,13 @@ int estrai_distanza_minore_per_destinazione (int dist[], int destinazione, int n
     }
 
     return dist[i];
-
 }
 
-// La funzione principale che calcola le distanze dei percorsi più brevi da src a tutti i vertici
+// La funzione principale che calcola le distanze dei percorsi più brevi da src a tutti i vertici;
+//tramite la flag in input "scelta_output" la funzione restituisce:
+//la distanza (calcolata usando come peso il costo della tratta)del nodo destinazione da quello di partenza (src) se vera,
+//il nodo che e' piu' vicino (sempre in termini di costo del biglietto in questo caso) a quello di partenza se falsa;
+//durata_complessiva conserva invece la durata complessiva dell'intero viaggio (considerando quindi gli eventuali scali)
 int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int stampa_percorso, int *durata_complessiva)
 {
 
@@ -242,12 +243,11 @@ int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int st
         a++;
     }
 
-
         int Percorso[nodes_count];
-        int q=destinazione; // inserisci nodo di arrivo
+        int q=destinazione;
         int arrivo=0;
         int i;
-        Percorso[arrivo]=destinazione; // inserisci nodo di arrivo
+        Percorso[arrivo]=destinazione;
         arrivo++;
 
         for(i=a; i>0 && q!=-1 && q!=src ; i--)
@@ -282,8 +282,8 @@ int dijkstra_costo(Graph G, int src, int destinazione, int scelta_output, int st
     else return estrai_destinazione_con_distanza_minore (dist, nodes_count);
 }
 
-
-
+//analoga alla precedente ma le distanze vengono questa volta calcolate usando come peso la durata di ogni tratta;
+//restituira' percio' la durata piu' breve del volo che porta da src a destinazione
 int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso, int *costo_complessivo)
 {
     int nodes_count = G->nodes_count;// Ottieni il numero di vertici nel grafico
@@ -340,11 +340,10 @@ int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso, int
     }
 
     int Percorso[nodes_count];
-    int costo_totale=0;
-    int q=destinazione; // inserisci nodo di arrivo
+    int q=destinazione;
     int arrivo=0;
     int i;
-    Percorso[arrivo]=destinazione; // inserisci nodo di arrivo
+    Percorso[arrivo]=destinazione;
     arrivo++;
 
     for(i=a; i>0 && q!=-1 && q!=src ; i--)
@@ -378,8 +377,7 @@ int dijkstra_durata(Graph G, int src, int destinazione, int stampa_percorso, int
         *costo_complessivo = *costo_complessivo + pesoArco_Costo(G, Percorso[i], Percorso[i-1]);
     }
 
-
-
-    return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count); //restituisce la distanza per quella dest
+    //restituisce la distanza per quella destinazione
+    return estrai_distanza_minore_per_destinazione (dist, destinazione, nodes_count);
 }
 

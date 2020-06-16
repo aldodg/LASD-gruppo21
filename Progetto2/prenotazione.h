@@ -55,13 +55,15 @@ Prenotati initNode(int, int, int);
 Prenotati insertTail(Prenotati P, int, int, int);
 
 /* FUNZIONE CHE AGGIUNGE UN NODO IN TESTA ALLA LISTA*/
-//Prenotati insertHead(Prenotati P, int,int,  int);
+Prenotati insertHead(Prenotati P, int, int, int, int);
 
 /* STAMPA LA LISTA DEI VOLI PRENOTATI*/
-//void printVoliPrenotati(Prenotati *P, int);
+void printVoliPrenotati(Prenotati P, int);
 
 /* DEALLOCA LA LISTA DEI VOLI PRENOTATI */
 void freeVoliPrenotati(Prenotati P);
+
+void freeCustomers (Customers C);
 
 //int metaGettonata();
 
