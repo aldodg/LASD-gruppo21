@@ -149,6 +149,7 @@ int main()
             freeGraph(G);
             cancellaListaNomi(NM);
             freeCustomers(Utenti);
+            system("pause");
             return 0;
         }
         default:

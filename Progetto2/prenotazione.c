@@ -192,7 +192,7 @@ int TrovaMetaGettonata(Nomi_Luoghi NM)
 {
 
     int max=trova_max_visite(NM);
-    int meta_gettonata;
+    int meta_gettonata=0;
 
     while(NM!=NULL)
     {

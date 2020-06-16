@@ -423,7 +423,7 @@ Graph popola_grafo_file (Graph L, Nomi_Luoghi *NM)
     {
         perror("");
         printf("Mi dispiace, impossibile accedere all'archivio in questo momento. Contattaci per favore.\n");
-        //chiudi_finestra();
+        system("pause");
         exit (-1);
     }
     else
