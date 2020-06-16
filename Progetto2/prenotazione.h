@@ -42,7 +42,7 @@ char *pass2;
 char *adpass;
 
 
-//void registra(Customers *L, char *name, char * surname, char * username, char * password);//Funzione che riempie la lista delle registrazioni utente
+void registra(Customers *L, char *name, char * surname, char * username, char * password);//Funzione che riempie la lista delle registrazioni utente
 int	UserGiaPresente(Customers L, char *username);//Funzione booleana che controlla se uno username è gia presente
 int controllaCredenziali(Customers L,char * username, char * password);
 
@@ -65,9 +65,9 @@ void freeVoliPrenotati(Prenotati P);
 
 //int metaGettonata();
 
-//void prenotaVolo(Graph G, Customers *Utenti, char *,Nomi_Luoghi NM);
+void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM);
 
-//void visualizza_prenotazioni_effettuate(char *username, Customers Utente);
+void visualizza_prenotazioni_effettuate(char *username, Customers Utente);
 
 void AggiornaContatore(Nomi_Luoghi NM, int id);
 

@@ -3,7 +3,7 @@
 
 #include "List.h"
 
-//struttura del grafo
+//struttura del grafo, contenente la lista delle adiacente e un attributo intero per il numero di nodi
 struct TGraph {
     List *adj;
     int nodes_count;
@@ -49,15 +49,17 @@ void addNode(Graph G);
 void removeNode(Graph G, int node_to_remove, Nomi_Luoghi*);
 List checkListRemoval(List L, int node_to_remove);
 
-Nomi_Luoghi aggiungi_nome_citta(Nomi_Luoghi, int, char*);
+Nomi_Luoghi aggiungi_nome_citta(Nomi_Luoghi L, int id, char *luogo);
+//Funzione di printing della lista contenente gli aeroporti
 void stampa_lista_nomi(Nomi_Luoghi NM);
 Nomi_Luoghi checkListRemoval_perNomiLuoghi (Nomi_Luoghi L, int node_to_remove);
+//Funzione che aggiorna il file del grafo
 Graph popola_grafo_file (Graph, Nomi_Luoghi*);
 void cancellaListaNomi(Nomi_Luoghi L);
 void aggiungi_aeroporto(Graph, Nomi_Luoghi*);
 void scelta_visualizza_elenco (Nomi_Luoghi NM);
 
-int empty_graph(Graph G);
+int empty_graph(Graph G);//bool
 int numeroVertici(Graph g);
 
 int numeroArchi(Graph g);
@@ -67,7 +69,8 @@ int esisteArco(Graph g, int partenza, int arrivo);
 int costoArco(Graph g, int partenza, int arrivo);
 
 int esisteVertice(Graph g, int v);
-
-
+int pesoArco_Durata(Graph g, int partenza, int arrivo);
+int pesoArco_Costo(Graph g, int partenza, int arrivo);
+void NomiDest(Nomi_Luoghi NM, int id);
 
 #endif

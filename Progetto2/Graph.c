@@ -123,7 +123,7 @@ int pesoArco_Costo(Graph g, int partenza, int arrivo)
     return ret;
 }
 
-//il peso considerato e' la durata della tratta, ho preferito "ricopiare" la funzione piuttosto che gestire un altro input per chiarezza
+//il peso considerato e' la durata della tratta, si e' preferito "ricopiare" la funzione piuttosto che gestire un altro input per chiarezza
 int pesoArco_Durata(Graph g, int partenza, int arrivo)
 {
 

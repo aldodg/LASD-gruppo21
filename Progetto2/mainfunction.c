@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/*Funzione principale di gestione dei voli, viene chiamata una volta che le operazioni di login hanno successo*/
 void login(Graph G, Customers Utenti, char *Username, Nomi_Luoghi NM)
 {
     int choice;
@@ -122,7 +122,7 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)
         printf("1 - Rimuovi tratta tra due aeroporti\n");
         printf("2 - Rimuovi aeroporto\n");
         printf("3 - Esci\nScegli:\t");
-
+        fflush(stdin);
         choice=readint();
 
         switch (choice)
@@ -150,6 +150,7 @@ void rimuoviTratta(Graph G, Nomi_Luoghi NM)
         {
             scelta_visualizza_elenco(NM);
             printf("Scegli l'aeroporto da rimuovere.\t");
+            fflush(stdin);
             scanf("%d",&nodo_da_rimuovere);
 
             removeNode(G, nodo_da_rimuovere, &NM);
@@ -190,7 +191,7 @@ void menutratte(Graph G, Nomi_Luoghi NM)
         printf("1 - Aggiungere viaggio\n");
         printf("2 - Rimuovi viaggio\n");
         printf("3 - Esci\nScegli:\t");
-
+        fflush(stdin);
         choice=readint();
 
         switch (choice)

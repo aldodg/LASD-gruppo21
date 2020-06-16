@@ -25,10 +25,8 @@ int main()
     Nomi_Luoghi NM = NULL;
 
     G=popola_grafo_file(G, &NM);
-    printGraph(G);
-    printf("\n\n");
-    stampa_lista_nomi(NM);
-    printf("--------------------------------------------\n");
+
+
     char usernames[MAX];
     char cognomes[MAX];
     char nomes[MAX];
@@ -55,29 +53,39 @@ int main()
 
             printf("\nBenvenuto nel menu' di registrazione!\n\n");
             fflush(stdin);
-            printf("Inserisci Username: \n");fflush(stdin);
+            printf("Inserisci Username: \n");
+            fflush(stdin);
             scanf("%s", usernames);
-            //username=read();
-            printf("\nInserisci Cognome: \n");fflush(stdin);
-            //cognome=read();
+
+            printf("\nInserisci Cognome: \n");
+            fflush(stdin);
+
             scanf("%s", cognomes);
-            printf("\nInserisci Nome: \n");fflush(stdin);scanf("%s", nomes);
-            //nome=read();scanf("%s", cogncazz);
-            printf("\nInserisci Password\n");fflush(stdin);scanf("%s", psw);
-            //pass=read();
-            printf("\nRipeti Password\n");fflush(stdin);scanf("%s", psw2);
-            //pass2=read();
+            printf("\nInserisci Nome: \n");
+            fflush(stdin);
+            scanf("%s", nomes);
+
+            printf("\nInserisci Password\n");
+            fflush(stdin);
+            scanf("%s", psw);
+
+            printf("\nRipeti Password\n");
+            fflush(stdin);
+            scanf("%s", psw2);
+
 
             while (strcmp (psw,psw2)!=0) // controllo sulle password
             {
                 printf("\nPassword non coincidenti, reinserire password\n");
                 fflush(stdin);
                 printf("\nInserisci Password\n");
-                //pass=read();
-                fflush(stdin);scanf("%s", psw);
+
+                fflush(stdin);
+                scanf("%s", psw);
                 printf("\nRipeti Password\n");
-                //pass2=read();
-                fflush(stdin);scanf("%s", psw2);
+
+                fflush(stdin);
+                scanf("%s", psw2);
             }
 
             /*Controllo su username, se già registrato impedisce la registrazione, altrimenti riempiamo la lista degli utenti*/
@@ -85,7 +93,7 @@ int main()
             {
 
                 registra(&Utenti,nomes,cognomes,usernames, psw);
-                //printf("%s ddd", Utenti->cognome);
+
                 printf("\nRegistrazione avvenuta con successo!\n");
                 login(G, Utenti, usernames, NM);//se tutto ok passiamo alle funzionalità del menù login
 
@@ -105,7 +113,8 @@ int main()
             fflush(stdin);
             scanf("%s", usernames);
             printf("Inserisci Password: \n");
-            fflush(stdin);scanf("%s", psw);
+            fflush(stdin);
+            scanf("%s", psw);
 
             if (!controllaCredenziali(Utenti, usernames, psw))
             {
@@ -126,6 +135,7 @@ int main()
             printf("\nMenu Admin, inserire password:\n");
             fflush(stdin);
             scanf("%s", adminpass);
+            fflush(stdin);
 
             if ( strcmp (adminpass,"Admin")==0 || strcmp (adminpass, "admin")==0)
             {

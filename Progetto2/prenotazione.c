@@ -24,8 +24,7 @@ void printVoliPrenotati(Prenotati P, int i)
 {
     if (P != NULL)
     {
-        printf("%d)\t%d -> %d\t\t\t\t%d\t%d", i, (P)->partenza, (P)->destinazione, P->costo_complessivo, P->durata_complessiva);
-        printf("\n");
+     printf("%d)\t%d -> %d \t\t\t\t%d\t%d", i, (P)->partenza, (P)->destinazione, P->costo_complessivo, P->durata_complessiva);        printf("\n");
         printVoliPrenotati(P->next, i+1);
 
     }
@@ -49,7 +48,7 @@ int esistono_mete_gettonate (Nomi_Luoghi NM)
     while(NM!=NULL && !esistono_mete_gettonate)
     {
 
-        if ((NM)->contatore_voli>0)
+        if ((NM)->contatore_voli>MIN_VOLI_PER_GETTONATI)
         {
             esistono_mete_gettonate=1;
         }
@@ -166,8 +165,7 @@ int trova_max_visite (Nomi_Luoghi NM)
 
         if ((NM)->contatore_voli>max)
         {
-            //printf("id: %d - %s con %d visite totali ricevute\n",(NM)->id,(NM)->nome_luogo, (NM)->contatore_voli);
-            //esistono_mete_gettonate=1;
+
             max=(NM)->contatore_voli;
         }
         NM=(NM)->next;
@@ -201,7 +199,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
 
     int scelta;
     int partenza, destinazione, costo_comp=0, durata_comp=0, scelta2;
-    //int  destinazione_gia_scelta=0;
+
 
     while( Cliente!=NULL && strcmp((Cliente)->user,username ))
     {
@@ -231,7 +229,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
             printf("Ci dispiace, questo viaggio non e' disponibile.\n");
             return;
         }
-        printf("La tratta piu' economica ti costera' %d e sarebbe %d.\n", costo_comp, destinazione);
+        printf("La tratta piu' economica ti costera' %d euro ed e': %d.\n", costo_comp, destinazione);
         printf("Durera' %d minuti.\n", durata_comp);
         stampa_lista_nomi(NM);
         printf("\nVuoi andarci?[1\\0]?\t");
@@ -279,7 +277,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
                 printf("Ci dispiace, questo viaggio non e' disponibile.\n");
                 return;
             }
-            printf("La viaggio piu' economico per arrivarci ti costera' %d e durera' %d minuti.\n", costo_comp, durata_comp);
+            printf("La viaggio piu' economico per arrivarci ti costera' %d euro e durera' %d minuti.\n", costo_comp, durata_comp);
             printf("\nVuoi andarci?[1\\0]?\t");
             fflush(stdin);
             scanf("%d", &scelta);
@@ -322,10 +320,10 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
             printf("Ci dispiace, questo viaggio non e' disponibile.\n");
             return;
         }
-        printf("La tratta piu' economica ti costera' %d e durera' %d minuti.\n", costo_comp_economica, durata_comp_economica);
+        printf("La tratta piu' economica ti costera' %d euro e durera' %d minuti.\n", costo_comp_economica, durata_comp_economica);
 
         int durata_comp_breve=dijkstra_durata(G, partenza, destinazione, 1, &costo_comp_breve);
-        printf("La tratta piu' breve ti costera' %d e durera' %d minuti.\n\n", costo_comp_breve, durata_comp_breve);
+        printf("La tratta piu' breve ti costera' %d euro e durera' %d minuti.\n\n", costo_comp_breve, durata_comp_breve);
 
         if (costo_comp_economica==costo_comp_breve)
         {
@@ -334,7 +332,7 @@ void prenotaVolo(Graph G, Customers Cliente, char * username, Nomi_Luoghi NM)
         }
 
         printf("Inserisci\n1 per la tratta piu' economica\n2 per la tratta piu' breve\n3 per annullare.\nRicorda che "
-               "piu' il viaggio sara' costoso piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
+               "piu' viaggi piu' accumulerai punti per fantastici sconti per i tuoi prossimi voli!\t");
         fflush(stdin);
         scanf("%d", &scelta2);
         switch (scelta2)
